@@ -21,43 +21,36 @@ Open http://127.0.0.1:8000/
 - **Email:** `admin@example.com`
 - **Password:** `changeme123`
 
-## Stage 1 — Foundation, Auth & Portal Shell
+## Stage 3 — Course Materials, Profiles & Portals
 
-- Invite-code registration with email verification
-- Admin approval queue
-- Login / logout / forgot password / reset password
-- Role-based routing (student, teacher, admin portals)
-
-## Stage 2 — Public Site & Admin Panel
-
-### Public pages
+### Student portal (`/student/`)
 
 | URL | Page |
 |-----|------|
-| `/` | Homepage with news section + newsletter signup |
-| `/about/` | Program story, team, structure |
-| `/students/` | Student showcase (profiles; projects in Stage 5) |
-| `/contact/` | Contact form (emails admin via console in dev) |
+| `/student/` | Dashboard with greeting, current week, placeholders for assignments |
+| `/student/materials/` | Published weekly materials (collapsible weeks) |
+| `/student/profile/` | Profile picture + bio (Markdown) |
+| `/student/settings/` | Theme, phone, notifications, password |
 
-### Admin panel (`/admin-panel/`)
+### Teacher portal (`/teacher/`)
 
 | URL | Page |
 |-----|------|
-| `/admin-panel/` | Dashboard + pending approvals |
-| `/admin-panel/users/` | User list with filter/search |
-| `/admin-panel/users/create-admin/` | Create admin without invite code |
-| `/admin-panel/users/<id>/` | User detail + approve/suspend/delete/reset |
-| `/admin-panel/invite-codes/` | Generate & deactivate invite codes |
-| `/admin-panel/updates/` | News/blog CRUD (shows on homepage) |
-| `/admin-panel/settings/` | Theme, notifications, password |
+| `/teacher/` | Dashboard with course stats + quick actions |
+| `/teacher/materials/` | Manage all weeks (publish/unpublish/delete) |
+| `/teacher/materials/create/` | Add new week with PDF uploads |
+| `/teacher/materials/<id>/edit/` | Edit week |
+| `/teacher/profile/` | Profile picture + bio |
+| `/teacher/settings/` | Theme, phone, notifications, password |
 
-### Stage 2 test flow
+### Stage 3 test flow
 
-1. Visit `/` — public homepage loads
-2. Admin → **Updates** → create a published update → refresh `/` to see it in Latest News
-3. Footer newsletter signup on homepage
-4. `/contact/` — submit form, check terminal for email output
-5. `/admin-panel/users/` — filter, view user, suspend/activate, reset password
-6. `/admin-panel/invite-codes/` — generate code, deactivate unused codes
+1. Log in as **teacher** (create teacher invite code from admin if needed)
+2. Go to **Course Materials** → **Add Week** → fill in week 1, upload PDFs, check **Publish**
+3. Log in as **student** → **Course Materials** → expand week 1, download slides/notes
+4. Student **Profile** → upload photo, write bio in Markdown
+5. **Settings** → toggle dark mode, update phone number
+
+Assignments, grades, and announcements wire in Stages 4–5.
 
 Emails print to the **console** in development.

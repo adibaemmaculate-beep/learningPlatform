@@ -17,7 +17,7 @@ def get_published_assignments(course=None):
     course = course or get_active_course()
     if not course:
         return Assignment.objects.none()
-    return Assignment.objects.filter(course=course, is_draft=False)
+    return Assignment.objects.filter(course=course, is_draft=False).select_related('created_by')
 
 
 def get_student_submission(assignment, student):
@@ -87,7 +87,7 @@ def recent_graded_submission(student, course=None):
         assignment__grades_released=True,
         score_obtained__isnull=False,
         assignment__course=course or get_active_course(),
-    ).select_related('assignment').order_by('-graded_at')[:1]
+    ).select_related('assignment', 'assignment__created_by').order_by('-graded_at')[:1]
     return subs.first()
 
 

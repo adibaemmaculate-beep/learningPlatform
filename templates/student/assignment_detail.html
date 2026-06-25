@@ -6,7 +6,7 @@
     <div class="mb-lg">
         <span class="font-label-md text-primary">Week {{ assignment.week }}</span>
         <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface mt-1">{{ assignment.title }}</h1>
-        <p class="font-body-md text-on-surface-variant mt-2">Due {{ assignment.due_date|date:"F j, Y \a\t H:i" }}</p>
+        <p class="font-body-md text-on-surface-variant mt-2">Due {{ assignment.due_date|date:"F j, Y \a\t H:i" }}{% if assignment.created_by %} • by {{ assignment.created_by.get_full_name }}{% endif %}</p>
         <p class="font-body-sm text-on-surface-variant mt-1">Accepted: {{ assignment.allowed_file_types|join:", " }} • Max {{ assignment.max_file_size_mb }} MB</p>
     </div>
     <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg mb-lg">

@@ -17,7 +17,7 @@
 </div>
 <div class="mb-lg">
     <h1 class="font-headline-lg font-bold text-on-surface">{{ assignment.title }}</h1>
-    <p class="font-body-md text-on-surface-variant">Week {{ assignment.week }} • Due {{ assignment.due_date|date:"M d, Y H:i" }} • Max score {{ assignment.total_score }}</p>
+    <p class="font-body-md text-on-surface-variant">Week {{ assignment.week }} • Due {{ assignment.due_date|date:"M d, Y H:i" }} • Max score {{ assignment.total_score }}{% if assignment.created_by %} • by {{ assignment.created_by.get_full_name }}{% endif %}</p>
 </div>
 <div class="flex gap-2 mb-4">
     <a href="?filter=all" class="px-3 py-1 rounded font-label-md {% if filter_status == 'all' %}bg-primary text-on-primary{% else %}bg-surface-container{% endif %}">All</a>

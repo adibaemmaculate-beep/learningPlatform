@@ -44,7 +44,11 @@ def student_assignments(request):
 
 @student_required
 def student_assignment_detail(request, assignment_id):
-    assignment = get_object_or_404(Assignment, id=assignment_id, is_draft=False)
+    assignment = get_object_or_404(
+        Assignment.objects.select_related('created_by'),
+        id=assignment_id,
+        is_draft=False,
+    )
     submission = get_student_submission(assignment, request.user)
     form = SubmissionForm(request.POST or None, request.FILES or None, assignment=assignment)
     if request.method == 'POST' and not submission and form.is_valid():
@@ -80,7 +84,10 @@ def student_grades(request):
 @teacher_required
 def teacher_assignments(request):
     course = get_active_course()
-    assignments = Assignment.objects.filter(course=course) if course else Assignment.objects.none()
+    assignments = (
+        Assignment.objects.filter(course=course).select_related('created_by')
+        if course else Assignment.objects.none()
+    )
     class_size = get_active_students().count()
     items = []
     for a in assignments:
@@ -129,7 +136,7 @@ def teacher_assignment_edit(request, assignment_id):
 
 @teacher_required
 def teacher_assignment_detail(request, assignment_id):
-    assignment = get_object_or_404(Assignment, id=assignment_id)
+    assignment = get_object_or_404(Assignment.objects.select_related('created_by'), id=assignment_id)
     filter_status = request.GET.get('filter', 'all')
     students = get_active_students().select_related('profile')
     rows = []

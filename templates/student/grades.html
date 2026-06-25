@@ -31,7 +31,10 @@
         <tbody class="divide-y divide-outline-variant font-table-data">
             {% for row in summary.rows %}
             <tr>
-                <td class="px-6 py-4 font-medium">{{ row.assignment.title }}</td>
+                <td class="px-6 py-4">
+                    <div class="font-medium">{{ row.assignment.title }}</div>
+                    {% if row.assignment.created_by %}<div class="text-on-surface-variant text-body-sm">by {{ row.assignment.created_by.get_full_name }}</div>{% endif %}
+                </td>
                 <td class="px-6 py-4">{{ row.assignment.week }}</td>
                 <td class="px-6 py-4 text-on-surface-variant">{{ row.assignment.due_date|date:"M d, Y" }}</td>
                 <td class="px-6 py-4">

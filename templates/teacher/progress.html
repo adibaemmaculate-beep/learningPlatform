@@ -30,7 +30,10 @@
     <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
         <div class="flex justify-between items-center mb-md">
             <h3 class="font-headline-sm text-on-surface">{{ stat.assignment.title }}</h3>
-            {% if stat.avg_pct is not None %}<span class="font-label-md text-primary">Avg: {{ stat.avg_pct }}%</span>{% endif %}
+            <div class="text-right">
+                {% if stat.assignment.created_by %}<p class="font-body-sm text-on-surface-variant">by {{ stat.assignment.created_by.get_full_name }}</p>{% endif %}
+                {% if stat.avg_pct is not None %}<span class="font-label-md text-primary">Avg: {{ stat.avg_pct }}%</span>{% endif %}
+            </div>
         </div>
         <div class="grid grid-cols-4 gap-4 mb-md font-body-sm text-center">
             <div><span class="block font-bold text-lg">{{ stat.on_time }}</span><span class="text-on-surface-variant">On Time</span></div>

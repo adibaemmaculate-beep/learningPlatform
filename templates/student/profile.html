@@ -6,11 +6,13 @@
     <form method="post" enctype="multipart/form-data" class="space-y-6">
         {% csrf_token %}
         <div class="flex items-center gap-6">
+            <div class="profile-picture-square">
             {% if profile.profile_pic %}
-            <img src="{{ profile.profile_pic.url }}" alt="" class="w-24 h-24 rounded-full object-cover border-2 border-outline-variant">
+            <img src="{{ profile.profile_pic.url }}" alt="">
             {% else %}
-            <div class="w-24 h-24 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-2xl font-bold">{{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}</div>
+            <div class="profile-picture-fallback bg-primary-container text-on-primary text-2xl">{{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}</div>
             {% endif %}
+            </div>
             <div>
                 <label class="block font-label-md mb-1">Profile Picture</label>
                 <input type="file" name="profile_pic" accept=".jpg,.jpeg,.png,.webp" class="text-body-sm">

@@ -18,7 +18,7 @@
                 <div class="flex items-center justify-between p-md border-b border-outline-variant last:border-0 hover:bg-surface-container-low transition-colors">
                     <div>
                         <h4 class="font-body-md font-semibold text-on-surface">{{ item.assignment.title }}</h4>
-                        <p class="font-body-sm text-on-surface-variant">Week {{ item.assignment.week }} • Due {{ item.assignment.due_date|date:"M d, H:i" }}</p>
+                        <p class="font-body-sm text-on-surface-variant">Week {{ item.assignment.week }} • Due {{ item.assignment.due_date|date:"M d, H:i" }}{% if item.assignment.created_by %} • by {{ item.assignment.created_by.get_full_name }}{% endif %}</p>
                     </div>
                     <div class="flex items-center gap-3">
                         <span class="font-label-sm px-2 py-1 rounded {% if item.status == 'Not Started' %}bg-error-container text-on-error-container{% elif item.status == 'Late' %}bg-surface-variant{% else %}bg-secondary-container/30{% endif %}">{{ item.status }}</span>

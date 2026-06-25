@@ -1,10 +1,7 @@
 <header class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-surface-variant shadow-sm">
     <div class="max-w-[1280px] mx-auto px-gutter h-16 flex justify-between items-center">
-        <a href="{% url 'public:home' %}" class="flex items-center gap-4">
-            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary">
-                <span class="material-symbols-outlined text-sm">code</span>
-            </div>
-            <span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Dev Academy</span>
+        <a href="{% url 'public:home' %}" class="flex items-center gap-3">
+            {% include "partials/site_logo.html" with css_class="h-6 w-auto max-w-[110px]" %}
         </a>
         <nav class="hidden md:flex items-center gap-8">
             <a href="{% url 'public:home' %}" class="font-label-md text-label-md {% if active_public_nav == 'home' %}text-primary border-b-2 border-secondary pb-1{% else %}text-on-surface-variant hover:text-primary{% endif %} transition-colors">Home</a>

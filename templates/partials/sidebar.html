@@ -1,22 +1,15 @@
-<nav class="h-screen w-64 fixed left-0 top-0 bg-primary-container flex flex-col py-gutter z-20">
-    <div class="px-container-padding mb-4">
-        <div class="flex items-center gap-2 text-on-primary mb-4">
-            <span class="material-symbols-outlined">school</span>
-            <span class="font-headline-sm font-bold">Dev Academy</span>
-        </div>
-        {% if user.is_authenticated %}
-        <div class="flex flex-col items-center gap-2 mb-4">
-            {% if current_user_profile and current_user_profile.profile_pic %}
-            <img src="{{ current_user_profile.profile_pic.url }}" alt="" class="w-16 h-16 rounded-full object-cover border-2 border-outline-variant">
-            {% else %}
-            <div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center text-on-primary font-bold text-lg border-2 border-outline-variant">
-                {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
-            </div>
-            {% endif %}
-            <span class="font-headline-sm text-on-primary">{{ user.first_name }}</span>
+<nav class="h-screen w-64 fixed left-0 top-0 bg-primary-container flex flex-col z-20">
+    {% if user.is_authenticated %}
+    <div class="mb-4 w-full profile-picture-sidebar">
+        {% if current_user_profile and current_user_profile.profile_pic %}
+        <img src="{{ current_user_profile.profile_pic.url }}" alt="">
+        {% else %}
+        <div class="profile-picture-fallback bg-surface-container-low text-on-primary text-4xl">
+            {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
         </div>
         {% endif %}
     </div>
+    {% endif %}
     <ul class="flex flex-col gap-1 px-4 flex-1 overflow-y-auto">
         {% if portal_role == 'admin' %}
         <li><a href="{% url 'admin_portal:home' %}" class="nav-link {% if active_nav == 'dashboard' %}nav-active{% endif %}"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a></li>
@@ -31,7 +24,7 @@
         <li><a href="{% url 'teacher:projects' %}" class="nav-link {% if active_nav == 'projects' %}nav-active{% endif %}"><span class="material-symbols-outlined">rocket_launch</span><span>Projects</span></a></li>
         <li><a href="{% url 'teacher:students' %}" class="nav-link {% if active_nav == 'students' %}nav-active{% endif %}"><span class="material-symbols-outlined">group</span><span>Students</span></a></li>
         <li><a href="{% url 'teacher:progress' %}" class="nav-link {% if active_nav == 'progress' %}nav-active{% endif %}"><span class="material-symbols-outlined">trending_up</span><span>Progress</span></a></li>
-        <li><a href="{% url 'teacher:materials' %}" class="nav-link {% if active_nav == 'materials' %}nav-active{% endif %}"><span class="material-symbols-outlined">menu_book</span><span>Course Materials</span></a></li>
+        <li><a href="{% url 'teacher:materials' %}" class="nav-link {% if active_nav == 'materials' %}nav-active{% endif %}"><span class="material-symbols-outlined">menu_book</span><span>Course Syllabus</span></a></li>
         <li><a href="{% url 'teacher:profile' %}" class="nav-link {% if active_nav == 'profile' %}nav-active{% endif %}"><span class="material-symbols-outlined">person</span><span>Profile</span></a></li>
         <li><a href="{% url 'teacher:settings' %}" class="nav-link {% if active_nav == 'settings' %}nav-active{% endif %}"><span class="material-symbols-outlined">settings</span><span>Settings</span></a></li>
         {% else %}
@@ -40,7 +33,7 @@
         <li><a href="{% url 'student:grades' %}" class="nav-link {% if active_nav == 'grades' %}nav-active{% endif %}"><span class="material-symbols-outlined">grade</span><span>Grades</span></a></li>
         <li><a href="{% url 'student:project' %}" class="nav-link {% if active_nav == 'project' %}nav-active{% endif %}"><span class="material-symbols-outlined">rocket_launch</span><span>My Project</span></a></li>
         <li><a href="{% url 'student:announcements' %}" class="nav-link {% if active_nav == 'announcements' %}nav-active{% endif %}"><span class="material-symbols-outlined">campaign</span><span>Announcements</span></a></li>
-        <li><a href="{% url 'student:materials' %}" class="nav-link {% if active_nav == 'materials' %}nav-active{% endif %}"><span class="material-symbols-outlined">menu_book</span><span>Course Materials</span></a></li>
+        <li><a href="{% url 'student:materials' %}" class="nav-link {% if active_nav == 'materials' %}nav-active{% endif %}"><span class="material-symbols-outlined">menu_book</span><span>Course Syllabus</span></a></li>
         <li><a href="{% url 'student:profile' %}" class="nav-link {% if active_nav == 'profile' %}nav-active{% endif %}"><span class="material-symbols-outlined">person</span><span>Profile</span></a></li>
         <li><a href="{% url 'student:settings' %}" class="nav-link {% if active_nav == 'settings' %}nav-active{% endif %}"><span class="material-symbols-outlined">settings</span><span>Settings</span></a></li>
         {% endif %}

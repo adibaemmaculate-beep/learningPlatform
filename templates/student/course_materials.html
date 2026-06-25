@@ -1,8 +1,8 @@
 {% extends "base_portal.html" %}
-{% block title %}Course Materials{% endblock %}
+{% block title %}Course Syllabus{% endblock %}
 {% block portal_content %}
 <div class="mb-xl">
-    <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">Course Materials</h1>
+    <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">Course Syllabus</h1>
     <p class="font-body-md text-on-surface-variant">{% if course %}{{ course.name }}{% else %}No active course{% endif %}</p>
 </div>
 {% if materials %}
@@ -60,7 +60,7 @@
 {% else %}
 <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xxl text-center">
     <span class="material-symbols-outlined text-6xl text-primary/20 mb-md">menu_book</span>
-    <p class="font-body-md text-on-surface-variant">No course materials published yet. Check back soon.</p>
+    <p class="font-body-md text-on-surface-variant">No Course Syllabus published yet. Check back soon.</p>
 </div>
 {% endif %}
 {% endblock %}

@@ -22,7 +22,10 @@
             <tbody>
                 {% for row in summary.rows %}
                 <tr class="border-b border-outline-variant">
-                    <td class="py-3">{{ row.assignment.title }}</td>
+                    <td class="py-3">
+                        <div>{{ row.assignment.title }}</div>
+                        {% if row.assignment.created_by %}<div class="text-on-surface-variant text-body-sm">by {{ row.assignment.created_by.get_full_name }}</div>{% endif %}
+                    </td>
                     <td class="py-3">{% if row.submission %}{% if row.submission.is_late %}Late{% else %}Submitted{% endif %}{% else %}Not submitted{% endif %}</td>
                     <td class="py-3 text-right">{{ row.score_display }}</td>
                 </tr>

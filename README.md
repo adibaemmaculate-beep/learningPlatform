@@ -21,14 +21,17 @@ Open http://127.0.0.1:8000/
 - **Email:** `admin@example.com`
 - **Password:** `changeme123`
 
-## Stage 3 — Course Materials, Profiles & Portals
+## Stage 4 — Assignments, Grades & Progress
 
 ### Student portal (`/student/`)
 
 | URL | Page |
 |-----|------|
-| `/student/` | Dashboard with greeting, current week, placeholders for assignments |
-| `/student/materials/` | Published weekly materials (collapsible weeks) |
+| `/student/` | Dashboard with due-this-week assignments and overall grade |
+| `/student/assignments/` | List of published assignments + submission status |
+| `/student/assignments/<id>/` | View instructions, submit file (validated client + server) |
+| `/student/grades/` | Grade breakdown (visible after teacher releases grades) |
+| `/student/materials/` | Published weekly materials |
 | `/student/profile/` | Profile picture + bio (Markdown) |
 | `/student/settings/` | Theme, phone, notifications, password |
 
@@ -36,21 +39,26 @@ Open http://127.0.0.1:8000/
 
 | URL | Page |
 |-----|------|
-| `/teacher/` | Dashboard with course stats + quick actions |
-| `/teacher/materials/` | Manage all weeks (publish/unpublish/delete) |
-| `/teacher/materials/create/` | Add new week with PDF uploads |
-| `/teacher/materials/<id>/edit/` | Edit week |
-| `/teacher/profile/` | Profile picture + bio |
-| `/teacher/settings/` | Theme, phone, notifications, password |
+| `/teacher/` | Dashboard with assignment stats + needs-attention list |
+| `/teacher/assignments/` | Manage all assignments |
+| `/teacher/assignments/create/` | Create assignment (file rules, due date, publish) |
+| `/teacher/assignments/<id>/` | Submission tracker with filters |
+| `/teacher/assignments/<id>/grade/<submission_id>/` | Grade submission + feedback |
+| `/teacher/students/` | Class roster with search |
+| `/teacher/students/<id>/` | Student profile + grade breakdown |
+| `/teacher/progress/` | Class progress dashboard |
+| `/teacher/materials/` | Manage weekly course materials |
 
-### Stage 3 test flow
+### Stage 4 test flow
 
-1. Log in as **teacher** (create teacher invite code from admin if needed)
-2. Go to **Course Materials** → **Add Week** → fill in week 1, upload PDFs, check **Publish**
-3. Log in as **student** → **Course Materials** → expand week 1, download slides/notes
-4. Student **Profile** → upload photo, write bio in Markdown
-5. **Settings** → toggle dark mode, update phone number
+1. Log in as **teacher** → **Assignments** → **Create Assignment**
+2. Set title, week, due date, instructions, allowed file types (e.g. `.pdf`), check **Publish**
+3. Log in as **student** → **Assignments** → open assignment → upload a valid file
+4. Teacher → assignment detail → **Grade** submission → enter score + feedback
+5. Teacher → **Release Grades** on the assignment
+6. Student → **Grades** → verify score appears
+7. Teacher → **Students** / **Progress** → verify roster and stats
 
-Assignments, grades, and announcements wire in Stages 4–5.
+Announcements and notifications wire in Stage 5.
 
 Emails print to the **console** in development.

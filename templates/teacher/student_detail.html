@@ -1,0 +1,41 @@
+{% extends "base_portal.html" %}
+{% block title %}{{ detail_student.get_full_name }}{% endblock %}
+{% block portal_content %}
+<div class="mb-4"><a href="{% url 'teacher:students' %}" class="text-primary font-label-md hover:underline">← Back to Students</a></div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 text-center">
+        {% if detail_student.profile and detail_student.profile.profile_pic %}
+        <img src="{{ detail_student.profile.profile_pic.url }}" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+        {% else %}
+        <div class="w-24 h-24 rounded-full bg-primary-container text-on-primary mx-auto mb-4 flex items-center justify-center text-2xl font-bold">{{ detail_student.first_name|slice:":1" }}{{ detail_student.last_name|slice:":1" }}</div>
+        {% endif %}
+        <h1 class="font-headline-md">{{ detail_student.get_full_name }}</h1>
+        <p class="text-on-surface-variant">{{ detail_student.email }}</p>
+        {% if detail_student.profile and detail_student.profile.bio %}
+        <div class="mt-4 text-left markdown-content text-body-sm text-on-surface-variant">{{ detail_student.profile.bio }}</div>
+        {% endif %}
+    </div>
+    <div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+        <h2 class="font-headline-sm mb-4">Grade Breakdown {% if summary.percentage is not None %}({{ summary.percentage }}%){% endif %}</h2>
+        <table class="w-full text-left font-table-data">
+            <thead><tr class="font-label-sm text-on-surface-variant uppercase border-b border-outline-variant"><th class="py-2">Assignment</th><th class="py-2">Status</th><th class="py-2 text-right">Score</th></tr></thead>
+            <tbody>
+                {% for row in summary.rows %}
+                <tr class="border-b border-outline-variant">
+                    <td class="py-3">{{ row.assignment.title }}</td>
+                    <td class="py-3">{% if row.submission %}{% if row.submission.is_late %}Late{% else %}Submitted{% endif %}{% else %}Not submitted{% endif %}</td>
+                    <td class="py-3 text-right">{{ row.score_display }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% if project %}
+    <div class="lg:col-span-3 bg-surface-container-lowest border border-outline-variant rounded-lg p-6 mt-6">
+        <h2 class="font-headline-sm mb-4">Final Project: {{ project.title }}</h2>
+        {% if project.description %}<p class="font-body-md text-on-surface-variant mb-2">{{ project.description }}</p>{% endif %}
+        <a href="{% url 'teacher:project_detail' project.id %}" class="text-primary font-label-md hover:underline">View full project →</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

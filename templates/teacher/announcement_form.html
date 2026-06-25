@@ -1,0 +1,23 @@
+{% extends "base_portal.html" %}
+{% block title %}Post Announcement{% endblock %}
+{% block portal_content %}
+<div class="mb-4"><a href="{% url 'teacher:announcements' %}" class="text-primary font-label-md hover:underline">← Back</a></div>
+<div class="max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+    <h1 class="font-headline-md text-headline-md mb-6">Post Announcement</h1>
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="text-error text-body-sm">{{ form.non_field_errors.0 }}</div>{% endif %}
+        <div><label class="block font-label-md mb-1">Title</label>{{ form.title }}</div>
+        <div><label class="block font-label-md mb-1">Message</label>{{ form.body }}</div>
+        <div><label class="block font-label-md mb-1">Visibility</label>{{ form.visibility }}</div>
+        <div id="target-student-field"><label class="block font-label-md mb-1">Target Student</label>{{ form.target_student }}</div>
+        <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Post</button>
+    </form>
+</div>
+<script>
+document.getElementById('id_visibility').addEventListener('change', function() {
+    document.getElementById('target-student-field').style.display = this.value === 'specific_student' ? 'block' : 'none';
+});
+document.getElementById('target-student-field').style.display = document.getElementById('id_visibility').value === 'specific_student' ? 'block' : 'none';
+</script>
+{% endblock %}

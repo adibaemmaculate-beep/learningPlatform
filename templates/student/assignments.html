@@ -1,0 +1,30 @@
+{% extends "base_portal.html" %}
+{% block title %}Assignments{% endblock %}
+{% block portal_content %}
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface mb-xl">Assignments</h1>
+{% if items %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+    {% for item in items %}
+    <a href="{% url 'student:assignment_detail' item.assignment.id %}" class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg hover:shadow-md transition-shadow block">
+        <div class="flex justify-between items-start mb-sm">
+            <span class="font-label-md text-primary">Week {{ item.assignment.week }}</span>
+            {% if item.submission %}
+            <span class="font-label-sm px-2 py-0.5 rounded {% if item.submission.is_late %}bg-error-container/30{% else %}bg-secondary-container/30{% endif %}">
+                {% if item.submission.status == 'graded' and item.assignment.grades_released %}Graded{% elif item.submission.is_late %}Late{% else %}Submitted{% endif %}
+            </span>
+            {% else %}
+            <span class="font-label-sm px-2 py-0.5 rounded bg-surface-container text-on-surface-variant">Not Started</span>
+            {% endif %}
+        </div>
+        <h3 class="font-headline-sm text-on-surface mb-sm">{{ item.assignment.title }}</h3>
+        <p class="font-body-sm text-on-surface-variant">Due {{ item.assignment.due_date|date:"M d, Y H:i" }}</p>
+        {% if item.submission and item.assignment.grades_released and item.submission.score_obtained is not None %}
+        <p class="font-label-md text-primary mt-md">{{ item.submission.score_obtained }} / {{ item.assignment.total_score }}</p>
+        {% endif %}
+    </a>
+    {% endfor %}
+</div>
+{% else %}
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xxl text-center text-on-surface-variant">No assignments published yet.</div>
+{% endif %}
+{% endblock %}

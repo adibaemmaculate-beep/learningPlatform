@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Check Your Email - Dev Academy{% endblock %}
+{% block body_class %}min-h-screen flex items-center justify-center p-md{% endblock %}
+{% block content %}
+<div class="max-w-md w-full bg-surface-container-lowest border border-outline-variant rounded-xl p-xl text-center">
+    <span class="material-symbols-outlined text-5xl text-primary mb-md">mail</span>
+    <h1 class="font-headline-md text-headline-md text-primary mb-sm">Check Your Email</h1>
+    <p class="font-body-md text-on-surface-variant mb-lg">We sent a verification link to <strong>{{ email }}</strong>. Please verify your email, then wait for admin approval.</p>
+    <a href="{% url 'accounts:login' %}" class="inline-block bg-secondary-container text-primary px-lg py-3 rounded-lg font-headline-sm">Back to Login</a>
+</div>
+{% endblock %}

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dev Academy - AI &amp; Coding Program</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#e0e3e5",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#c4c7c9",
+                      "on-primary": "#ffffff",
+                      "on-primary-fixed": "#131b2e",
+                      "inverse-surface": "#233144",
+                      "surface-bright": "#f8f9ff",
+                      "outline": "#76777d",
+                      "on-primary-container": "#7c839b",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "on-tertiary-fixed": "#191c1e",
+                      "background": "#f8f9ff",
+                      "surface-container": "#e6eeff",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#444749",
+                      "on-secondary-container": "#6f5900",
+                      "tertiary": "#000000",
+                      "primary": "#000000",
+                      "surface-variant": "#d5e3fc",
+                      "surface-dim": "#ccdbf3",
+                      "on-background": "#0d1c2e",
+                      "on-secondary-fixed-variant": "#574500",
+                      "on-surface": "#0d1c2e",
+                      "on-surface-variant": "#45464d",
+                      "secondary": "#735c00",
+                      "secondary-container": "#fed01b",
+                      "secondary-fixed": "#ffe083",
+                      "on-secondary-fixed": "#231b00",
+                      "surface": "#f8f9ff",
+                      "surface-tint": "#565e74",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#bec6e0",
+                      "surface-container-highest": "#d5e3fc",
+                      "tertiary-container": "#191c1e",
+                      "primary-fixed": "#dae2fd",
+                      "secondary-fixed-dim": "#eec200",
+                      "on-error-container": "#93000a",
+                      "outline-variant": "#c6c6cd",
+                      "surface-container-low": "#eff4ff",
+                      "primary-container": "#131b2e",
+                      "surface-container-high": "#dce9ff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "on-tertiary-container": "#818486",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#bec6e0",
+                      "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xxl": "48px",
+                      "sm": "12px",
+                      "base": "8px",
+                      "lg": "24px",
+                      "gutter": "24px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "container-max": "1280px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "headline-xl": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "label-md": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "10px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background font-body-md text-on-background antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-surface-variant transition-all duration-300 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)]">
+<div class="max-w-[1280px] mx-auto px-gutter h-16 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-headline-md">
+<span class="material-symbols-outlined text-sm">code</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Dev Academy</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-md text-label-md text-primary border-b-2 border-secondary pb-1 transition-colors" href="#">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Meet the Students</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-secondary-container text-primary font-label-md text-label-md px-6 py-2 rounded-DEFAULT hover:bg-secondary-fixed transition-colors font-bold shadow-sm">
+                    Log In
+                </button>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="mt-16 bg-primary-container text-on-primary pt-xxl pb-xxl px-gutter relative overflow-hidden">
+<!-- Abstract Tech Pattern Background -->
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 32px 32px;"></div>
+<div class="max-w-[1280px] mx-auto grid lg:grid-cols-2 gap-xl items-center relative z-10">
+<div class="space-y-lg">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-variant/10 border border-surface-variant/20 backdrop-blur-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-surface-bright uppercase tracking-wider">Next Cohort Enrolling Now</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-surface-bright font-extrabold leading-tight">
+                    Engineer the Future of Intelligence.
+                </h1>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-xl">
+                    Master modern software development and applied artificial intelligence in an intensive, immersive environment built for high-performance learners.
+                </p>
+<div class="flex gap-4 pt-sm">
+<button class="bg-secondary-container text-primary font-label-md text-label-md px-8 py-3 rounded-DEFAULT hover:bg-secondary-fixed transition-all font-bold shadow-sm">
+                        Learn More
+                    </button>
+<button class="bg-transparent border border-surface-variant/30 text-surface-bright font-label-md text-label-md px-8 py-3 rounded-DEFAULT hover:bg-surface-variant/10 transition-all">
+                        View Curriculum
+                    </button>
+</div>
+</div>
+<div class="relative rounded-xl overflow-hidden shadow-2xl border border-surface-variant/20 aspect-video lg:aspect-square bg-inverse-surface group">
+<img alt="Students coding" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90" data-alt="A modern, high-tech classroom environment featuring students focused on coding laptops, illuminated by crisp white and soft blue lighting. The space is minimalist and professional, conveying a focused, premium educational setting characteristic of a top-tier tech academy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWZdFYSkLux8d7jWes5nvDLrYAHN7GFk-ylXVTEJ0xKDsiIoxAApCEElB1O3svTNrPFRtNZQ1v1kjkrbU69lSl2eHjm2x2cDBjZsT59314Sj4e9QofQx_NXy2fshWgjAoDLY4cducWOwstKIZgW_wuHv9POaF-VeWN8rqmRUwqRKHkC7xkntsRQloLvyzgb7_OO7rVqt1UljKd3HlBSiH5MI_qZSnbkkN6mBsGhS809JyqwTiJzhfqxeY97A1mEmCMt_xcyrn4IwV6"/>
+<!-- Floating Glass Card -->
+<div class="absolute bottom-6 left-6 right-6 bg-surface-container-lowest/90 backdrop-blur-md p-4 rounded-lg border border-surface-variant shadow-lg flex items-center justify-between transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Course Spotlight</p>
+<p class="font-headline-sm text-headline-sm text-primary">Advanced Machine Learning</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Values Section (Bento Grid Style) -->
+<section class="py-xxl px-gutter bg-surface-container-lowest relative">
+<div class="max-w-[1280px] mx-auto">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-sm">What We Stand For</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Our pedagogy is built on rigorous technical foundations, practical application, and ethical AI development.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-6">
+<!-- Value Card 1 -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-lg hover:shadow-[0_10px_15px_-3px_rgba(15,23,42,0.05)] hover:border-primary/20 transition-all duration-300 group">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center mb-md group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary" data-weight="fill">terminal</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Code Mastery</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Deep foundational knowledge in system architecture, clean code practices, and modern frameworks.</p>
+</div>
+<!-- Value Card 2 -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-lg hover:shadow-[0_10px_15px_-3px_rgba(15,23,42,0.05)] hover:border-primary/20 transition-all duration-300 group">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center mb-md group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary" data-weight="fill">neurology</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Applied AI</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Moving beyond theory to deploy functional AI models solving real-world engineering challenges.</p>
+</div>
+<!-- Value Card 3 -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-lg hover:shadow-[0_10px_15px_-3px_rgba(15,23,42,0.05)] hover:border-primary/20 transition-all duration-300 group">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center mb-md group-hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary" data-weight="fill">group_work</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Collaborative Rigor</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Intensive pair programming, peer code reviews, and cross-functional project sprints.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Mission & Vision (Asymmetric Split) -->
+<section class="py-xxl px-gutter bg-surface-container-low border-y border-surface-variant">
+<div class="max-w-[1280px] mx-auto grid md:grid-cols-12 gap-xl items-center">
+<div class="md:col-span-5 relative">
+<div class="aspect-[3/4] rounded-xl overflow-hidden bg-surface-variant relative shadow-sm border border-outline-variant/30">
+<img alt="Coding environment" class="w-full h-full object-cover" data-alt="A clean, modern workspace featuring a glowing monitor displaying lines of code, situated on a neat desk. The lighting is bright and airy, typical of a modern software development studio, utilizing a minimalist white and subtle grey palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJAPAjr4XUOv7lLfYzjaYkvgNGX1_lPhu5Q41cZPhQbHmsz5QUHL0KF5VUh4nrHxjRa28_nfJ3EJc4ATCHcPA9UzKGNSgVOjFBJCopLR3jjt02CxoVNE24y8qyAiA4jZnEh7RJHjL8MZZT9k2HGllssgBS2byjcKbEbplS_fbP83Ynpj08NZuSUvMUx-LoRhNZAF4ktKWufk4n_NrMh0BUtuwKMR1Guz2MJmV02gg5xUsWOKq6ZeC2LY-E7IoLYcBwdzLgMnG3MlfX"/>
+</div>
+<!-- Decorative Pattern -->
+<div class="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary-fixed/20 rounded-full blur-2xl -z-10"></div>
+</div>
+<div class="md:col-span-7 space-y-lg md:pl-lg">
+<div>
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2">Our Mission</h4>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md">Bridging the gap between ambition and engineering excellence.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                        We believe that the next generation of software engineers needs more than just syntax syntax knowledge. They need deep systemic understanding, the ability to leverage artificial intelligence as a co-pilot, and the architectural foresight to build scalable solutions.
+                    </p>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Our program is meticulously designed to transform driven individuals into high-impact developers ready to tackle complex industry problems on day one.
+                    </p>
+</div>
+<div class="grid grid-cols-2 gap-6 pt-md border-t border-outline-variant/30">
+<div>
+<div class="font-headline-xl text-headline-xl text-primary font-bold">94%</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase mt-1">Placement Rate</div>
+</div>
+<div>
+<div class="font-headline-xl text-headline-xl text-primary font-bold">400+</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase mt-1">Hours of Coding</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- News & Updates Section -->
+<section class="py-xxl px-gutter bg-surface-container-lowest">
+<div class="max-w-[1280px] mx-auto">
+<div class="flex justify-between items-end mb-xl border-b border-surface-variant pb-4">
+<h2 class="font-headline-lg text-headline-lg text-primary">Latest Updates</h2>
+<a class="font-label-md text-label-md text-primary flex items-center gap-1 hover:text-on-surface-variant transition-colors" href="#">
+                    View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- News Card 1 -->
+<article class="group cursor-pointer">
+<div class="aspect-[16/10] rounded-lg overflow-hidden bg-surface-variant mb-4 border border-surface-variant relative">
+<img alt="Tech Event" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A modern tech conference scene with a speaker presenting sophisticated data visualizations on a large screen to an engaged audience in a well-lit, minimalist auditorium. The dominant colors are crisp whites and subtle blues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYtkjSYf34kgD_01yr4_9Jw1rM0GpBrNv5ucOMnvPY8OUiloP6AYsjtb56kbg-wGZrAaqOL5_-dZN_d99X90zb60Xthj27aibLNqzwnVtfFqILQWz4ZXcurw8AtSvLkF4HsIyZaPFge66I0bAbLrE_94WcZpfPSBlEb2lsctIEywEQYw8gUmjOKC99_kCcbd4cc5pQ_ypXCQLN2Cok2jxSSXnpt37IVgi1Ze78Dq6d6CdLKJwRcCqbFaweOiKslwYZwnBLlhDzVIdZ"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Industry Event</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 12, 2023</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2 group-hover:text-surface-tint transition-colors">Dev Academy Hosts Annual AI Summit in San Francisco</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">Leading researchers and our alumni gathered to discuss the practical applications of LLMs in modern web architecture.</p>
+<span class="font-label-md text-label-md text-primary group-hover:underline flex items-center gap-1">Read more</span>
+</article>
+<!-- News Card 2 -->
+<article class="group cursor-pointer">
+<div class="aspect-[16/10] rounded-lg overflow-hidden bg-surface-variant mb-4 border border-surface-variant relative">
+<img alt="Student Project" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A close-up of a diverse group of students collaboratively reviewing code on a laptop in a bright, modern minimalist classroom setting. Natural light highlights the clean lines of the environment, emphasizing professional focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAawxiOS--92KAxlwpfoFzuyWufFANwDDbJ5s11kZchWOmj0o_ErX8hKb4B_flhgoyGN3OCLpNrIWdpEpAG1R_Iz8tKf6JBwMgy63YTGyO_juB-M4zndpSjoGyp0zjsAGGz6WvJoee8n3hwYxQvyhGCbEqzlcPlK_DIBNFDeUiKZYwDDO0yIwvnzCeMZVTdQWMprOApFMN8Ca7x90ur2B1-TGJ7M9X3lNKkNBNGWjIy4is1SwvTr_XvlwgZtj6hO61FSTX7KR_BKnnJ"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Student Success</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sep 28, 2023</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2 group-hover:text-surface-tint transition-colors">Cohort 14 Ships Open-Source Developer Tools</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">Our recent graduates have published three highly acclaimed NPM packages focusing on React performance optimization.</p>
+<span class="font-label-md text-label-md text-primary group-hover:underline flex items-center gap-1">Read more</span>
+</article>
+<!-- News Card 3 -->
+<article class="group cursor-pointer">
+<div class="aspect-[16/10] rounded-lg overflow-hidden bg-surface-variant mb-4 border border-surface-variant relative">
+<img alt="Curriculum Update" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An abstract, stylized representation of neural network connections or code structures, rendered in clean, high-key light mode aesthetics using crisp white, grey, and subtle yellow accents to convey cutting-edge curriculum updates." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIDBDTh9fM4eZugJjn58RZ2TRfJl45Xm_KA9ik1A5KqtmpuzjZvMIcrnu2EMX8fL0nePVL_Gg6qagd7glAvxwpKu9YhP1QQNPRWtXgPa8aq6X3_5IzaTMel4Ua1YkV0SqcBiu5WLkBew80IxlnWMjwKRxqYYqxaIpmOe1PnAlWTcgdhGPBRI46vhhaKodCgsyORBCg2mULA6di8h7zXWVF8FQIo24_KX8XhrVTI0P_K_bi1u7hHDWTidvYtmPNprYeEhce-PGjcE1i"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Curriculum</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sep 15, 2023</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2 group-hover:text-surface-tint transition-colors">Announcing the New Systems Architecture Module</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">We are expanding our core curriculum to include deep dives into distributed systems, Docker, and Kubernetes deployment strategies.</p>
+<span class="font-label-md text-label-md text-primary group-hover:underline flex items-center gap-1">Read more</span>
+</article>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary-container text-on-primary-fixed-variant pt-xl pb-lg px-gutter border-t border-primary-fixed-dim/20">
+<div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-xl mb-xl">
+<!-- Brand Column -->
+<div class="col-span-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center text-primary-container font-headline-md">
+<span class="material-symbols-outlined text-sm">code</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-surface-bright tracking-tight">Dev Academy</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary-fixed-dim/80 mb-6 max-w-xs">
+                    Empowering the next generation of software engineers through rigorous, AI-integrated curriculum and intensive practical application.
+                </p>
+<div class="flex gap-4">
+<a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#"><span class="material-symbols-outlined">forum</span></a>
+</div>
+</div>
+<!-- Quick Links -->
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-surface-bright mb-4 uppercase tracking-wider">Quick Links</h4>
+<ul class="space-y-3 font-body-sm text-body-sm">
+<li><a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#">Curriculum Overview</a></li>
+<li><a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#">Admissions Process</a></li>
+<li><a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#">Student Outcomes</a></li>
+<li><a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#">Tuition &amp; Financing</a></li>
+<li><a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#">Campus Locations</a></li>
+</ul>
+</div>
+<!-- Contact -->
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-surface-bright mb-4 uppercase tracking-wider">Contact</h4>
+<ul class="space-y-3 font-body-sm text-body-sm">
+<li class="flex items-start gap-2 text-primary-fixed-dim">
+<span class="material-symbols-outlined text-sm mt-0.5">mail</span>
+                        admissions@devacademy.edu
+                    </li>
+<li class="flex items-start gap-2 text-primary-fixed-dim">
+<span class="material-symbols-outlined text-sm mt-0.5">call</span>
+                        +1 (555) 123-4567
+                    </li>
+<li class="flex items-start gap-2 text-primary-fixed-dim">
+<span class="material-symbols-outlined text-sm mt-0.5">location_on</span>
+                        100 Innovation Drive<br/>San Francisco, CA 94105
+                    </li>
+</ul>
+</div>
+<!-- Newsletter -->
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-surface-bright mb-4 uppercase tracking-wider">Stay Updated</h4>
+<p class="font-body-sm text-body-sm text-primary-fixed-dim/80 mb-4">Subscribe to our newsletter for insights on engineering and curriculum updates.</p>
+<form class="flex flex-col gap-2">
+<input class="bg-primary-fixed/10 border border-primary-fixed-dim/30 rounded-DEFAULT px-3 py-2 text-surface-bright font-body-sm focus:outline-none focus:border-secondary-fixed transition-colors placeholder:text-primary-fixed-dim/50" placeholder="Enter your email" type="email"/>
+<button class="bg-secondary-container text-primary font-label-md text-label-md px-4 py-2 rounded-DEFAULT hover:bg-secondary-fixed transition-colors font-bold mt-2" type="submit">
+                        Subscribe
+                    </button>
+</form>
+</div>
+</div>
+<div class="max-w-[1280px] mx-auto pt-6 border-t border-primary-fixed-dim/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-sm text-body-sm text-primary-fixed-dim/60">© 2023 Dev Academy. All rights reserved.</p>
+<div class="flex gap-6 font-body-sm text-body-sm text-primary-fixed-dim/60">
+<a class="hover:text-surface-bright transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-surface-bright transition-colors" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

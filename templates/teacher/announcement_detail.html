@@ -1,0 +1,25 @@
+{% extends "base_portal.html" %}
+{% block title %}{{ announcement.title }}{% endblock %}
+{% block portal_content %}
+<div class="mb-4"><a href="{% url 'teacher:announcements' %}" class="text-primary font-label-md hover:underline">← Back</a></div>
+<div class="max-w-2xl">
+    <h1 class="font-headline-lg font-bold text-on-surface mb-2">{{ announcement.title }}</h1>
+    <p class="font-body-sm text-on-surface-variant mb-6">{{ announcement.published_at|date:"F j, Y H:i" }} • {{ announcement.get_visibility_display }} • by {{ announcement.created_by.get_full_name }}</p>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg mb-xl">
+        <div class="markdown-content font-body-md whitespace-pre-wrap">{{ announcement.body }}</div>
+    </div>
+    <h2 class="font-headline-sm mb-4">Read by ({{ reads|length }})</h2>
+    {% if reads %}
+    <ul class="bg-surface-container-lowest border border-outline-variant rounded-lg divide-y divide-outline-variant">
+        {% for read in reads %}
+        <li class="px-6 py-3 flex justify-between font-body-sm">
+            <span>{{ read.user.get_full_name }}</span>
+            <span class="text-on-surface-variant">{{ read.read_at|date:"M d, H:i" }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-on-surface-variant">No one has read this yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

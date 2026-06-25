@@ -1,0 +1,65 @@
+{% extends "base_portal.html" %}
+{% block title %}Invite Codes - Admin{% endblock %}
+{% block portal_content %}
+<div class="flex justify-between items-center mb-6">
+    <h1 class="font-headline-md text-headline-md text-on-surface">Invite Codes</h1>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+        <h3 class="font-headline-sm text-headline-sm mb-4">Generate New Code</h3>
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label class="block font-label-md mb-1" for="id_role">Role</label>
+                <select name="role" id="id_role" class="w-full border border-outline-variant rounded-lg px-3 py-2">
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-label-md mb-1" for="id_expires_at">Expires At</label>
+                <input type="datetime-local" name="expires_at" id="id_expires_at" class="w-full border border-outline-variant rounded-lg px-3 py-2" required>
+            </div>
+            <div class="flex items-center gap-2">
+                <input type="checkbox" name="is_single_use" id="id_is_single_use" checked class="rounded">
+                <label for="id_is_single_use" class="font-body-sm">Single use</label>
+            </div>
+            <button type="submit" class="w-full bg-primary text-on-primary py-2 rounded-lg font-label-md">Generate Code</button>
+        </form>
+    </div>
+    <div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+        <table class="w-full text-left">
+            <thead class="bg-surface border-b border-outline-variant">
+                <tr class="font-label-sm text-on-surface-variant uppercase">
+                    <th class="px-4 py-3">Code</th>
+                    <th class="px-4 py-3">Role</th>
+                    <th class="px-4 py-3">Status</th>
+                    <th class="px-4 py-3">Expires</th>
+                    <th class="px-4 py-3">Used By</th>
+                    <th class="px-4 py-3 text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant font-table-data">
+                {% for code in invite_codes %}
+                <tr>
+                    <td class="px-4 py-3 font-mono font-medium">{{ code.code }}</td>
+                    <td class="px-4 py-3">{{ code.get_role_display }}</td>
+                    <td class="px-4 py-3"><span class="px-2 py-0.5 rounded text-xs {% if code.status == 'active' %}bg-secondary-container/30{% elif code.status == 'used' %}bg-surface-container{% else %}bg-error-container/30{% endif %}">{{ code.get_status_display }}</span></td>
+                    <td class="px-4 py-3 text-on-surface-variant">{{ code.expires_at|date:"M d, Y H:i" }}</td>
+                    <td class="px-4 py-3">{{ code.used_by.get_full_name|default:"—" }}</td>
+                    <td class="px-4 py-3 text-right">
+                        {% if code.status == 'active' %}
+                        <form method="post" action="{% url 'admin_portal:deactivate_invite_code' code.id %}" class="inline">{% csrf_token %}
+                            <button type="submit" class="text-error text-label-sm hover:underline" onclick="return confirm('Deactivate this code?')">Deactivate</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="px-4 py-8 text-center text-on-surface-variant">No invite codes yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

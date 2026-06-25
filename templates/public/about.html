@@ -1,0 +1,48 @@
+{% extends "base_public.html" %}
+{% block title %}About the Program - Dev Academy{% endblock %}
+{% block public_content %}
+<section class="max-w-[1280px] mx-auto px-gutter py-xxl">
+    <h1 class="font-headline-xl text-headline-xl text-primary mb-lg">About the Program</h1>
+    <div class="prose max-w-none font-body-md text-on-surface-variant space-y-md mb-xxl">
+        <p>The Dev Academy AI &amp; Coding Program was created to give middle school students in Zimbabwe hands-on experience with artificial intelligence and software development. Students learn by doing — building projects that matter to their communities.</p>
+        <p>Over the course of the program, students progress from foundational coding concepts through to machine learning basics, culminating in a final community-impact project they design, build, and present publicly.</p>
+        <p>Our methodology combines structured weekly coursework, collaborative assignments, teacher mentorship, and peer learning in a supportive cohort environment.</p>
+    </div>
+
+    <h2 class="font-headline-lg text-headline-lg text-primary mb-lg">The Team</h2>
+    {% if teachers %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg mb-xxl">
+        {% for teacher in teachers %}
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg text-center">
+            <div class="w-20 h-20 rounded-full bg-primary-container text-on-primary mx-auto mb-md flex items-center justify-center font-headline-md text-xl">
+                {{ teacher.first_name|slice:":1" }}{{ teacher.last_name|slice:":1" }}
+            </div>
+            <h3 class="font-headline-sm text-headline-sm text-on-surface">{{ teacher.get_full_name }}</h3>
+            <p class="font-body-sm text-on-surface-variant mt-sm">{% if teacher.profile and teacher.profile.bio %}{{ teacher.profile.bio|truncatewords:20 }}{% else %}Program Instructor{% endif %}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="font-body-md text-on-surface-variant mb-xxl">Our teaching team profiles will appear here.</p>
+    {% endif %}
+
+    <h2 class="font-headline-lg text-headline-lg text-primary mb-lg">Program Structure</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+        <div class="bg-surface-container border border-outline-variant rounded-xl p-lg">
+            <span class="material-symbols-outlined text-3xl text-secondary mb-md">calendar_month</span>
+            <h3 class="font-headline-sm text-headline-sm mb-sm">Weekly Modules</h3>
+            <p class="font-body-sm text-on-surface-variant">Structured weekly lessons with slides, notes, and hands-on exercises.</p>
+        </div>
+        <div class="bg-surface-container border border-outline-variant rounded-xl p-lg">
+            <span class="material-symbols-outlined text-3xl text-secondary mb-md">assignment</span>
+            <h3 class="font-headline-sm text-headline-sm mb-sm">Assignments</h3>
+            <p class="font-body-sm text-on-surface-variant">Regular assignments with teacher feedback and graded submissions.</p>
+        </div>
+        <div class="bg-surface-container border border-outline-variant rounded-xl p-lg">
+            <span class="material-symbols-outlined text-3xl text-secondary mb-md">rocket_launch</span>
+            <h3 class="font-headline-sm text-headline-sm mb-sm">Final Project</h3>
+            <p class="font-body-sm text-on-surface-variant">A community-focused capstone project showcased publicly at program end.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

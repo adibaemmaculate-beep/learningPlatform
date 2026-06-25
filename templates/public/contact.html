@@ -1,0 +1,48 @@
+{% extends "base_public.html" %}
+{% block title %}Contact Us - Dev Academy{% endblock %}
+{% block extra_head %}<style>.custom-input:focus{border-color:#000;box-shadow:0 0 0 2px rgba(254,208,27,.2);outline:none;}</style>{% endblock %}
+{% block public_content %}
+<section class="max-w-[1280px] mx-auto px-gutter py-xxl">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-xxl">
+        <div>
+            <h1 class="font-headline-xl text-headline-xl text-primary mb-md">Contact Us</h1>
+            <p class="font-body-lg text-on-surface-variant mb-xl">Have questions about the program? We'd love to hear from you.</p>
+            <div class="space-y-lg">
+                <div class="flex items-start gap-md">
+                    <span class="material-symbols-outlined text-primary mt-1">mail</span>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface">Email</h3>
+                        <p class="font-body-md text-on-surface-variant">admin@example.com</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-md">
+                    <span class="material-symbols-outlined text-primary mt-1">location_on</span>
+                    <div>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface">Location</h3>
+                        <p class="font-body-md text-on-surface-variant">Harare, Zimbabwe</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xl">
+            <h2 class="font-headline-md text-headline-md text-primary mb-lg">Send a Message</h2>
+            <form method="post" class="space-y-md">
+                {% csrf_token %}
+                <div>
+                    <label class="block font-label-md text-label-md mb-xs" for="id_name">Name</label>
+                    <input class="w-full border border-outline-variant rounded-lg px-3 py-2 custom-input font-body-sm" id="id_name" name="name" required value="{{ form.name.value|default:'' }}">
+                </div>
+                <div>
+                    <label class="block font-label-md text-label-md mb-xs" for="id_email">Email</label>
+                    <input class="w-full border border-outline-variant rounded-lg px-3 py-2 custom-input font-body-sm" id="id_email" name="email" type="email" required value="{{ form.email.value|default:'' }}">
+                </div>
+                <div>
+                    <label class="block font-label-md text-label-md mb-xs" for="id_message">Message</label>
+                    <textarea class="w-full border border-outline-variant rounded-lg px-3 py-2 custom-input font-body-sm" id="id_message" name="message" rows="5" required>{{ form.message.value|default:'' }}</textarea>
+                </div>
+                <button type="submit" class="w-full bg-secondary-container text-primary font-headline-sm py-3 rounded-lg hover:bg-secondary-fixed transition-colors">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,8 @@
+django>=4.2
+python-dotenv
+Pillow
+python-markdown
+django-widget-tweaks
+psycopg2-binary
+gunicorn
+whitenoise

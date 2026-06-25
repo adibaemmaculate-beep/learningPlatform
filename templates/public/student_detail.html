@@ -1,0 +1,36 @@
+{% extends "base_public.html" %}
+{% block title %}{{ student.get_full_name }} - Dev Academy{% endblock %}
+{% block public_content %}
+<section class="max-w-[960px] mx-auto px-gutter py-xxl">
+    <div class="mb-4"><a href="{% url 'public:students' %}" class="text-primary font-label-md hover:underline">← Meet the Students</a></div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+        <div class="text-center">
+            {% if student.profile and student.profile.profile_pic %}
+            <img src="{{ student.profile.profile_pic.url }}" alt="" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-outline-variant">
+            {% else %}
+            <div class="w-32 h-32 rounded-full bg-primary-container text-on-primary mx-auto mb-4 flex items-center justify-center text-3xl font-bold">{{ student.first_name|slice:":1" }}{{ student.last_name|slice:":1" }}</div>
+            {% endif %}
+            <h1 class="font-headline-lg text-on-surface">{{ student.get_full_name }}</h1>
+            {% if student.profile and student.profile.bio %}
+            <div class="markdown-content font-body-md text-on-surface-variant mt-4 text-left">{{ student.profile.bio }}</div>
+            {% endif %}
+        </div>
+        <div class="lg:col-span-2">
+            <h2 class="font-headline-md text-on-surface mb-2">{{ project.title }}</h2>
+            {% if project.description %}<p class="font-body-lg text-on-surface-variant mb-6">{{ project.description }}</p>{% endif %}
+            {% if project.write_up %}<div class="markdown-content font-body-md mb-6">{{ project.write_up }}</div>{% endif %}
+            <div class="flex flex-wrap gap-4 mb-6">
+                {% if project.codebase_url %}<a href="{{ project.codebase_url }}" target="_blank" class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md">View Codebase</a>{% endif %}
+                {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="bg-secondary-container text-primary px-4 py-2 rounded-lg font-label-md">Live Demo</a>{% endif %}
+            </div>
+            {% if project.images.all %}
+            <div class="grid grid-cols-2 gap-4">
+                {% for img in project.images.all %}
+                <img src="{{ img.image.url }}" alt="" class="rounded-xl border border-outline-variant object-cover w-full h-48">
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

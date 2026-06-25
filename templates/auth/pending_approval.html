@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Pending Approval - Dev Academy{% endblock %}
+{% block body_class %}min-h-screen flex items-center justify-center p-md{% endblock %}
+{% block content %}
+<div class="max-w-md w-full bg-surface-container-lowest border border-outline-variant rounded-xl p-xl text-center">
+    <span class="material-symbols-outlined text-5xl text-secondary mb-md">hourglass_top</span>
+    <h1 class="font-headline-md text-primary mb-sm">Pending Approval</h1>
+    <p class="font-body-md text-on-surface-variant mb-lg">Your account is waiting for administrator approval. You'll receive an email when approved.</p>
+    <a href="{% url 'accounts:logout' %}" class="inline-block bg-secondary-container text-primary px-lg py-3 rounded-lg font-headline-sm">Logout</a>
+</div>
+{% endblock %}

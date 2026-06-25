@@ -1,0 +1,44 @@
+{% extends "base_portal.html" %}
+{% block title %}Manage Assignments{% endblock %}
+{% block portal_content %}
+<div class="flex justify-between items-center mb-xl">
+    <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">Assignments</h1>
+    <a href="{% url 'teacher:assignment_create' %}" class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm">add</span> Create Assignment
+    </a>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+    <table class="w-full text-left">
+        <thead class="bg-surface border-b border-outline-variant">
+            <tr class="font-label-sm text-on-surface-variant uppercase">
+                <th class="px-6 py-3">Title</th>
+                <th class="px-6 py-3">Week</th>
+                <th class="px-6 py-3">Due</th>
+                <th class="px-6 py-3">Submissions</th>
+                <th class="px-6 py-3">Status</th>
+                <th class="px-6 py-3 text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant font-table-data">
+            {% for item in items %}
+            <tr class="hover:bg-surface-container-low">
+                <td class="px-6 py-4 font-medium">{{ item.assignment.title }}</td>
+                <td class="px-6 py-4">{{ item.assignment.week }}</td>
+                <td class="px-6 py-4 text-on-surface-variant">{{ item.assignment.due_date|date:"M d, Y" }}</td>
+                <td class="px-6 py-4">{{ item.submission_count }} / {{ item.class_size }}</td>
+                <td class="px-6 py-4">
+                    {% if item.assignment.is_draft %}<span class="text-xs px-2 py-0.5 rounded bg-surface-container">Draft</span>{% endif %}
+                    {% if item.assignment.grades_released %}<span class="text-xs px-2 py-0.5 rounded bg-secondary-container/30">Grades Released</span>{% endif %}
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="{% url 'teacher:assignment_detail' item.assignment.id %}" class="text-primary font-label-md hover:underline">View</a>
+                    <a href="{% url 'teacher:assignment_edit' item.assignment.id %}" class="text-on-surface-variant font-label-md hover:underline ml-2">Edit</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6" class="px-6 py-8 text-center text-on-surface-variant">No assignments yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

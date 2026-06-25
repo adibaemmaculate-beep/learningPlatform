@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Progress Dashboard</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface": "#0b1c30",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#45464d",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary-container": "#6f5900",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#131b2e",
+                        "tertiary-fixed": "#fcdeb5",
+                        "background": "#f8f9ff",
+                        "secondary": "#735c00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "outline-variant": "#c6c6cd",
+                        "inverse-primary": "#bec6e0",
+                        "surface-tint": "#565e74",
+                        "on-primary-fixed": "#131b2e",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e5eeff",
+                        "on-secondary-fixed": "#231b00",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "tertiary": "#000000",
+                        "primary-fixed": "#dae2fd",
+                        "on-tertiary-fixed": "#271901",
+                        "surface": "#f8f9ff",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary-container": "#271901",
+                        "on-error": "#ffffff",
+                        "primary": "#000000",
+                        "surface-container-high": "#dce9ff",
+                        "on-background": "#0b1c30",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-tertiary-container": "#98805d",
+                        "secondary-container": "#fed01b",
+                        "outline": "#76777d",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#213145",
+                        "on-primary-container": "#7c839b",
+                        "surface-variant": "#d3e4fe",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "secondary-fixed": "#ffe083",
+                        "error-container": "#ffdad6"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "gutter": "16px",
+                        "container-padding": "24px",
+                        "row-height-dense": "32px",
+                        "unit": "4px",
+                        "row-height-standard": "48px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "headline-sm": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "table-data": ["Geist"],
+                        "headline-md": ["Geist"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["30px", { lineHeight: "38px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "label-sm": ["11px", { lineHeight: "16px", letterSpacing: "0.03em", fontWeight: "600" }],
+                        "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-md": ["13px", { lineHeight: "18px", letterSpacing: "0.01em", fontWeight: "500" }],
+                        "table-data": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex font-sans">
+<!-- SideNavBar -->
+<nav class="bg-primary-container dark:bg-primary-container text-on-primary dark:text-primary-fixed-dim font-body-md text-body-md h-screen w-64 fixed left-0 top-0 border-r border-outline-variant z-20 flex flex-col h-full py-gutter px-unit">
+<!-- Brand / Header -->
+<div class="px-4 py-6 mb-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover bg-surface-variant" data-alt="A small, professional profile picture of a teacher with a neutral background, highly detailed, well-lit, corporate headshot style, conveying authority and approachability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNreTqnRrj3IXsCFeZXjPT3S2W0EpTupavAbjAHqev6TmUuVGgCCPJbnDpBOG91_kg-L4XBglwjCBJ4XQfwFf-4HPIzfnMHFnmCry4s72R9BkGtHVcOyj7hwttgzq10eMRCI4fPYVElrwCRmYA8nXEPi0mXIpyV9cSdN-ust-Dv6VT1dlixml-7h5DYKJFS6kuCqdfcgGt6-Zq4qiWx8UphxQyO-znOp1um_2Kfcymym5fXw5lspWL0IN6RjJzB6NntFFtau7VzMtX"/>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-primary">Teacher Portal</h1>
+<p class="font-label-sm text-label-sm opacity-80">Classroom Management</p>
+</div>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col gap-1 overflow-y-auto flex-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span>Home</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">assignment</span>
+<span>Assignments</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span>Students</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-secondary-fixed border-l-4 border-secondary-container bg-surface-container-highest/10 font-bold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+<span>Progress</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">book</span>
+<span>Course Materials</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">campaign</span>
+<span>Announcements</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span>Profile</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+<!-- Logout Pinned to Bottom -->
+<div class="mt-auto pt-4 pb-2">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim text-on-surface dark:text-on-surface font-headline-sm text-headline-sm fixed top-0 right-0 w-[calc(100%-16rem)] h-row-height-standard border-b border-outline-variant z-10 flex justify-between items-center px-container-padding">
+<div class="font-headline-md text-headline-md text-primary">Dashboard</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="ml-2 w-8 h-8 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A small, professional profile picture of a teacher with a neutral background, highly detailed, well-lit, corporate headshot style, conveying authority and approachability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvUNewn7A2JzBfL4lYt_wakmmskvegsYl5Ka8O4HJGZZ-ePqrLuEUqHEc0j939MLaCMkWcadW1_f92f1yAqsl_RFippZ1Jzp5v9grmW1qt0JbQ17wcd_KHtxYlkFb3aLAbc9DFQLFMy-tg3Q0Wj4T4g7Ytn7EWYsMe3-W64hELKB4sP9JEgflsRnCxMzzPcZ8JGMNChTXVGCWgjey_dqk-gJba7E2YXcspUbxr3csvm8s_7yRwmPOOJsvkDSPF69DK__5LWLOy5WBu"/>
+</div>
+</div>
+</header>
+<!-- Canvas / Dashboard Content -->
+<main class="flex-1 mt-row-height-standard p-container-padding">
+<!-- Stat Cards Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-container-padding">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 flex flex-col justify-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Average Grade</span>
+<span class="font-headline-lg text-headline-lg text-primary">82%</span>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 flex flex-col justify-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Highest Grade</span>
+<span class="font-headline-lg text-headline-lg text-primary">98%</span>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 flex flex-col justify-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Lowest Grade</span>
+<span class="font-headline-lg text-headline-lg text-error">64%</span>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 flex flex-col justify-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Overall Submission Rate</span>
+<span class="font-headline-lg text-headline-lg text-primary">92%</span>
+</div>
+</div>
+<!-- Charts Row -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter mb-container-padding h-80">
+<!-- Chart 1: Average Score -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Average Score per Assignment</h3>
+<!-- Simulated Bar Chart -->
+<div class="flex-1 flex items-end gap-2 pb-6 relative">
+<!-- Y-axis lines -->
+<div class="absolute inset-x-0 bottom-6 border-b border-outline-variant opacity-30"></div>
+<div class="absolute inset-x-0 top-1/2 border-b border-outline-variant opacity-30"></div>
+<div class="absolute inset-x-0 top-4 border-b border-outline-variant opacity-30"></div>
+<!-- Bars -->
+<div class="flex-1 flex flex-col items-center justify-end h-full z-10 group">
+<div class="w-full bg-primary rounded-t-sm h-[75%] hover:bg-primary-container transition-colors relative">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">75%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-4">A1</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-end h-full z-10 group">
+<div class="w-full bg-primary rounded-t-sm h-[82%] hover:bg-primary-container transition-colors relative">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">82%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-4">A2</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-end h-full z-10 group">
+<div class="w-full bg-primary rounded-t-sm h-[68%] hover:bg-primary-container transition-colors relative">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">68%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-4">A3</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-end h-full z-10 group">
+<div class="w-full bg-primary rounded-t-sm h-[90%] hover:bg-primary-container transition-colors relative">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">90%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-4">A4</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-end h-full z-10 group">
+<div class="w-full bg-primary rounded-t-sm h-[85%] hover:bg-primary-container transition-colors relative">
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">85%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-4">A5</span>
+</div>
+</div>
+</div>
+<!-- Chart 2: Submission Rate -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Submission Rate per Assignment</h3>
+<!-- Simulated Stacked Bar Chart -->
+<div class="flex-1 flex items-end gap-2 pb-6 relative">
+<!-- Y-axis lines -->
+<div class="absolute inset-x-0 bottom-6 border-b border-outline-variant opacity-30"></div>
+<div class="absolute inset-x-0 top-1/2 border-b border-outline-variant opacity-30"></div>
+<div class="absolute inset-x-0 top-4 border-b border-outline-variant opacity-30"></div>
+<!-- Stacked Bars -->
+<div class="flex-1 flex flex-col items-center justify-end h-full z-10">
+<div class="w-full h-full flex flex-col justify-end relative group">
+<div class="w-full bg-surface-variant h-[10%]"></div> <!-- Missing -->
+<div class="w-full bg-secondary-container h-[90%] rounded-t-sm"></div> <!-- Submitted -->
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">90%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-4">A1</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-end h-full z-10">
+<div class="w-full h-full flex flex-col justify-end relative group">
+<div class="w-full bg-surface-variant h-[5%]"></div>
+<div class="w-full bg-secondary-container h-[95%] rounded-t-sm"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">95%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-4">A2</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-end h-full z-10">
+<div class="w-full h-full flex flex-col justify-end relative group">
+<div class="w-full bg-surface-variant h-[15%]"></div>
+<div class="w-full bg-secondary-container h-[85%] rounded-t-sm"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">85%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-4">A3</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-end h-full z-10">
+<div class="w-full h-full flex flex-col justify-end relative group">
+<div class="w-full bg-surface-variant h-[2%]"></div>
+<div class="w-full bg-secondary-container h-[98%] rounded-t-sm"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">98%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-4">A4</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-end h-full z-10">
+<div class="w-full h-full flex flex-col justify-end relative group">
+<div class="w-full bg-surface-variant h-[8%]"></div>
+<div class="w-full bg-secondary-container h-[92%] rounded-t-sm"></div>
+<span class="absolute -top-6 left-1/2 -translate-x-1/2 font-label-sm text-label-sm opacity-0 group-hover:opacity-100 transition-opacity">92%</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-2 absolute -bottom-4">A5</span>
+</div>
+</div>
+<!-- Legend -->
+<div class="flex justify-end gap-4 mt-2">
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-3 h-3 bg-secondary-container rounded-sm inline-block"></span> Submitted
+                        </div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-3 h-3 bg-surface-variant rounded-sm inline-block"></span> Missing
+                        </div>
+</div>
+</div>
+</div>
+<!-- Students Needing Support Section -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+<div class="p-4 border-b border-outline-variant bg-surface-bright">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Students Who May Need Support</h3>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant font-label-md text-label-md text-on-surface-variant bg-surface">
+<th class="p-4 font-medium">Student Name</th>
+<th class="p-4 font-medium">Current Grade</th>
+<th class="p-4 font-medium">Missing Assignments</th>
+<th class="p-4 font-medium">Last Active</th>
+<th class="p-4 font-medium text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-table-data text-table-data">
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors">
+<td class="p-4 font-medium text-on-surface">Sarah Jenkins</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-error/10 text-error font-label-sm text-label-sm">62% (D)</span>
+</td>
+<td class="p-4">3</td>
+<td class="p-4 text-on-surface-variant">2 Days Ago</td>
+<td class="p-4 text-right">
+<button class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors">Message</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/50 bg-background/50 hover:bg-surface-container-low transition-colors">
+<td class="p-4 font-medium text-on-surface">Marcus Thorne</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-error/10 text-error font-label-sm text-label-sm">58% (F)</span>
+</td>
+<td class="p-4">5</td>
+<td class="p-4 text-on-surface-variant">1 Week Ago</td>
+<td class="p-4 text-right">
+<button class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors">Message</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-4 font-medium text-on-surface">Emily Chen</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-secondary-container/20 text-on-secondary-container font-label-sm text-label-sm">71% (C-)</span>
+</td>
+<td class="p-4">1</td>
+<td class="p-4 text-on-surface-variant">Today</td>
+<td class="p-4 text-right">
+<button class="font-label-md text-label-md text-primary hover:text-primary-container transition-colors">Message</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+</body></html>

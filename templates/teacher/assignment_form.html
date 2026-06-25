@@ -1,0 +1,23 @@
+{% extends "base_portal.html" %}
+{% block title %}{% if editing %}Edit{% else %}Create{% endif %} Assignment{% endblock %}
+{% block portal_content %}
+<div class="mb-4"><a href="{% url 'teacher:assignments' %}" class="text-primary font-label-md hover:underline">← Back</a></div>
+<div class="max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+    <h1 class="font-headline-md text-headline-md mb-6">{% if editing %}Edit Assignment{% else %}Create Assignment{% endif %}</h1>
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="text-error text-body-sm">{{ form.non_field_errors.0 }}</div>{% endif %}
+        <div><label class="block font-label-md mb-1">Title</label>{{ form.title }}</div>
+        <div class="grid grid-cols-2 gap-4">
+            <div><label class="block font-label-md mb-1">Week</label>{{ form.week }}</div>
+            <div><label class="block font-label-md mb-1">Total Score</label>{{ form.total_score }}</div>
+        </div>
+        <div><label class="block font-label-md mb-1">Due Date & Time</label>{{ form.due_date }}</div>
+        <div><label class="block font-label-md mb-1">Instructions (Markdown)</label>{{ form.instructions }}</div>
+        <div><label class="block font-label-md mb-1">Max File Size (MB)</label>{{ form.max_file_size_mb }}</div>
+        <div><label class="block font-label-md mb-1">Allowed File Types</label>{{ form.allowed_types }}</div>
+        <div class="flex items-center gap-2">{{ form.publish }}<label for="id_publish" class="font-body-sm">Publish to students</label></div>
+        <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Save</button>
+    </form>
+</div>
+{% endblock %}

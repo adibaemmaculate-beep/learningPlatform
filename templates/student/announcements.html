@@ -1,0 +1,23 @@
+{% extends "base_portal.html" %}
+{% block title %}Announcements{% endblock %}
+{% block portal_content %}
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface mb-xl">Announcements</h1>
+<div class="space-y-3">
+    {% for a in announcements %}
+    <a href="{% url 'student:announcement_detail' a.id %}" class="block bg-surface-container-lowest border border-outline-variant rounded-xl p-lg hover:bg-surface-container-low transition-colors">
+        <div class="flex justify-between items-start">
+            <div>
+                <h3 class="font-headline-sm text-on-surface">{{ a.title }}</h3>
+                <p class="font-body-sm text-on-surface-variant mt-1">{{ a.published_at|date:"M d, Y" }}</p>
+            </div>
+            {% if a.id not in read_ids %}
+            <span class="text-xs px-2 py-0.5 rounded bg-secondary-container text-primary font-label-sm">New</span>
+            {% endif %}
+        </div>
+        <p class="font-body-md text-on-surface-variant mt-2 line-clamp-2">{{ a.body|truncatewords:30 }}</p>
+    </a>
+    {% empty %}
+    <p class="text-on-surface-variant text-center py-12">No announcements yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

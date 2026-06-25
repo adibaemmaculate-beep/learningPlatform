@@ -1,0 +1,57 @@
+{% extends "base_portal.html" %}
+{% block title %}Manage Course Materials{% endblock %}
+{% block portal_content %}
+<div class="flex justify-between items-center mb-xl">
+    <div>
+        <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">Course Materials</h1>
+        <p class="font-body-md text-on-surface-variant">{% if course %}{{ course.name }}{% else %}No active course{% endif %}</p>
+    </div>
+    <a href="{% url 'teacher:material_create' %}" class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md flex items-center gap-2 hover:opacity-90">
+        <span class="material-symbols-outlined text-sm">add</span> Add Week
+    </a>
+</div>
+{% if materials %}
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+    <table class="w-full text-left">
+        <thead class="bg-surface border-b border-outline-variant">
+            <tr class="font-label-sm text-on-surface-variant uppercase">
+                <th class="px-6 py-3">Week</th>
+                <th class="px-6 py-3">Title</th>
+                <th class="px-6 py-3">Status</th>
+                <th class="px-6 py-3">Files</th>
+                <th class="px-6 py-3 text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant font-table-data">
+            {% for m in materials %}
+            <tr class="hover:bg-surface-container-low">
+                <td class="px-6 py-4 font-bold">{{ m.week }}</td>
+                <td class="px-6 py-4">{{ m.title }}</td>
+                <td class="px-6 py-4">
+                    {% if m.published %}<span class="px-2 py-0.5 rounded text-xs bg-secondary-container/30">Published</span>
+                    {% else %}<span class="px-2 py-0.5 rounded text-xs bg-surface-container text-on-surface-variant">Draft</span>{% endif %}
+                </td>
+                <td class="px-6 py-4 text-on-surface-variant text-sm">
+                    {% if m.slides %}Slides{% endif %}{% if m.slides and m.notes %}, {% endif %}{% if m.notes %}Notes{% endif %}
+                </td>
+                <td class="px-6 py-4 text-right space-x-2">
+                    <a href="{% url 'teacher:material_edit' m.id %}" class="text-primary font-label-md hover:underline">Edit</a>
+                    <form method="post" action="{% url 'teacher:material_toggle_publish' m.id %}" class="inline">{% csrf_token %}
+                        <button type="submit" class="text-on-surface-variant font-label-md hover:underline">{% if m.published %}Unpublish{% else %}Publish{% endif %}</button>
+                    </form>
+                    <form method="post" action="{% url 'teacher:material_delete' m.id %}" class="inline">{% csrf_token %}
+                        <button type="submit" class="text-error font-label-md hover:underline" onclick="return confirm('Delete week {{ m.week }}?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xxl text-center">
+    <p class="font-body-md text-on-surface-variant mb-4">No weeks added yet.</p>
+    <a href="{% url 'teacher:material_create' %}" class="bg-secondary-container text-primary px-6 py-3 rounded-lg font-headline-sm inline-block">Add First Week</a>
+</div>
+{% endif %}
+{% endblock %}

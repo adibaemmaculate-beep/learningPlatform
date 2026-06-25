@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block html_class %}{% if current_user_profile %}{{ current_user_profile.theme }}{% else %}light{% endif %}{% endblock %}
+{% block body_class %}bg-background text-on-background font-body-md min-h-screen flex{% endblock %}
+{% block content %}
+{% include "partials/sidebar.html" %}
+<div class="ml-64 w-full flex flex-col min-h-screen">
+    {% include "partials/navbar.html" %}
+    {% include "partials/announcement_banner.html" %}
+    <main class="p-container-padding flex-1 flex flex-col gap-6">
+        {% block portal_content %}{% endblock %}
+    </main>
+</div>
+{% endblock %}

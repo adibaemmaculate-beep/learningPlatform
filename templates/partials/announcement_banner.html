@@ -1,0 +1,19 @@
+{% if unread_announcements %}
+<div class="mb-lg space-y-2" id="announcement-banner">
+    {% for a in unread_announcements %}
+    <div class="bg-secondary-container/20 border border-secondary-container rounded-xl p-md flex items-start justify-between gap-4 announcement-item" data-announcement-id="{{ a.id }}">
+        <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="material-symbols-outlined text-primary text-sm">campaign</span>
+                <span class="font-label-md text-primary">New Announcement</span>
+            </div>
+            <a href="{% url 'student:announcement_detail' a.id %}" class="font-headline-sm text-on-surface hover:underline">{{ a.title }}</a>
+            <p class="font-body-sm text-on-surface-variant mt-1 line-clamp-2">{{ a.body|truncatewords:25 }}</p>
+        </div>
+        <button type="button" class="announcement-dismiss text-on-surface-variant hover:text-on-surface p-1" aria-label="Dismiss">
+            <span class="material-symbols-outlined text-sm">close</span>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

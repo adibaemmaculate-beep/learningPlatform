@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Sign Up - Dev Academy{% endblock %}
+{% block body_class %}bg-[#F1F5F9] bg-grid-pattern min-h-screen flex items-center justify-center p-md sm:p-lg antialiased font-body-md text-on-surface{% endblock %}
+{% block extra_head %}<style>.bg-grid-pattern{background-size:40px 40px;background-image:linear-gradient(to right,rgba(226,232,240,.5) 1px,transparent 1px),linear-gradient(to bottom,rgba(226,232,240,.5) 1px,transparent 1px);}</style>{% endblock %}
+{% block content %}
+<main class="w-full max-w-lg bg-surface-container-lowest border border-outline-variant rounded-xl p-lg sm:p-xl shadow-lg border-t-[10px] border-t-primary">
+    <div class="text-center mb-xl">
+        <div class="w-16 h-16 bg-primary mx-auto rounded-lg flex items-center justify-center mb-md text-on-primary font-headline-md">DA</div>
+        <h1 class="font-headline-lg text-headline-lg text-primary mb-xs">Create your Account</h1>
+        <p class="font-body-md text-body-md text-on-surface-variant">Dev Academy Registration</p>
+    </div>
+    {% if form.non_field_errors %}
+    <div class="mb-md p-md bg-error-container text-on-error-container rounded-lg text-body-sm">
+        {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+    </div>
+    {% endif %}
+    <form method="post" class="space-y-md">
+        {% csrf_token %}
+        <div class="space-y-xs">
+            <label class="block font-label-md text-label-md text-on-surface" for="id_invite_code">Invite Code <span class="text-error">*</span></label>
+            <div class="relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">vpn_key</span>
+                <input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-10 pr-3 py-2 font-body-sm input-focus-ring" id="id_invite_code" name="invite_code" type="text" placeholder="Enter your invite code" required value="{{ form.invite_code.value|default:'' }}">
+            </div>
+            {% if form.invite_code.errors %}<p class="text-error text-body-sm">{{ form.invite_code.errors.0 }}</p>{% endif %}
+            <p class="font-body-sm text-body-sm text-on-surface-variant italic">You need an invite code from your administrator to register</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+            <div class="space-y-xs">
+                <label class="block font-label-md text-label-md" for="id_first_name">First Name <span class="text-error">*</span></label>
+                <input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-sm input-focus-ring" id="id_first_name" name="first_name" required value="{{ form.first_name.value|default:'' }}">
+            </div>
+            <div class="space-y-xs">
+                <label class="block font-label-md text-label-md" for="id_last_name">Last Name <span class="text-error">*</span></label>
+                <input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-sm input-focus-ring" id="id_last_name" name="last_name" required value="{{ form.last_name.value|default:'' }}">
+            </div>
+        </div>
+        <div class="space-y-xs">
+            <label class="block font-label-md text-label-md" for="id_email">Email <span class="text-error">*</span></label>
+            <input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-sm input-focus-ring" id="id_email" name="email" type="email" required value="{{ form.email.value|default:'' }}">
+            {% if form.email.errors %}<p class="text-error text-body-sm">{{ form.email.errors.0 }}</p>{% endif %}
+        </div>
+        <div class="space-y-xs">
+            <label class="block font-label-md text-label-md" for="id_phone_number">Phone (Optional)</label>
+            <input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-sm input-focus-ring" id="id_phone_number" name="phone_number" type="tel" value="{{ form.phone_number.value|default:'' }}">
+        </div>
+        <div class="space-y-xs">
+            <label class="block font-label-md text-label-md" for="id_password">Password <span class="text-error">*</span></label>
+            <input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-sm input-focus-ring" id="id_password" name="password" type="password" required>
+        </div>
+        <div class="space-y-xs">
+            <label class="block font-label-md text-label-md" for="id_confirm_password">Confirm Password <span class="text-error">*</span></label>
+            <input class="w-full border border-outline-variant rounded-lg px-3 py-2 font-body-sm input-focus-ring" id="id_confirm_password" name="confirm_password" type="password" required>
+        </div>
+        <button class="w-full bg-secondary-container text-on-secondary-container font-headline-sm py-3 rounded-lg hover:bg-secondary transition-colors flex items-center justify-center gap-2" type="submit">
+            Create Account <span class="material-symbols-outlined text-lg">arrow_forward</span>
+        </button>
+        <p class="font-body-sm text-outline italic text-center">After registering, verify your email. An administrator must approve your account before you can log in.</p>
+    </form>
+    <div class="mt-lg pt-lg border-t border-outline-variant text-center">
+        <p class="font-body-md text-on-surface-variant">Already have an account? <a class="text-primary hover:underline font-semibold" href="{% url 'accounts:login' %}">Log in</a></p>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course Portal - Grades</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#0d1c2e",
+                      "primary-container": "#131b2e",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#444749",
+                      "surface-container-high": "#dce9ff",
+                      "on-primary-container": "#7c839b",
+                      "secondary-fixed": "#ffe083",
+                      "surface-bright": "#f8f9ff",
+                      "tertiary-fixed": "#e0e3e5",
+                      "on-surface-variant": "#45464d",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#eec200",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed-dim": "#c4c7c9",
+                      "outline-variant": "#c6c6cd",
+                      "on-secondary-fixed-variant": "#574500",
+                      "on-error": "#ffffff",
+                      "surface-dim": "#ccdbf3",
+                      "on-primary-fixed": "#131b2e",
+                      "surface": "#f8f9ff",
+                      "on-tertiary-container": "#818486",
+                      "on-secondary-container": "#6f5900",
+                      "error": "#ba1a1a",
+                      "tertiary": "#000000",
+                      "on-secondary-fixed": "#231b00",
+                      "secondary-container": "#fed01b",
+                      "on-surface": "#0d1c2e",
+                      "on-tertiary-fixed": "#191c1e",
+                      "outline": "#76777d",
+                      "secondary": "#735c00",
+                      "primary": "#000000",
+                      "surface-container-low": "#eff4ff",
+                      "primary-fixed": "#dae2fd",
+                      "inverse-primary": "#bec6e0",
+                      "tertiary-container": "#191c1e",
+                      "surface-variant": "#d5e3fc",
+                      "primary-fixed-dim": "#bec6e0",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "inverse-surface": "#233144",
+                      "on-secondary": "#ffffff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-tint": "#565e74",
+                      "surface-container": "#e6eeff",
+                      "background": "#f8f9ff",
+                      "surface-container-highest": "#d5e3fc",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "xxl": "48px",
+                      "md": "16px",
+                      "gutter": "24px",
+                      "lg": "24px",
+                      "sm": "12px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "headline-sm": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Geist"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-xl": [
+                              "Geist"
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "10px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar Component -->
+<nav class="fixed left-0 top-0 h-full w-64 bg-primary-container dark:bg-primary-container border-r border-outline-variant dark:border-outline-variant flex flex-col py-xl px-md z-20">
+<!-- Brand Logo -->
+<div class="mb-xl px-md">
+<span class="font-headline-sm text-headline-sm text-on-primary">Course Portal</span>
+</div>
+<!-- Profile Section -->
+<div class="flex items-center gap-sm px-md mb-xl">
+<img alt="Alex's Profile Picture" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A small, professional portrait avatar of a young student. They have a friendly expression, smiling gently, shot against a neutral studio background. Clean lighting, high definition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByt8mHyKRYLVapbWtps1TXgIrrZTgcKxaMDwTE7oOdTiIp91lBmSbbzJLdsnYGWLGjvxozb_XC3NXaEq4nh1t03uKNTnDDXRyxqi8r2M0X9z65vbVWjwcnGf2TVW3RHBjAoLeGd_sHbI9qm_vZfr4RB1pdqD37wc3JdleWURPbiZ1gGEITyygGbvPMq-1aDhy43WDw7NNlN3wfxGLuPcJYayt2j_lG667B4kpaOc6ymqJldInFFHN2SS6HL97SZrs1whbnGOBQut6e"/>
+<div class="flex flex-col">
+<span class="text-on-primary font-headline-sm text-headline-sm">Alex</span>
+<span class="text-on-primary-container font-body-sm text-body-sm">Student Portal</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex flex-col gap-xs flex-grow">
+<a class="flex items-center gap-md px-md py-sm text-on-primary-container hover:bg-surface-variant/10 transition-colors cursor-pointer active:scale-95 rounded-lg" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-body-md text-body-md">Home</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-primary-container hover:bg-surface-variant/10 transition-colors cursor-pointer active:scale-95 rounded-lg" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-body-md text-body-md">Assignments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm bg-secondary-container text-on-secondary-container rounded-lg cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">grade</span>
+<span class="font-body-md text-body-md font-semibold">Grades</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-primary-container hover:bg-surface-variant/10 transition-colors cursor-pointer active:scale-95 rounded-lg" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="font-body-md text-body-md">Course Materials</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-primary-container hover:bg-surface-variant/10 transition-colors cursor-pointer active:scale-95 rounded-lg" href="#">
+<span class="material-symbols-outlined">folder</span>
+<span class="font-body-md text-body-md">Project</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-primary-container hover:bg-surface-variant/10 transition-colors cursor-pointer active:scale-95 rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-md text-body-md">Profile</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-primary-container hover:bg-surface-variant/10 transition-colors cursor-pointer active:scale-95 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</div>
+<!-- Footer -->
+<div class="mt-auto border-t border-outline-variant/20 pt-md">
+<a class="flex items-center gap-md px-md py-sm text-on-primary-container hover:bg-surface-variant/10 transition-colors cursor-pointer active:scale-95 rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar Component -->
+<header class="bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant flex justify-between items-center w-full px-lg py-md sticky top-0 z-10">
+<div class="flex items-center gap-md hidden">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Course Portal</span>
+</div>
+<!-- Empty spacer for layout since brand is in sidenav but topappbar requested it -->
+<div class="flex-1"></div>
+<div class="flex items-center gap-md">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-all cursor-pointer rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img alt="Alex small avatar" class="w-8 h-8 rounded-full object-cover border border-outline-variant cursor-pointer" data-alt="A small, professional portrait avatar of a young student. They have a friendly expression, smiling gently, shot against a neutral studio background. Clean lighting, high definition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOYWngIwdhq9aSIeJI2-A20u1uhxSqvD3oN521gnMiAkswigScrPNC3hH0-nPnM468ehv-88pkiT2fTCVLDR3Fkbs1VSdaSp0l86EVhO5mlBN6bJx_Y2OaBAcEQ6jx1yO546g1CxjNeULvMvCjyP84xoFiMWpP8S8bftldrt_4qJmp2R8mUyJlIsA17tF5YZUHvUCVvdq63LyQ39I6pnRjraGsqAJEZdXwvB2sbMbeb_ILYwZVHuJs7tDWhDvedtWfylDmWsqGCzUw"/>
+</div>
+</header>
+<!-- Page Content -->
+<main class="p-xl max-w-[container-max] w-full mx-auto">
+<!-- Header Section -->
+<div class="mb-xl">
+<h1 class="font-headline-xl text-headline-xl text-on-background mb-xs">Grades</h1>
+<p class="font-body-lg text-body-lg text-primary">Your current grade: <span class="font-semibold text-primary">76%</span></p>
+</div>
+<!-- Progress Bar -->
+<div class="bg-white border border-outline-variant rounded-lg p-lg mb-xl shadow-sm">
+<div class="flex justify-between items-end mb-sm">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Overall Progress</span>
+<span class="font-headline-md text-headline-md text-primary">76%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-4 overflow-hidden border border-outline-variant/30">
+<div class="bg-secondary-container h-full transition-all duration-1000 ease-in-out relative" style="width: 76%">
+<div class="absolute inset-0 bg-white/20" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);"></div>
+</div>
+</div>
+</div>
+<!-- Grades Table Card -->
+<div class="bg-white border border-outline-variant rounded-lg shadow-sm overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant bg-surface flex justify-between items-center">
+<h2 class="font-headline-sm text-headline-sm text-on-background">Assignment History</h2>
+<div class="flex gap-2">
+<button class="text-on-surface-variant p-2 rounded hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-bright border-b border-outline-variant font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">
+<th class="p-md font-semibold cursor-pointer hover:text-on-background transition-colors group">
+                                    Assignment Title
+                                    <span class="material-symbols-outlined text-[16px] align-middle opacity-0 group-hover:opacity-100 transition-opacity">arrow_drop_down</span>
+</th>
+<th class="p-md font-semibold cursor-pointer hover:text-on-background transition-colors group">
+                                    Week
+                                    <span class="material-symbols-outlined text-[16px] align-middle opacity-0 group-hover:opacity-100 transition-opacity">arrow_drop_down</span>
+</th>
+<th class="p-md font-semibold cursor-pointer hover:text-on-background transition-colors group">
+                                    Due Date
+                                    <span class="material-symbols-outlined text-[16px] align-middle opacity-0 group-hover:opacity-100 transition-opacity">arrow_drop_down</span>
+</th>
+<th class="p-md font-semibold">Status</th>
+<th class="p-md font-semibold text-right cursor-pointer hover:text-on-background transition-colors group">
+                                    Score
+                                    <span class="material-symbols-outlined text-[16px] align-middle opacity-0 group-hover:opacity-100 transition-opacity">arrow_drop_down</span>
+</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-background">
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors">
+<td class="p-md font-medium text-primary">React Component Architecture</td>
+<td class="p-md text-on-surface-variant">Week 4</td>
+<td class="p-md text-on-surface-variant">Oct 15, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-sm text-label-sm font-label-sm bg-primary-fixed text-on-primary-fixed uppercase tracking-wider">Graded</span>
+</td>
+<td class="p-md text-right font-medium">18 / 20</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-bright border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors">
+<td class="p-md font-medium text-primary">State Management with Redux</td>
+<td class="p-md text-on-surface-variant">Week 5</td>
+<td class="p-md text-on-surface-variant">Oct 22, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-sm text-label-sm font-label-sm bg-surface-variant text-on-surface-variant uppercase tracking-wider border border-outline-variant/50">Submitted</span>
+</td>
+<td class="p-md text-right text-on-surface-variant">—</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors">
+<td class="p-md font-medium text-primary">Advanced Hooks</td>
+<td class="p-md text-on-surface-variant">Week 6</td>
+<td class="p-md text-on-surface-variant">Oct 29, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-sm text-label-sm font-label-sm bg-error-container text-on-error-container uppercase tracking-wider">Late</span>
+</td>
+<td class="p-md text-right font-medium text-error">12 / 20</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-bright border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors">
+<td class="p-md font-medium text-primary">API Integration &amp; Fetching</td>
+<td class="p-md text-on-surface-variant">Week 3</td>
+<td class="p-md text-on-surface-variant">Oct 08, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-sm text-label-sm font-label-sm bg-primary-fixed text-on-primary-fixed uppercase tracking-wider">Graded</span>
+</td>
+<td class="p-md text-right font-medium">19 / 20</td>
+</tr>
+<!-- Row 5 -->
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-low transition-colors">
+<td class="p-md font-medium text-primary">Intro to Next.js</td>
+<td class="p-md text-on-surface-variant">Week 2</td>
+<td class="p-md text-on-surface-variant">Oct 01, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-sm text-label-sm font-label-sm bg-primary-fixed text-on-primary-fixed uppercase tracking-wider">Graded</span>
+</td>
+<td class="p-md text-right font-medium">20 / 20</td>
+</tr>
+<!-- Row 6 -->
+<tr class="bg-surface-bright hover:bg-surface-container-low transition-colors">
+<td class="p-md font-medium text-primary">JavaScript Fundamentals Review</td>
+<td class="p-md text-on-surface-variant">Week 1</td>
+<td class="p-md text-on-surface-variant">Sep 24, 2023</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-sm text-label-sm font-label-sm bg-primary-fixed text-on-primary-fixed uppercase tracking-wider">Graded</span>
+</td>
+<td class="p-md text-right font-medium">15 / 20</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+</body></html>

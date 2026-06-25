@@ -1,0 +1,37 @@
+{% extends "base_portal.html" %}
+{% block title %}My Profile{% endblock %}
+{% block portal_content %}
+<h1 class="font-headline-md text-headline-md text-on-surface mb-6">My Profile</h1>
+<div class="max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        <div class="flex items-center gap-6">
+            {% if profile.profile_pic %}
+            <img src="{{ profile.profile_pic.url }}" alt="" class="w-24 h-24 rounded-full object-cover border-2 border-outline-variant">
+            {% else %}
+            <div class="w-24 h-24 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-2xl font-bold">{{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}</div>
+            {% endif %}
+            <div>
+                <label class="block font-label-md mb-1">Profile Picture</label>
+                <input type="file" name="profile_pic" accept=".jpg,.jpeg,.png,.webp" class="text-body-sm">
+                <p class="font-body-sm text-on-surface-variant mt-1">JPG, PNG, or WebP. Max 2 MB.</p>
+            </div>
+        </div>
+        <div>
+            <label class="block font-label-md mb-1">Full Name</label>
+            <p class="font-body-md text-on-surface">{{ user.get_full_name }} <span class="text-on-surface-variant text-body-sm">(contact admin to change)</span></p>
+        </div>
+        <div>
+            <label class="block font-label-md mb-1">Bio / Story (Markdown)</label>
+            {{ form.bio }}
+        </div>
+        <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Save Profile</button>
+    </form>
+    {% if profile.bio %}
+    <div class="mt-8 pt-8 border-t border-outline-variant">
+        <h2 class="font-headline-sm text-headline-sm mb-4">Preview</h2>
+        <div class="markdown-content font-body-md text-on-surface-variant">{{ profile.bio }}</div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

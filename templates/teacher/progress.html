@@ -1,0 +1,52 @@
+{% extends "base_portal.html" %}
+{% block title %}Class Progress{% endblock %}
+{% block portal_content %}
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface mb-xl">Class Progress</h1>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl mb-xl">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+        <h2 class="font-headline-sm text-headline-sm mb-md">Top Performers</h2>
+        {% if data.top_performers %}
+        <ul class="space-y-3">
+            {% for row in data.top_performers %}
+            <li class="flex justify-between"><span>{{ row.student.get_full_name }}</span><span class="font-bold text-primary">{{ row.grade_pct }}%</span></li>
+            {% endfor %}
+        </ul>
+        {% else %}<p class="text-on-surface-variant">No graded data yet.</p>{% endif %}
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+        <h2 class="font-headline-sm text-headline-sm mb-md">May Need Support</h2>
+        {% if data.needs_support %}
+        <ul class="space-y-3">
+            {% for row in data.needs_support %}
+            <li class="flex justify-between"><span>{{ row.student.get_full_name }}</span><span class="font-bold">{{ row.grade_pct }}%</span></li>
+            {% endfor %}
+        </ul>
+        {% else %}<p class="text-on-surface-variant">No data yet.</p>{% endif %}
+    </div>
+</div>
+<h2 class="font-headline-sm text-headline-sm mb-md">Assignment Statistics</h2>
+<div class="space-y-lg">
+    {% for stat in data.assignment_stats %}
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+        <div class="flex justify-between items-center mb-md">
+            <h3 class="font-headline-sm text-on-surface">{{ stat.assignment.title }}</h3>
+            {% if stat.avg_pct is not None %}<span class="font-label-md text-primary">Avg: {{ stat.avg_pct }}%</span>{% endif %}
+        </div>
+        <div class="grid grid-cols-4 gap-4 mb-md font-body-sm text-center">
+            <div><span class="block font-bold text-lg">{{ stat.on_time }}</span><span class="text-on-surface-variant">On Time</span></div>
+            <div><span class="block font-bold text-lg">{{ stat.late }}</span><span class="text-on-surface-variant">Late</span></div>
+            <div><span class="block font-bold text-lg">{{ stat.not_submitted }}</span><span class="text-on-surface-variant">Missing</span></div>
+            <div><span class="block font-bold text-lg">{{ stat.submitted }}/{{ data.student_count }}</span><span class="text-on-surface-variant">Submitted</span></div>
+        </div>
+        {% if data.student_count %}
+        <div class="w-full bg-surface-variant h-3 rounded-full overflow-hidden flex">
+            <div class="bg-secondary-fixed-dim h-full" style="width:{% widthratio stat.on_time data.student_count 100 %}%"></div>
+            <div class="bg-error-container h-full" style="width:{% widthratio stat.late data.student_count 100 %}%"></div>
+        </div>
+        {% endif %}
+    </div>
+    {% empty %}
+    <p class="text-on-surface-variant">No published assignments yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

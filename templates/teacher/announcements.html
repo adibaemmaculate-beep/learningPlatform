@@ -1,0 +1,36 @@
+{% extends "base_portal.html" %}
+{% block title %}Announcements{% endblock %}
+{% block portal_content %}
+<div class="flex justify-between items-center mb-xl">
+    <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">Announcements</h1>
+    <a href="{% url 'teacher:announcement_create' %}" class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md flex items-center gap-2">
+        <span class="material-symbols-outlined text-sm">add</span> Post Announcement
+    </a>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+    <table class="w-full text-left">
+        <thead class="bg-surface border-b border-outline-variant">
+            <tr class="font-label-sm text-on-surface-variant uppercase">
+                <th class="px-6 py-3">Title</th>
+                <th class="px-6 py-3">Date</th>
+                <th class="px-6 py-3">Visibility</th>
+                <th class="px-6 py-3">Read</th>
+                <th class="px-6 py-3 text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant font-table-data">
+            {% for a in announcements %}
+            <tr class="hover:bg-surface-container-low">
+                <td class="px-6 py-4 font-medium">{{ a.title }}</td>
+                <td class="px-6 py-4 text-on-surface-variant">{{ a.published_at|date:"M d, Y" }}</td>
+                <td class="px-6 py-4">{{ a.get_visibility_display }}{% if a.target_student %} ({{ a.target_student.get_full_name }}){% endif %}</td>
+                <td class="px-6 py-4">{{ a.read_count }}</td>
+                <td class="px-6 py-4 text-right"><a href="{% url 'teacher:announcement_detail' a.id %}" class="text-primary font-label-md hover:underline">View</a></td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="px-6 py-8 text-center text-on-surface-variant">No announcements yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

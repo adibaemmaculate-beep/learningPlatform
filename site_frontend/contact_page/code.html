@@ -1,0 +1,221 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Contact Us - Dev Academy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#000000",
+                      "primary-fixed-dim": "#bec6e0",
+                      "tertiary-container": "#191c1e",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#c4c7c9",
+                      "on-secondary-container": "#6f5900",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed-variant": "#574500",
+                      "outline": "#76777d",
+                      "on-tertiary-fixed": "#191c1e",
+                      "surface-container": "#e6eeff",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "primary-container": "#131b2e",
+                      "error": "#ba1a1a",
+                      "secondary-container": "#fed01b",
+                      "on-primary-fixed": "#131b2e",
+                      "secondary-fixed-dim": "#eec200",
+                      "tertiary-fixed": "#e0e3e5",
+                      "surface": "#f8f9ff",
+                      "outline-variant": "#c6c6cd",
+                      "on-tertiary-fixed-variant": "#444749",
+                      "on-tertiary-container": "#818486",
+                      "on-tertiary": "#ffffff",
+                      "surface-variant": "#d5e3fc",
+                      "on-error": "#ffffff",
+                      "primary": "#000000",
+                      "inverse-primary": "#bec6e0",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-highest": "#d5e3fc",
+                      "surface-tint": "#565e74",
+                      "on-surface": "#0d1c2e",
+                      "inverse-surface": "#233144",
+                      "surface-dim": "#ccdbf3",
+                      "inverse-on-surface": "#eaf1ff",
+                      "primary-fixed": "#dae2fd",
+                      "surface-bright": "#f8f9ff",
+                      "on-primary-container": "#7c839b",
+                      "surface-container-high": "#dce9ff",
+                      "surface-container-low": "#eff4ff",
+                      "secondary": "#735c00",
+                      "secondary-fixed": "#ffe083",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#45464d",
+                      "background": "#f8f9ff",
+                      "on-secondary-fixed": "#231b00",
+                      "on-background": "#0d1c2e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "base": "8px",
+                      "container-max": "1280px",
+                      "md": "16px",
+                      "xxl": "48px",
+                      "xl": "32px",
+                      "gutter": "24px",
+                      "sm": "12px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "body-sm": ["Inter"],
+                      "headline-xl": ["Geist"],
+                      "headline-lg": ["Geist"],
+                      "label-sm": ["Geist"],
+                      "headline-md": ["Geist"],
+                      "body-md": ["Inter"],
+                      "headline-sm": ["Geist"],
+                      "headline-lg-mobile": ["Geist"],
+                      "body-lg": ["Inter"],
+                      "label-md": ["Geist"]
+              },
+              "fontSize": {
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+      </script>
+<style>
+        .custom-input:focus {
+            border-color: #000000;
+            box-shadow: 0 0 0 2px rgba(254, 208, 27, 0.2);
+            outline: none;
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md flex min-h-screen" data-new-gr-c-s-check-loaded="9.75.0" data-gr-ext-installed="">
+<!-- SideNavBar -->
+
+<!-- Main Content Area -->
+<div class="flex-grow flex flex-col min-w-0 w-full">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-surface-variant transition-all duration-300 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)]"><div class="max-w-[1280px] mx-auto px-gutter h-16 flex justify-between items-center"><div class="flex items-center gap-4"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-headline-md"><span class="material-symbols-outlined text-sm">code</span></div><span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Dev Academy</span></div><nav class="hidden md:flex items-center gap-8"><a class="font-label-md text-label-md text-primary border-b-2 border-secondary pb-1 transition-colors" href="#">Home</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">About</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Meet the Students</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a></nav><div class="flex items-center gap-4"><button class="bg-secondary-container text-primary font-label-md text-label-md px-6 py-2 rounded-DEFAULT hover:bg-secondary-fixed transition-colors font-bold shadow-sm">Log In</button><button class="md:hidden text-primary"><span class="material-symbols-outlined">menu</span></button></div></div></header>
+<!-- Page Canvas -->
+<main class="flex-grow p-4 md:p-lg lg:p-xl w-full max-w-container-max mx-auto mt-16">
+<!-- Hero Banner -->
+<div class="bg-primary-container rounded-xl p-xl md:p-xxl mb-xl relative overflow-hidden flex items-center shadow-[0px_10px_15px_-3px_rgba(15,23,42,0.05)] border border-[#0F172A] border-opacity-10">
+<div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTMwIDBMMzAgNjBNMCAzMEw2MCAzMCIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiLz48L3N2Zz4=')]"></div>
+<div class="relative z-10">
+<h2 class="font-headline-xl text-headline-xl text-on-primary mb-4">Get in Touch</h2>
+<p class="font-body-lg text-body-lg text-on-primary-container max-w-2xl">
+                        Have questions about the curriculum, need technical support, or want to report an issue? Our team is ready to assist you.
+                    </p>
+</div>
+</div>
+<!-- Two Column Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Left: Contact Info (Bento Style) -->
+<div class="lg:col-span-5 flex flex-col gap-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg h-full flex flex-col">
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-md">Contact Us</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">
+                            We usually respond within 24 hours. For immediate assistance, please check our <a class="text-primary font-medium hover:underline" href="#">knowledge base</a>.
+                        </p>
+<div class="flex flex-col gap-md mb-xl flex-grow">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center flex-shrink-0 text-primary">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Email Support</div>
+<a class="font-body-md text-body-md text-primary font-medium hover:underline" href="mailto:support@devacademy.edu">support@devacademy.edu</a>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center flex-shrink-0 text-primary">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Office Location</div>
+<div class="font-body-md text-body-md text-primary font-medium">1280 Logic Blvd, Suite 404<br>San Francisco, CA 94107</div>
+</div>
+</div>
+</div>
+<div class="pt-lg border-t border-surface-variant mt-auto">
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-sm">Connect with us</div>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors border border-outline-variant" href="#">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-on-surface-variant hover:bg-surface-variant hover:text-primary transition-colors border border-outline-variant" href="#">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Contact Form -->
+<div class="lg:col-span-7">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg lg:p-xl h-full shadow-[0px_10px_15px_-3px_rgba(15,23,42,0.05)]">
+<form action="#" class="flex flex-col gap-md" method="POST">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface" for="firstName">First Name</label>
+<input class="custom-input bg-surface-container-lowest border border-outline-variant rounded px-3 py-2 font-body-md text-body-md text-on-surface w-full transition-all duration-200" id="firstName" name="firstName" placeholder="Jane" required="" type="text">
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface" for="lastName">Last Name</label>
+<input class="custom-input bg-surface-container-lowest border border-outline-variant rounded px-3 py-2 font-body-md text-body-md text-on-surface w-full transition-all duration-200" id="lastName" name="lastName" placeholder="Doe" required="" type="text">
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface" for="email">Email Address</label>
+<input class="custom-input bg-surface-container-lowest border border-outline-variant rounded px-3 py-2 font-body-md text-body-md text-on-surface w-full transition-all duration-200" id="email" name="email" placeholder="jane.doe@example.com" required="" type="email">
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface" for="topic">Topic</label>
+<select class="custom-input bg-surface-container-lowest border border-outline-variant rounded px-3 py-2 font-body-md text-body-md text-on-surface w-full transition-all duration-200 cursor-pointer" id="topic" name="topic">
+<option disabled="" selected="" value="">Select a topic</option>
+<option value="curriculum">Curriculum Question</option>
+<option value="technical">Technical Support</option>
+<option value="billing">Billing Inquiry</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="flex flex-col gap-2 mb-md">
+<label class="font-label-md text-label-md text-on-surface" for="message">Message</label>
+<textarea class="custom-input bg-surface-container-lowest border border-outline-variant rounded px-3 py-2 font-body-md text-body-md text-on-surface w-full transition-all duration-200 resize-none" id="message" name="message" placeholder="How can we help you today?" required="" rows="5"></textarea>
+</div>
+<button class="bg-secondary-container text-primary font-headline-sm text-headline-sm px-6 py-3 rounded-lg hover:bg-secondary-fixed transition-colors flex items-center justify-center gap-2 mt-auto w-full md:w-auto self-start" type="submit">
+                                Send Message
+                                <span class="material-symbols-outlined text-[20px]" data-icon="send">send</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+
+</body></html>

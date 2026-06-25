@@ -1,0 +1,35 @@
+{% extends "base_public.html" %}
+{% block title %}Meet the Students - Dev Academy{% endblock %}
+{% block public_content %}
+<section class="max-w-[1280px] mx-auto px-gutter py-xxl">
+    <div class="text-center mb-xxl">
+        <h1 class="font-headline-xl text-headline-xl text-primary mb-md">Meet the Students</h1>
+        <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">Our cohort of young innovators building technology solutions for their communities.</p>
+    </div>
+    {% if projects %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-lg">
+        {% for project in projects %}
+        <a href="{% url 'public:student_detail' project.student.id %}" class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-md transition-shadow block">
+            {% if project.images.first %}
+            <img src="{{ project.images.first.image.url }}" alt="" class="w-full h-40 object-cover">
+            {% else %}
+            <div class="w-full h-40 bg-surface-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-4xl text-primary/30">code</span>
+            </div>
+            {% endif %}
+            <div class="p-lg">
+                <h3 class="font-headline-sm text-headline-sm text-on-surface">{{ project.student.get_full_name }}</h3>
+                <p class="font-body-sm text-primary mt-1">{{ project.title }}</p>
+                <p class="font-body-sm text-on-surface-variant mt-sm line-clamp-2">{% if project.description %}{{ project.description }}{% else %}{{ project.write_up|truncatewords:15 }}{% endif %}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-xxl bg-surface-container rounded-xl border border-outline-variant">
+        <span class="material-symbols-outlined text-6xl text-primary/30 mb-md">groups</span>
+        <p class="font-body-md text-on-surface-variant">Published student projects will appear here.</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

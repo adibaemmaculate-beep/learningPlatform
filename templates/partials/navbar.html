@@ -1,0 +1,15 @@
+<header class="bg-surface docked sticky top-0 border-b border-outline-variant flex justify-between items-center w-full px-container-padding h-row-height-standard z-10">
+    <div class="flex items-center gap-4">
+        <h2 class="font-headline-sm text-headline-sm text-on-surface">
+            {% if portal_role == 'admin' %}Admin Portal{% elif portal_role == 'teacher' %}Teacher Portal{% else %}Student Portal{% endif %}
+        </h2>
+    </div>
+    <div class="flex items-center gap-4">
+        <button type="button" id="theme-toggle" class="text-on-surface-variant hover:text-primary transition-all p-2 rounded-full hover:bg-surface-container-low" title="Toggle theme">
+            <span class="material-symbols-outlined">dark_mode</span>
+        </button>
+        <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary text-sm font-semibold">
+            {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
+        </div>
+    </div>
+</header>

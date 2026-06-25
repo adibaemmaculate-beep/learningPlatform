@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dev Academy - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#e0e3e5",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#131b2e",
+                        "inverse-surface": "#233144",
+                        "surface-bright": "#f8f9ff",
+                        "outline": "#76777d",
+                        "on-primary-container": "#7c839b",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-tertiary-fixed": "#191c1e",
+                        "background": "#f8f9ff",
+                        "surface-container": "#e6eeff",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-secondary-container": "#6f5900",
+                        "tertiary": "#000000",
+                        "primary": "#000000",
+                        "surface-variant": "#d5e3fc",
+                        "surface-dim": "#ccdbf3",
+                        "on-background": "#0d1c2e",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-surface": "#0d1c2e",
+                        "on-surface-variant": "#45464d",
+                        "secondary": "#735c00",
+                        "secondary-container": "#fed01b",
+                        "secondary-fixed": "#ffe083",
+                        "on-secondary-fixed": "#231b00",
+                        "surface": "#f8f9ff",
+                        "surface-tint": "#565e74",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#bec6e0",
+                        "surface-container-highest": "#d5e3fc",
+                        "tertiary-container": "#191c1e",
+                        "primary-fixed": "#dae2fd",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c6c6cd",
+                        "surface-container-low": "#eff4ff",
+                        "primary-container": "#131b2e",
+                        "surface-container-high": "#dce9ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-container": "#818486",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#bec6e0",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xxl": "48px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "container-max": "1280px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Geist"],
+                        "headline-xl": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "label-md": ["Geist"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .grid-pattern {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, #E2E8F0 1px, transparent 1px),
+                linear-gradient(to bottom, #E2E8F0 1px, transparent 1px);
+        }
+        
+        /* Floating label styles */
+        .floating-input:focus ~ .floating-label,
+        .floating-input:not(:placeholder-shown) ~ .floating-label {
+            transform: translateY(-1.5rem) scale(0.85);
+            color: theme('colors.primary');
+            background-color: white;
+            padding: 0 4px;
+        }
+
+        .input-glow:focus {
+            box-shadow: 0 0 0 2px rgba(254, 208, 27, 0.2); /* Accent Yellow glow */
+            border-color: theme('colors.primary');
+        }
+    </style>
+</head>
+<body class="bg-[#F1F5F9] font-body-md text-on-surface min-h-screen flex items-center justify-center relative overflow-hidden">
+<!-- Subtle Grid Background -->
+<div class="absolute inset-0 grid-pattern opacity-50 z-0"></div>
+<!-- Main Content Canvas - Suppressing Navigation Shell due to Linear/Transactional intent (Login Page) -->
+<main class="w-full max-w-[440px] px-md md:px-0 z-10 relative">
+<!-- Login Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-[0px_10px_15px_-3px_rgba(15,23,42,0.05),0_0_0_1px_rgba(15,23,42,0.1)] p-xl">
+<!-- Header Section -->
+<div class="flex flex-col items-center mb-xl text-center">
+<!-- Rectangular Logo Placeholder -->
+<div class="h-12 w-32 bg-surface-variant rounded flex items-center justify-center mb-lg border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[28px]" data-icon="code">code</span>
+<span class="font-headline-sm text-headline-sm text-primary ml-xs">DevAcademy</span>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-sm">Welcome Back</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Continue your AI &amp; Engineering journey.</p>
+</div>
+<!-- Login Form -->
+<form action="#" class="flex flex-col gap-lg" method="POST">
+<!-- Email Input (Floating Label) -->
+<div class="relative">
+<input class="floating-input input-glow block w-full px-md py-3 text-on-surface bg-surface-container-lowest border border-outline-variant rounded appearance-none focus:outline-none bg-transparent transition-colors duration-200" id="email" name="email" placeholder=" " required="" type="email"/>
+<label class="floating-label absolute text-on-surface-variant duration-300 transform -translate-y-1/2 scale-100 top-1/2 left-md origin-[0] pointer-events-none font-body-md text-body-md" for="email">Email Address</label>
+</div>
+<!-- Password Input (Floating Label) -->
+<div class="relative">
+<input class="floating-input input-glow block w-full px-md py-3 text-on-surface bg-surface-container-lowest border border-outline-variant rounded appearance-none focus:outline-none bg-transparent transition-colors duration-200" id="password" name="password" placeholder=" " required="" type="password"/>
+<label class="floating-label absolute text-on-surface-variant duration-300 transform -translate-y-1/2 scale-100 top-1/2 left-md origin-[0] pointer-events-none font-body-md text-body-md" for="password">Password</label>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility_off">visibility_off</span>
+</button>
+</div>
+<!-- Forgot Password Link -->
+<div class="flex justify-end mt-[-8px]">
+<a class="font-label-md text-label-md text-primary hover:underline hover:text-primary-fixed-variant transition-colors" href="#">Forgot password?</a>
+</div>
+<!-- Primary CTA Button -->
+<button class="w-full bg-secondary-container text-primary font-headline-sm text-headline-sm py-3 px-lg rounded flex items-center justify-center gap-sm hover:bg-secondary-fixed transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" type="submit">
+                    Log In
+                    <span class="material-symbols-outlined text-[20px]" data-icon="login">login</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="flex items-center my-lg">
+<div class="flex-grow border-t border-[#F1F5F9]"></div>
+<span class="mx-md text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">or</span>
+<div class="flex-grow border-t border-[#F1F5F9]"></div>
+</div>
+<!-- Secondary Actions -->
+<div class="flex flex-col gap-sm">
+<button class="w-full bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md text-body-md py-3 px-lg rounded flex items-center justify-center gap-sm hover:bg-surface-container-low transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="public">public</span>
+                    Continue with Github
+                </button>
+</div>
+<!-- Footer Link -->
+<div class="mt-xl text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Don't have an account? 
+                    <a class="font-label-md text-label-md text-primary hover:underline transition-colors" href="#">Register</a>
+</p>
+</div>
+</div>
+</main>
+</body></html>

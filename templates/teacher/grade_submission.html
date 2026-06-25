@@ -1,0 +1,25 @@
+{% extends "base_portal.html" %}
+{% block title %}Grade Submission{% endblock %}
+{% block portal_content %}
+<div class="mb-4"><a href="{% url 'teacher:assignment_detail' assignment.id %}" class="text-primary font-label-md hover:underline">← Back to Tracker</a></div>
+<div class="max-w-2xl">
+    <h1 class="font-headline-md text-headline-md mb-2">Grade: {{ submission.student.get_full_name }}</h1>
+    <p class="font-body-md text-on-surface-variant mb-6">{{ assignment.title }} • Submitted {{ submission.submitted_at|date:"M d, Y H:i" }}{% if submission.is_late %} (Late){% endif %}</p>
+    <p class="mb-4"><a href="{{ submission.file.url }}" class="text-primary font-label-md hover:underline" target="_blank">Download submission: {{ submission.file_name }}</a></p>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label class="block font-label-md mb-1">Score (out of {{ assignment.total_score }})</label>
+                <input type="number" name="score_obtained" min="0" max="{{ assignment.total_score }}" value="{{ form.score_obtained.value|default:0 }}" class="w-full border border-outline-variant rounded-lg px-3 py-2" required>
+                {% if form.score_obtained.errors %}<p class="text-error text-sm">{{ form.score_obtained.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+                <label class="block font-label-md mb-1">Feedback (Markdown)</label>
+                {{ form.comments }}
+            </div>
+            <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Save Grade</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

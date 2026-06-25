@@ -1,0 +1,21 @@
+{% extends "base_portal.html" %}
+{% block title %}Student Projects{% endblock %}
+{% block portal_content %}
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface mb-xl">Student Projects</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+    {% for project in projects %}
+    <a href="{% url 'teacher:project_detail' project.id %}" class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg hover:shadow-md transition-shadow block">
+        {% if project.images.first %}
+        <img src="{{ project.images.first.image.url }}" alt="" class="w-full h-32 object-cover rounded-lg mb-md">
+        {% endif %}
+        <h3 class="font-headline-sm text-on-surface">{{ project.title }}</h3>
+        <p class="font-body-sm text-on-surface-variant mt-1">{{ project.student.get_full_name }}</p>
+        <span class="text-xs mt-2 inline-block px-2 py-0.5 rounded {% if project.is_published %}bg-secondary-container/30{% else %}bg-surface-container{% endif %}">
+            {% if project.is_published %}Published{% else %}Draft{% endif %}
+        </span>
+    </a>
+    {% empty %}
+    <p class="text-on-surface-variant col-span-full text-center py-12">No student projects yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

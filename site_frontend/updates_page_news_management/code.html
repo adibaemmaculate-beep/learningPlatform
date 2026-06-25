@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Coding Program - Updates</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#eff4ff",
+                      "outline": "#76777d",
+                      "on-tertiary-container": "#98805d",
+                      "tertiary-container": "#271901",
+                      "surface-container-high": "#dce9ff",
+                      "on-error": "#ffffff",
+                      "surface": "#f8f9ff",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-surface": "#0b1c30",
+                      "primary-fixed": "#dae2fd",
+                      "tertiary-fixed": "#fcdeb5",
+                      "on-tertiary-fixed-variant": "#574425",
+                      "secondary-fixed-dim": "#eec200",
+                      "outline-variant": "#c6c6cd",
+                      "secondary-container": "#fed01b",
+                      "inverse-surface": "#213145",
+                      "tertiary-fixed-dim": "#dec29a",
+                      "surface-container": "#e5eeff",
+                      "primary-container": "#131b2e",
+                      "on-background": "#0b1c30",
+                      "surface-bright": "#f8f9ff",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-container": "#6f5900",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "primary-fixed-dim": "#bec6e0",
+                      "primary": "#000000",
+                      "on-secondary-fixed-variant": "#574500",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed": "#131b2e",
+                      "surface-variant": "#d3e4fe",
+                      "on-surface-variant": "#45464d",
+                      "secondary": "#735c00",
+                      "on-secondary-fixed": "#231b00",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed": "#ffe083",
+                      "on-tertiary-fixed": "#271901",
+                      "inverse-on-surface": "#eaf1ff",
+                      "inverse-primary": "#bec6e0",
+                      "background": "#f8f9ff",
+                      "surface-dim": "#cbdbf5",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#000000",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-container": "#7c839b",
+                      "error": "#ba1a1a",
+                      "surface-tint": "#565e74",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "row-height-standard": "48px",
+                      "gutter": "16px",
+                      "container-padding": "24px",
+                      "unit": "4px",
+                      "row-height-dense": "32px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Geist"
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ],
+                      "headline-sm": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ],
+                      "label-md": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "table-data": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.03em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "30px",
+                              {
+                                      "lineHeight": "38px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "table-data": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background m-0 p-0 overflow-x-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-primary-container flex-col py-gutter z-50">
+<div class="px-container-padding mb-8">
+<h1 class="font-headline-sm text-headline-sm text-surface-container-lowest font-bold truncate" title="AI Coding Program">AI Coding Program</h1>
+<p class="font-label-md text-label-md text-on-primary-container/70 mt-1">Admin Portal</p>
+</div>
+<ul class="flex flex-col gap-1 px-4 font-body-md text-body-md text-on-primary-container">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container/70 font-medium hover:bg-surface-container-highest/5 hover:text-on-primary-container transition-colors opacity-100 hover:opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container/70 font-medium hover:bg-surface-container-highest/5 hover:text-on-primary-container transition-colors opacity-100 hover:opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                    Users
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container/70 font-medium hover:bg-surface-container-highest/5 hover:text-on-primary-container transition-colors opacity-100 hover:opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="vpn_key">vpn_key</span>
+                    Invite Codes
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-secondary-container font-bold border-l-4 border-secondary-container bg-surface-container-highest/10 opacity-100 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="system_update_alt">system_update_alt</span>
+                    Updates
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container/70 font-medium hover:bg-surface-container-highest/5 hover:text-on-primary-container transition-colors opacity-100 hover:opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<div class="mt-auto px-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-primary-container/70 font-medium hover:bg-surface-container-highest/5 hover:text-on-primary-container transition-colors opacity-100 hover:opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</nav>
+<!-- TopAppBar & Main Content Area -->
+<div class="ml-0 md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface docked full-width top-0 sticky z-40 border-b border-outline-variant flex justify-between items-center px-container-padding h-row-height-standard">
+<div class="flex items-center gap-4">
+<!-- Mobile menu button (placeholder) -->
+<button class="md:hidden text-on-surface-variant p-1 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden sm:flex font-headline-sm text-headline-sm text-on-surface">Admin Portal</div>
+</div>
+<!-- Search Bar (on_left as per JSON, but pushed to flex layout) -->
+<div class="flex-1 max-w-md px-4 hidden md:block">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="w-full pl-9 pr-4 py-1.5 bg-surface-container-low border border-outline-variant rounded-full font-label-md text-label-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Search updates..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-primary transition-all p-1.5 rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all p-1.5 rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant cursor-pointer ml-2">
+<img alt="Admin Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate administrator in a modern, well-lit office setting. The lighting is soft and natural, emphasizing a clean, authoritative yet approachable persona. The color palette features neutral grays and crisp whites, aligning with a high-end corporate administrative portal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTP2j4C-ixrx4MiwseGVWxI9x-WmGcSvv1JePWlEmJOKqNK3keq-8TtGQR-FjTJCETS_CchVLJv0TXwL8h7IoVS9I_WjFcZvrG6S0S3JXfXwRAA6cDI2zmm_X-n8YeFAeMKdxg4aiwcbryAm0gZRpgFCixYKyEt2nXGuq228QW1e1YWVkgDoNnj8bMTy0W6QILi9-mKZvNvu9vMWCW30OKGHD0fC5VWgDdT3EBGPqS0LdP82gAAi5o3zDYPCVh9oNg2gZHHcRfEYat"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 p-container-padding">
+<!-- Header Section -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Updates</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage platform announcements and release notes.</p>
+</div>
+<button class="bg-secondary-container text-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:brightness-95 transition-all flex items-center gap-2 font-medium shadow-sm" onclick="toggleForm()">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    New Update
+                </button>
+</div>
+<!-- List View -->
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6" id="updates-list">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-md transition-shadow flex flex-col group">
+<div class="h-40 bg-surface-container relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Abstract modern digital graphic representing software updates. Minimalist geometric shapes in varied shades of blue and white, with subtle yellow accents. The composition is clean, high-density, and technical, perfectly suited for an enterprise admin portal's release notes thumbnail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs68u4-JjjWO0p4QiY3KmU0p9rAxS_czwAq-o1nRZoxYsImfllLykZEs5hTa0rWduHhwjPTEaAXNzElM2GAFQh3NRNF0eNJ-trBl1ja7YFrpr0nzkPZ1zK3E6_wGkYMR_jmjVU1ONi9RqJjhTHN5epRZRjU06_oca14q1v4Qzk5HhDaaMwH0gC_ak43nr9wnUVUmJrbzb_LM1snvA7VIVyz-dEFMWmlWJ9wDQvBxUK6vCQMSnbYRUDfawhE1wBAbSNTBuZIfiVSkoz"/>
+<div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded-DEFAULT font-label-sm text-label-sm text-on-surface border border-outline-variant/50">
+                            v2.4.0
+                        </div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 24, 2023</span>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary p-1 rounded-DEFAULT hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error p-1 rounded-DEFAULT hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Enhanced Code Editor Performance</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 flex-1">We've significantly reduced latency in the in-browser IDE. Syntax highlighting now uses WebWorkers for smoother typing in large files.</p>
+<div class="mt-4 pt-4 border-t border-outline-variant/50 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-[10px] font-bold text-on-surface-variant">JD</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Jane Doe</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-md transition-shadow flex flex-col group">
+<div class="h-40 bg-surface-container relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, minimalist illustration of a digital shield and padlock, symbolizing cybersecurity and privacy. The color palette focuses on deep enterprise blues and crisp whites, conveying authority, safety, and a modern corporate aesthetic suitable for an admin workspace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpucFjCsdubysCFuZCsOmUH_dPs6svWkUG8NeTXLfQMlLD9o7dDF2ZBI7ffK1h1X65PM5YCLwYa5C9tdVZwt9fURwZe8an3QkAJYOEGvyoftpsGnMcZdDwaZ4c8-ZC_65P7DZ0zUkmVm3_3-sW65ATc9AxrP6fnx3_YwU7rdSJ5mZyc99JBwdrFbvhRLjOGAD1NMG4QqcmoO0cQ-h7e-ndacQ8vUlqFiUuIIcOSMXMbCiNKM3Qw2K_yHFU1P9PgAt83HP_gaRav_L7"/>
+<div class="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-sm px-2 py-1 rounded-DEFAULT font-label-sm text-label-sm text-on-surface border border-outline-variant/50">
+                            Security
+                        </div>
+</div>
+<div class="p-5 flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 18, 2023</span>
+<div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-on-surface-variant hover:text-primary p-1 rounded-DEFAULT hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error p-1 rounded-DEFAULT hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Mandatory 2FA Implementation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 flex-1">All administrative accounts are now required to set up Two-Factor Authentication by the end of the month to maintain access.</p>
+<div class="mt-4 pt-4 border-t border-outline-variant/50 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-[10px] font-bold text-on-surface-variant">AS</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Admin System</span>
+</div>
+</div>
+</div>
+</div>
+<!-- New Update Form (Initially Hidden) -->
+<div class="hidden bg-surface-container-lowest border border-outline-variant rounded-xl max-w-4xl mx-auto shadow-sm" id="new-update-form">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-container-low/50 rounded-t-xl">
+<h3 class="font-headline-md text-headline-md text-on-surface">Draft New Update</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors" onclick="toggleForm()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 space-y-6">
+<!-- Title & Meta Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 space-y-2">
+<label class="block font-label-md text-label-md text-on-surface">Post Title</label>
+<input class="w-full px-3 py-2 border border-outline-variant rounded-lg bg-surface font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="e.g., Spring Release Notes v3.0" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface">Category Tag</label>
+<select class="w-full px-3 py-2 border border-outline-variant rounded-lg bg-surface font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none">
+<option>Release Note</option>
+<option>Announcement</option>
+<option>Maintenance</option>
+<option>Security</option>
+</select>
+</div>
+</div>
+<!-- Image Upload Area -->
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface">Cover Image</label>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center bg-surface-container-low/30 hover:bg-surface-container-low/80 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-outline text-4xl mb-2 group-hover:text-primary transition-colors">image</span>
+<p class="font-label-md text-label-md text-on-surface">Click to upload or drag and drop</p>
+<p class="font-label-sm text-label-sm text-outline mt-1">SVG, PNG, JPG or GIF (max. 800x400px)</p>
+</div>
+</div>
+<!-- Markdown Editor Placeholder -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<label class="block font-label-md text-label-md text-on-surface">Description (Markdown)</label>
+<div class="flex gap-2">
+<button class="p-1 text-on-surface-variant hover:bg-surface-variant rounded"><span class="material-symbols-outlined text-[16px]">format_bold</span></button>
+<button class="p-1 text-on-surface-variant hover:bg-surface-variant rounded"><span class="material-symbols-outlined text-[16px]">format_italic</span></button>
+<button class="p-1 text-on-surface-variant hover:bg-surface-variant rounded"><span class="material-symbols-outlined text-[16px]">link</span></button>
+</div>
+</div>
+<textarea class="w-full px-3 py-2 border border-outline-variant rounded-lg bg-surface font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-mono text-sm" placeholder="Write the update details here..." rows="8"></textarea>
+</div>
+<!-- Attribution -->
+<div class="flex items-center gap-3 p-4 bg-surface-container-low rounded-lg border border-outline-variant/50">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate administrator in a modern, well-lit office setting. The lighting is soft and natural, emphasizing a clean, authoritative yet approachable persona. The color palette features neutral grays and crisp whites, aligning with a high-end corporate administrative portal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI8xtsmHVxsbQeBuEAqI7L7yCP4kZSj97mloQ4U6pLyqiqHcNUfw8MtTmTWmb981qCWbGBiqsudpBtPdazMWLt5GkBdziXSUAOoUXVsGOcgjwdtt3c2hhPaMJUcMMewWppJTqLmEsjZDMeeW7V0itT5iUlt2NUpWUvza6wUNzhR_shyBVha0f22jnjxyoXZXpElymH9776r5idDOKXaTaJ-oMr-D-NNyeXK7VIOofOBUYUQKsaz8Nu-_x9vMz00mYkxMlYPV2KsXsy"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Posting as</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Admin User (Auto-filled)</p>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-outline-variant bg-surface-container-lowest rounded-b-xl flex justify-end gap-3">
+<button class="px-4 py-2 border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-low transition-colors" onclick="toggleForm()">
+                        Cancel
+                    </button>
+<button class="px-6 py-2 bg-secondary-container text-primary rounded-lg font-label-md text-label-md font-medium hover:brightness-95 transition-all shadow-sm">
+                        Publish Update
+                    </button>
+</div>
+</div>
+</main>
+</div>
+<script>
+        function toggleForm() {
+            const list = document.getElementById('updates-list');
+            const form = document.getElementById('new-update-form');
+            
+            if (list.classList.contains('hidden')) {
+                list.classList.remove('hidden');
+                form.classList.add('hidden');
+            } else {
+                list.classList.add('hidden');
+                form.classList.remove('hidden');
+            }
+        }
+    </script>
+</body></html>

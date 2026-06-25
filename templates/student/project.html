@@ -1,0 +1,50 @@
+{% extends "base_portal.html" %}
+{% block title %}My Project{% endblock %}
+{% block portal_content %}
+<div class="flex justify-between items-center mb-xl">
+    <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">My Project</h1>
+</div>
+<div class="max-w-3xl bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+    <form method="post" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="text-error text-body-sm">{{ form.non_field_errors.0 }}</div>{% endif %}
+        <div><label class="block font-label-md mb-1">Title</label>{{ form.title }}</div>
+        <div><label class="block font-label-md mb-1">Short Description</label>{{ form.description }}</div>
+        <div><label class="block font-label-md mb-1">Write-up (Markdown)</label>{{ form.write_up }}</div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div><label class="block font-label-md mb-1">Codebase URL</label>{{ form.codebase_url }}</div>
+            <div><label class="block font-label-md mb-1">Live Demo URL</label>{{ form.live_url }}</div>
+        </div>
+        {% if project.images.all %}
+        <div>
+            <label class="block font-label-md mb-2">Current Images</label>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {% for img in project.images.all %}
+                <img src="{{ img.image.url }}" alt="" class="rounded-lg border border-outline-variant object-cover h-24 w-full">
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        <div>
+            <label class="block font-label-md mb-1">Add Images</label>
+            <input type="file" name="new_images" multiple accept=".jpg,.jpeg,.png,.webp" class="text-body-sm">
+            <p class="font-body-sm text-on-surface-variant mt-1">JPG, PNG, or WebP. Max 5 MB each.</p>
+        </div>
+        <div class="flex items-center gap-2">{{ form.is_published }}<label for="id_is_published" class="font-body-sm">Publish on public Meet the Students page</label></div>
+        <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Save Project</button>
+    </form>
+</div>
+{% if project.write_up or project.description %}
+<div class="max-w-3xl mt-xl bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+    <h2 class="font-headline-sm text-headline-sm mb-md">Preview</h2>
+    {% if project.description %}<p class="font-body-md text-on-surface-variant mb-4">{{ project.description }}</p>{% endif %}
+    {% if project.write_up %}<div class="markdown-content font-body-md">{{ project.write_up }}</div>{% endif %}
+    {% if project.codebase_url or project.live_url %}
+    <div class="flex gap-4 mt-4">
+        {% if project.codebase_url %}<a href="{{ project.codebase_url }}" target="_blank" class="text-primary font-label-md hover:underline">View Codebase →</a>{% endif %}
+        {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="text-primary font-label-md hover:underline">Live Demo →</a>{% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

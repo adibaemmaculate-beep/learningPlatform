@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Teacher Portal - Course Materials</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#0b1c30",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#45464d",
+                        "tertiary-fixed-dim": "#dec29a",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary-container": "#6f5900",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#131b2e",
+                        "tertiary-fixed": "#fcdeb5",
+                        "background": "#f8f9ff",
+                        "secondary": "#735c00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "outline-variant": "#c6c6cd",
+                        "inverse-primary": "#bec6e0",
+                        "surface-tint": "#565e74",
+                        "on-primary-fixed": "#131b2e",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e5eeff",
+                        "on-secondary-fixed": "#231b00",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-tertiary-fixed-variant": "#574425",
+                        "tertiary": "#000000",
+                        "primary-fixed": "#dae2fd",
+                        "on-tertiary-fixed": "#271901",
+                        "surface": "#f8f9ff",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary-container": "#271901",
+                        "on-error": "#ffffff",
+                        "primary": "#000000",
+                        "surface-container-high": "#dce9ff",
+                        "on-background": "#0b1c30",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-tertiary-container": "#98805d",
+                        "secondary-container": "#fed01b",
+                        "outline": "#76777d",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#213145",
+                        "on-primary-container": "#7c839b",
+                        "surface-variant": "#d3e4fe",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "secondary-fixed": "#ffe083",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "container-padding": "24px",
+                        "row-height-dense": "32px",
+                        "unit": "4px",
+                        "row-height-standard": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "headline-sm": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-md": ["Geist"],
+                        "table-data": ["Geist"],
+                        "headline-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "table-data": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased flex min-h-screen">
+<!-- SideNavBar -->
+<nav class="bg-primary-container dark:bg-primary-container h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col h-full py-gutter px-unit z-20">
+<div class="mb-8 px-4 flex items-center gap-3">
+<img alt="Teacher Profile Picture" class="w-10 h-10 rounded-full object-cover bg-surface-container-low" data-alt="A small, professional headshot of a smiling teacher in a brightly lit modern classroom setting. The image is cropped as an avatar. The style is modern, approachable, and uses a clean white and soft blue color palette to match the UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuPqZ7a7ZiClYCOb_5kWf4pBXpc_PA3goKQpSmi9xpCtyUzWT7ZfFkjeyT2M9f3bMdpduK2yp6V_UOdAaETsOkMnnh3I_-QdZd1QVc10QXufwY9AlxnejKOVV-v9K0dls_ICouj6hkY6-s8a4OIgwiqEC4iyHS6nIG7kXpNSt5jAmaMJo7Y1VRK7U7-VoGY_kNla3_6x4XLmad2U-sQHdvhw81Eay9-dxr9yeosj_c4dNw2RRGbH-aStaKJlhj8pxMmHEJpHZjRFxb"/>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-primary">Teacher Portal</h1>
+<p class="font-label-sm text-label-sm text-on-primary-container opacity-80">Classroom Management</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">home</span>
+<span>Home</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span>Assignments</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Students</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">trending_up</span>
+<span>Progress</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-secondary-fixed border-l-4 border-secondary-container bg-surface-container-highest/10 font-bold transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined filled">book</span>
+<span>Course Materials</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span>Announcements</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto border-t border-outline-variant/20 pt-4">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">person</span>
+<span>Profile</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary transition-all duration-200 ease-in-out font-body-md text-body-md mt-4" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim text-on-surface dark:text-on-surface font-headline-sm text-headline-sm fixed top-0 right-0 w-[calc(100%-16rem)] h-row-height-standard border-b border-outline-variant flex justify-between items-center px-container-padding z-10">
+<div class="flex items-center">
+<span class="font-headline-md text-headline-md text-primary mr-8">Dashboard</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant cursor-pointer">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</header>
+<!-- Page Canvas -->
+<main class="flex-1 mt-[48px] p-container-padding max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Course Materials</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage and organize your weekly curriculum.</p>
+</div>
+<button class="bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed transition-colors px-6 py-2 rounded-lg font-label-md text-label-md flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Add Week
+                </button>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 gap-6">
+<!-- Week 1 Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:border-outline transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Week 1: Introduction to Algebraic Concepts</h3>
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                Published
+                            </span>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded hover:bg-surface-container-low text-on-surface-variant transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-error-container text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 max-w-3xl">This week covers the foundational principles of variables, expressions, and basic equations. Students will complete the initial assessment to gauge prior knowledge.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Resource Item -->
+<div class="flex items-center gap-3 p-3 rounded-lg bg-surface border border-outline-variant/50">
+<div class="bg-primary/10 p-2 rounded-md text-primary">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Syllabus Overview</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">PDF • 1.2 MB</p>
+</div>
+</div>
+<!-- Resource Item -->
+<div class="flex items-center gap-3 p-3 rounded-lg bg-surface border border-outline-variant/50">
+<div class="bg-tertiary-fixed/30 p-2 rounded-md text-tertiary-container">
+<span class="material-symbols-outlined">smart_display</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Lecture: Variables</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Video • 15:30</p>
+</div>
+</div>
+<!-- Resource Item -->
+<div class="flex items-center gap-3 p-3 rounded-lg bg-surface border border-outline-variant/50">
+<div class="bg-surface-variant p-2 rounded-md text-on-surface-variant">
+<span class="material-symbols-outlined">quiz</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Diagnostic Quiz</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Assessment • 10 pts</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Week 2 Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:border-outline transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Week 2: Linear Equations</h3>
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                Published
+                            </span>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded hover:bg-surface-container-low text-on-surface-variant transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-error-container text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 max-w-3xl">Deep dive into solving single-variable linear equations and graphing basics on the Cartesian plane.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Resource Item -->
+<div class="flex items-center gap-3 p-3 rounded-lg bg-surface border border-outline-variant/50">
+<div class="bg-primary/10 p-2 rounded-md text-primary">
+<span class="material-symbols-outlined">article</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Reading: Chapter 2</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Document • 4 Pages</p>
+</div>
+</div>
+<!-- Resource Item -->
+<div class="flex items-center gap-3 p-3 rounded-lg bg-surface border border-outline-variant/50">
+<div class="bg-surface-variant p-2 rounded-md text-on-surface-variant">
+<span class="material-symbols-outlined">assignment</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-md text-label-md text-on-surface truncate">Problem Set 1</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Assignment • Due Friday</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Week 3 Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 hover:border-outline transition-colors group opacity-75">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Week 3: Inequalities</h3>
+<span class="bg-surface-container text-outline px-2 py-1 rounded font-label-sm text-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                Draft
+                            </span>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 rounded hover:bg-surface-container-low text-on-surface-variant transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 rounded hover:bg-error-container text-error transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 max-w-3xl">Understanding and solving linear inequalities, including compound inequalities and absolute value applications.</p>
+<div class="border-2 border-dashed border-outline-variant/50 rounded-lg p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-outline mb-2">upload_file</span>
+<p class="font-label-md text-label-md text-on-surface">Drag & Drop resources here</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">or click to browse files</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

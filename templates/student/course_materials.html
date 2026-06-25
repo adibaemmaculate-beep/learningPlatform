@@ -1,0 +1,66 @@
+{% extends "base_portal.html" %}
+{% block title %}Course Materials{% endblock %}
+{% block portal_content %}
+<div class="mb-xl">
+    <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">Course Materials</h1>
+    <p class="font-body-md text-on-surface-variant">{% if course %}{{ course.name }}{% else %}No active course{% endif %}</p>
+</div>
+{% if materials %}
+<div class="flex flex-col gap-md">
+    {% for material in materials %}
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+        <button type="button" data-collapsible-toggle="week-{{ material.id }}" class="w-full flex items-center justify-between p-lg hover:bg-surface-container-low transition-colors text-left">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-bold">{{ material.week }}</div>
+                <div>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Week {{ material.week }}: {{ material.title }}</h3>
+                    <p class="font-body-sm text-on-surface-variant">{{ material.objectives_json|length }} learning objective{{ material.objectives_json|length|pluralize }}</p>
+                </div>
+            </div>
+            <span class="material-symbols-outlined chevron text-on-surface-variant">expand_more</span>
+        </button>
+        <div id="week-{{ material.id }}" class="collapsible-content border-t border-outline-variant">
+            <div class="p-lg space-y-md">
+                {% if material.description %}
+                <div class="markdown-content font-body-md text-on-surface-variant">{{ material.description }}</div>
+                {% endif %}
+                {% if material.objectives_json %}
+                <div>
+                    <h4 class="font-label-md text-label-md text-on-surface mb-sm uppercase">Objectives</h4>
+                    <ul class="list-disc list-inside space-y-1 font-body-sm text-on-surface-variant">
+                        {% for obj in material.objectives_json %}<li>{{ obj }}</li>{% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <div class="flex flex-wrap gap-3">
+                    {% if material.slides %}
+                    <a href="{{ material.slides.url }}" target="_blank" class="inline-flex items-center gap-2 bg-surface-container px-4 py-2 rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-primary">picture_as_pdf</span>
+                        <span class="font-label-md">Download Slides</span>
+                    </a>
+                    {% endif %}
+                    {% if material.notes %}
+                    <a href="{{ material.notes.url }}" target="_blank" class="inline-flex items-center gap-2 bg-surface-container px-4 py-2 rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-primary">description</span>
+                        <span class="font-label-md">Download Notes</span>
+                    </a>
+                    {% endif %}
+                    {% for res in material.other_resources_json %}
+                    <a href="{{ res.url }}" target="_blank" class="inline-flex items-center gap-2 bg-surface-container px-4 py-2 rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors">
+                        <span class="material-symbols-outlined text-primary">link</span>
+                        <span class="font-label-md">{{ res.label }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xxl text-center">
+    <span class="material-symbols-outlined text-6xl text-primary/20 mb-md">menu_book</span>
+    <p class="font-body-md text-on-surface-variant">No course materials published yet. Check back soon.</p>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base_portal.html" %}
+{% block title %}{{ announcement.title }}{% endblock %}
+{% block portal_content %}
+<div class="mb-4"><a href="{% url 'student:announcements' %}" class="text-primary font-label-md hover:underline">← Back</a></div>
+<div class="max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+    <h1 class="font-headline-lg font-bold text-on-surface mb-2">{{ announcement.title }}</h1>
+    <p class="font-body-sm text-on-surface-variant mb-6">{{ announcement.published_at|date:"F j, Y H:i" }}</p>
+    <div class="markdown-content font-body-md whitespace-pre-wrap">{{ announcement.body }}</div>
+</div>
+{% endblock %}

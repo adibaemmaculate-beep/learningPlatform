@@ -1,0 +1,32 @@
+{% extends "base_portal.html" %}
+{% block title %}{{ project.title }}{% endblock %}
+{% block portal_content %}
+<div class="mb-4"><a href="{% url 'teacher:projects' %}" class="text-primary font-label-md hover:underline">← Back to Projects</a></div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg text-center">
+        {% if project.student.profile and project.student.profile.profile_pic %}
+        <img src="{{ project.student.profile.profile_pic.url }}" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+        {% else %}
+        <div class="w-24 h-24 rounded-full bg-primary-container text-on-primary mx-auto mb-4 flex items-center justify-center text-2xl font-bold">{{ project.student.first_name|slice:":1" }}{{ project.student.last_name|slice:":1" }}</div>
+        {% endif %}
+        <h2 class="font-headline-md">{{ project.student.get_full_name }}</h2>
+        <p class="text-on-surface-variant text-body-sm">{{ project.student.email }}</p>
+    </div>
+    <div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+        <h1 class="font-headline-lg font-bold text-on-surface mb-2">{{ project.title }}</h1>
+        {% if project.description %}<p class="font-body-md text-on-surface-variant mb-4">{{ project.description }}</p>{% endif %}
+        {% if project.write_up %}<div class="markdown-content font-body-md mb-4">{{ project.write_up }}</div>{% endif %}
+        <div class="flex gap-4 mb-4">
+            {% if project.codebase_url %}<a href="{{ project.codebase_url }}" target="_blank" class="text-primary font-label-md hover:underline">Codebase →</a>{% endif %}
+            {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="text-primary font-label-md hover:underline">Live Demo →</a>{% endif %}
+        </div>
+        {% if project.images.all %}
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {% for img in project.images.all %}
+            <img src="{{ img.image.url }}" alt="" class="rounded-lg border border-outline-variant object-cover h-32 w-full">
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

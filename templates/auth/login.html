@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Login - Dev Academy{% endblock %}
+{% block body_class %}bg-[#F1F5F9] font-body-md text-on-surface min-h-screen flex items-center justify-center relative overflow-hidden{% endblock %}
+{% block content %}
+<div class="absolute inset-0 grid-pattern opacity-50 z-0"></div>
+<main class="w-full max-w-[440px] px-md md:px-0 z-10 relative">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-lg p-xl">
+        <div class="flex flex-col items-center mb-xl text-center">
+            <div class="h-12 w-32 bg-surface-variant rounded flex items-center justify-center mb-lg border border-outline-variant">
+                <span class="material-symbols-outlined text-primary text-[28px]">code</span>
+                <span class="font-headline-sm text-headline-sm text-primary ml-xs">DevAcademy</span>
+            </div>
+            <h1 class="font-headline-lg text-headline-lg text-primary mb-sm">Welcome Back</h1>
+            <p class="font-body-md text-body-md text-on-surface-variant">Continue your AI &amp; Engineering journey.</p>
+        </div>
+        {% if form.non_field_errors %}
+        <div class="mb-md p-md bg-error-container text-on-error-container rounded-lg text-body-sm">
+            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+        </div>
+        {% endif %}
+        <form method="post" class="flex flex-col gap-lg">
+            {% csrf_token %}
+            <div class="relative">
+                <input class="floating-input input-glow block w-full px-md py-3 text-on-surface bg-surface-container-lowest border border-outline-variant rounded appearance-none focus:outline-none transition-colors duration-200" id="id_email" name="email" type="email" placeholder=" " required value="{{ form.email.value|default:'' }}">
+                <label class="floating-label absolute text-on-surface-variant duration-300 transform -translate-y-1/2 scale-100 top-1/2 left-md origin-[0] pointer-events-none font-body-md text-body-md" for="id_email">Email Address</label>
+            </div>
+            <div class="relative">
+                <input class="floating-input input-glow block w-full px-md py-3 text-on-surface bg-surface-container-lowest border border-outline-variant rounded appearance-none focus:outline-none transition-colors duration-200" id="id_password" name="password" type="password" placeholder=" " required>
+                <label class="floating-label absolute text-on-surface-variant duration-300 transform -translate-y-1/2 scale-100 top-1/2 left-md origin-[0] pointer-events-none font-body-md text-body-md" for="id_password">Password</label>
+            </div>
+            <div class="flex justify-end mt-[-8px]">
+                <a class="font-label-md text-label-md text-primary hover:underline" href="{% url 'accounts:forgot_password' %}">Forgot password?</a>
+            </div>
+            <button class="w-full bg-secondary-container text-primary font-headline-sm text-headline-sm py-3 px-lg rounded flex items-center justify-center gap-sm hover:bg-secondary-fixed transition-colors" type="submit">
+                Log In <span class="material-symbols-outlined text-[20px]">login</span>
+            </button>
+        </form>
+        <div class="mt-xl text-center">
+            <p class="font-body-sm text-body-sm text-on-surface-variant">
+                Don't have an account?
+                <a class="font-label-md text-label-md text-primary hover:underline" href="{% url 'accounts:register' %}">Register</a>
+            </p>
+        </div>
+    </div>
+</main>
+{% endblock %}

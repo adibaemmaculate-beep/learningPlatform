@@ -1,0 +1,29 @@
+<footer class="bg-primary-container text-on-primary-container py-xxl mt-auto">
+    <div class="max-w-[1280px] mx-auto px-gutter grid grid-cols-1 md:grid-cols-3 gap-lg">
+        <div>
+            <h3 class="font-headline-sm text-headline-sm text-surface-container-lowest mb-md">Dev Academy</h3>
+            <p class="font-body-sm text-body-sm text-on-primary-container/80">Empowering Zimbabwe's youth with AI and coding skills to solve community problems.</p>
+        </div>
+        <div>
+            <h4 class="font-label-md text-label-md text-surface-container-lowest mb-md uppercase tracking-wider">Navigate</h4>
+            <ul class="space-y-sm font-body-sm">
+                <li><a href="{% url 'public:home' %}" class="hover:text-secondary-container transition-colors">Home</a></li>
+                <li><a href="{% url 'public:about' %}" class="hover:text-secondary-container transition-colors">About</a></li>
+                <li><a href="{% url 'public:students' %}" class="hover:text-secondary-container transition-colors">Meet the Students</a></li>
+                <li><a href="{% url 'public:contact' %}" class="hover:text-secondary-container transition-colors">Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-label-md text-label-md text-surface-container-lowest mb-md uppercase tracking-wider">Newsletter</h4>
+            <form method="post" action="{% url 'public:home' %}" class="flex gap-2">
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="newsletter">
+                <input type="email" name="email" placeholder="Your email" required class="flex-1 px-3 py-2 rounded bg-surface-container-lowest text-on-surface text-body-sm border-0">
+                <button type="submit" class="bg-secondary-container text-primary px-4 py-2 rounded font-label-md hover:bg-secondary-fixed transition-colors">Subscribe</button>
+            </form>
+        </div>
+    </div>
+    <div class="max-w-[1280px] mx-auto px-gutter mt-lg pt-lg border-t border-on-primary-container/20 text-center font-body-sm text-on-primary-container/60">
+        &copy; {% now "Y" %} Dev Academy — AI &amp; Coding Program, Zimbabwe
+    </div>
+</footer>

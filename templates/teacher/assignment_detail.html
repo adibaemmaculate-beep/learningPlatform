@@ -1,0 +1,62 @@
+{% extends "base_portal.html" %}
+{% block title %}{{ assignment.title }}{% endblock %}
+{% block portal_content %}
+<div class="mb-4 flex justify-between items-center">
+    <a href="{% url 'teacher:assignments' %}" class="text-primary font-label-md hover:underline">← Back to Assignments</a>
+    <div class="flex gap-2">
+        <a href="{% url 'teacher:assignment_edit' assignment.id %}" class="border border-outline-variant px-3 py-1 rounded font-label-md">Edit</a>
+        {% if not assignment.grades_released %}
+        <form method="post" action="{% url 'teacher:release_grades' assignment.id %}">{% csrf_token %}
+            <button type="submit" class="bg-secondary-container text-primary px-3 py-1 rounded font-label-md" onclick="return confirm('Release grades to all students?')">Release Grades</button>
+        </form>
+        {% endif %}
+        <form method="post" action="{% url 'teacher:assignment_delete' assignment.id %}">{% csrf_token %}
+            <button type="submit" class="text-error px-3 py-1 rounded font-label-md border border-error/30" onclick="return confirm('Delete this assignment?')">Delete</button>
+        </form>
+    </div>
+</div>
+<div class="mb-lg">
+    <h1 class="font-headline-lg font-bold text-on-surface">{{ assignment.title }}</h1>
+    <p class="font-body-md text-on-surface-variant">Week {{ assignment.week }} • Due {{ assignment.due_date|date:"M d, Y H:i" }} • Max score {{ assignment.total_score }}</p>
+</div>
+<div class="flex gap-2 mb-4">
+    <a href="?filter=all" class="px-3 py-1 rounded font-label-md {% if filter_status == 'all' %}bg-primary text-on-primary{% else %}bg-surface-container{% endif %}">All</a>
+    <a href="?filter=submitted" class="px-3 py-1 rounded font-label-md {% if filter_status == 'submitted' %}bg-primary text-on-primary{% else %}bg-surface-container{% endif %}">Submitted</a>
+    <a href="?filter=not_submitted" class="px-3 py-1 rounded font-label-md {% if filter_status == 'not_submitted' %}bg-primary text-on-primary{% else %}bg-surface-container{% endif %}">Not Submitted</a>
+    <a href="?filter=ungraded" class="px-3 py-1 rounded font-label-md {% if filter_status == 'ungraded' %}bg-primary text-on-primary{% else %}bg-surface-container{% endif %}">Ungraded</a>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+    <table class="w-full text-left">
+        <thead class="bg-surface border-b border-outline-variant">
+            <tr class="font-label-sm text-on-surface-variant uppercase">
+                <th class="px-6 py-3">Student</th>
+                <th class="px-6 py-3">Status</th>
+                <th class="px-6 py-3">Submitted</th>
+                <th class="px-6 py-3">Score</th>
+                <th class="px-6 py-3 text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant font-table-data">
+            {% for row in rows %}
+            <tr>
+                <td class="px-6 py-4 font-medium">{{ row.student.get_full_name }}</td>
+                <td class="px-6 py-4">
+                    {% if row.submission %}
+                        {% if row.submission.is_late %}Late{% else %}Submitted{% endif %}
+                        {% if row.submission.status == 'graded' %} • Graded{% endif %}
+                    {% else %}Not Submitted{% endif %}
+                </td>
+                <td class="px-6 py-4 text-on-surface-variant">{% if row.submission %}{{ row.submission.submitted_at|date:"M d, H:i" }}{% else %}—{% endif %}</td>
+                <td class="px-6 py-4">{% if row.submission and row.submission.score_obtained is not None %}{{ row.submission.score_obtained }}/{{ assignment.total_score }}{% else %}—{% endif %}</td>
+                <td class="px-6 py-4 text-right">
+                    {% if row.submission %}
+                    <a href="{{ row.submission.file.url }}" class="text-on-surface-variant font-label-md hover:underline mr-2" target="_blank">File</a>
+                    <a href="{% url 'teacher:grade_submission' assignment.id row.submission.id %}" class="text-primary font-label-md hover:underline">Grade</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

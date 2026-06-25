@@ -1,0 +1,60 @@
+{% extends "base_portal.html" %}
+{% block title %}Teacher Dashboard{% endblock %}
+{% block portal_content %}
+<div class="mb-xl">
+    <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">{{ greeting }}</h1>
+    <p class="font-body-md text-on-surface-variant">{% now "F j, Y" %}{% if course %} • {{ course.name }}{% endif %}</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-xl">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4">
+        <span class="font-label-md text-on-surface-variant">Assignments</span>
+        <span class="font-headline-lg block">{{ assignment_count }}</span>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4">
+        <span class="font-label-md text-on-surface-variant">Pending Submissions</span>
+        <span class="font-headline-lg block">{{ pending_submissions }}</span>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4">
+        <span class="font-label-md text-on-surface-variant">Submissions This Week</span>
+        <span class="font-headline-lg block">{{ submissions_this_week }}</span>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4">
+        <span class="font-label-md text-on-surface-variant">Published Weeks</span>
+        <span class="font-headline-lg block">{{ published_count }}</span>
+    </div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-lg">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+        <h2 class="font-headline-sm text-headline-sm mb-md">Quick Actions</h2>
+        <div class="flex flex-wrap gap-3">
+            <a href="{% url 'teacher:assignment_create' %}" class="bg-secondary-container text-primary px-4 py-2 rounded-lg font-label-md">Create Assignment</a>
+            <a href="{% url 'teacher:announcement_create' %}" class="border border-outline-variant px-4 py-2 rounded-lg font-label-md hover:bg-surface-container-low">Post Announcement</a>
+            <a href="{% url 'teacher:material_create' %}" class="border border-outline-variant px-4 py-2 rounded-lg font-label-md hover:bg-surface-container-low">Add Week</a>
+        </div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+        <h2 class="font-headline-sm text-headline-sm mb-md">Recent Announcements</h2>
+        {% if recent_announcements %}
+        <ul class="space-y-2">
+            {% for a in recent_announcements %}
+            <li><a href="{% url 'teacher:announcement_detail' a.id %}" class="text-primary hover:underline font-body-md">{{ a.title }}</a> <span class="text-on-surface-variant text-body-sm">{{ a.published_at|date:"M d" }}</span></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="font-body-md text-on-surface-variant">No announcements yet.</p>
+        {% endif %}
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg lg:col-span-2">
+        <h2 class="font-headline-sm text-headline-sm mb-md">Needs Attention</h2>
+        {% if assignments_needing_attention %}
+        <ul class="space-y-2">
+            {% for a in assignments_needing_attention %}
+            <li><a href="{% url 'teacher:assignment_detail' a.id %}" class="text-primary hover:underline font-body-md">{{ a.title }}</a> <span class="text-on-surface-variant text-body-sm">({{ a.ungraded }} ungraded)</span></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="font-body-md text-on-surface-variant">All caught up!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Teacher Portal - Dashboard</title>
+<!-- Google Fonts: Geist & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface": "#0b1c30",
+                      "on-secondary": "#ffffff",
+                      "on-surface-variant": "#45464d",
+                      "tertiary-fixed-dim": "#dec29a",
+                      "on-tertiary": "#ffffff",
+                      "surface-bright": "#f8f9ff",
+                      "surface-container-highest": "#d3e4fe",
+                      "surface-container-low": "#eff4ff",
+                      "on-secondary-container": "#6f5900",
+                      "on-primary": "#ffffff",
+                      "primary-container": "#131b2e",
+                      "tertiary-fixed": "#fcdeb5",
+                      "background": "#f8f9ff",
+                      "secondary": "#735c00",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#574500",
+                      "outline-variant": "#c6c6cd",
+                      "inverse-primary": "#bec6e0",
+                      "surface-tint": "#565e74",
+                      "on-primary-fixed": "#131b2e",
+                      "on-error-container": "#93000a",
+                      "surface-container": "#e5eeff",
+                      "on-secondary-fixed": "#231b00",
+                      "primary-fixed-dim": "#bec6e0",
+                      "on-tertiary-fixed-variant": "#574425",
+                      "tertiary": "#000000",
+                      "primary-fixed": "#dae2fd",
+                      "on-tertiary-fixed": "#271901",
+                      "surface": "#f8f9ff",
+                      "surface-dim": "#cbdbf5",
+                      "tertiary-container": "#271901",
+                      "on-error": "#ffffff",
+                      "primary": "#000000",
+                      "surface-container-high": "#dce9ff",
+                      "on-background": "#0b1c30",
+                      "inverse-on-surface": "#eaf1ff",
+                      "secondary-fixed-dim": "#eec200",
+                      "on-tertiary-container": "#98805d",
+                      "secondary-container": "#fed01b",
+                      "outline": "#76777d",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#213145",
+                      "on-primary-container": "#7c839b",
+                      "surface-variant": "#d3e4fe",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "secondary-fixed": "#ffe083",
+                      "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "container-padding": "24px",
+                      "row-height-dense": "32px",
+                      "unit": "4px",
+                      "row-height-standard": "48px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Geist"],
+                      "body-md": ["Geist"],
+                      "label-sm": ["Geist"],
+                      "headline-sm": ["Geist"],
+                      "body-lg": ["Geist"],
+                      "label-md": ["Geist"],
+                      "table-data": ["Geist"],
+                      "headline-md": ["Geist"]
+              },
+              "fontSize": {
+                      "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.03em", "fontWeight": "600"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "table-data": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Styling base elements to inherit font */
+        body {
+            font-family: 'Geist', sans-serif;
+            background-color: #f8f9ff; /* bg-background */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased flex h-screen overflow-hidden">
+<!-- Shared Component: SideNavBar -->
+<nav class="bg-primary-container dark:bg-primary-container h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col py-gutter px-unit z-20">
+<!-- Brand / Header -->
+<div class="px-3 mb-8 flex items-center space-x-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="Teacher Profile Picture" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged male teacher with glasses, smiling warmly. He is wearing a light blue button-down shirt. The background is a brightly lit, modern classroom with subtle educational posters slightly out of focus. The lighting is soft and flattering, creating a welcoming and authoritative academic mood in a light-mode color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlcWyVW5yeMF7aiMChu3GZI4l4HSdqkQtYXzQUmxbnBWb3vn6VM3RMRDf2EVEblxpsKYSmfJyvYGLLa3DU-n2gqeqt1RU0C12mVydkdS3HAhtfljEyokys0iwt2vZp4KmPTKPfsU_zWd8HFTp0tktf6TpQzJuyYiEnlZSxbUUxuWriQb_qV-1Jwgtz4Dt6x1GQIFkFDwXesxzcbakvVjqbe40d7ExXifpkIuMA_YimPDx_o1qiLK5N3PtCvXtS45i5uSv21lflYkKa"/>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-on-primary">Teacher Portal</h1>
+<p class="font-label-sm text-label-sm text-on-primary-container">Classroom Management</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col flex-1 space-y-1">
+<!-- Active State: Home -->
+<li>
+<a class="flex items-center px-3 py-2 rounded-md transition-all duration-200 ease-in-out text-secondary-fixed border-l-4 border-secondary-container bg-surface-container-highest/10 font-bold" href="#">
+<span class="material-symbols-outlined mr-3">home</span>
+<span class="font-body-md text-body-md">Home</span>
+</a>
+</li>
+<!-- Inactive States -->
+<li>
+<a class="flex items-center px-3 py-2 rounded-md transition-all duration-200 ease-in-out text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">assignment</span>
+<span class="font-body-md text-body-md">Assignments</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-3 py-2 rounded-md transition-all duration-200 ease-in-out text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+<span class="font-body-md text-body-md">Students</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-3 py-2 rounded-md transition-all duration-200 ease-in-out text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">trending_up</span>
+<span class="font-body-md text-body-md">Progress</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-3 py-2 rounded-md transition-all duration-200 ease-in-out text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">book</span>
+<span class="font-body-md text-body-md">Course Materials</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-3 py-2 rounded-md transition-all duration-200 ease-in-out text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">campaign</span>
+<span class="font-body-md text-body-md">Announcements</span>
+</a>
+</li>
+</ul>
+<!-- Bottom Actions -->
+<ul class="flex flex-col space-y-1 mt-auto pt-4 border-t border-surface-tint/30">
+<li>
+<a class="flex items-center px-3 py-2 rounded-md transition-all duration-200 ease-in-out text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">person</span>
+<span class="font-body-md text-body-md">Profile</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-3 py-2 rounded-md transition-all duration-200 ease-in-out text-on-primary-container opacity-80 hover:bg-surface-container-highest/20 hover:text-on-primary border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-3 py-2 rounded-md transition-all duration-200 ease-in-out text-error border-l-4 border-transparent hover:bg-error/10" href="#">
+<span class="material-symbols-outlined mr-3">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="ml-64 flex-1 flex flex-col h-screen overflow-hidden relative">
+<!-- Shared Component: TopAppBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim fixed top-0 right-0 w-[calc(100%-16rem)] h-row-height-standard border-b border-outline-variant flex justify-between items-center px-container-padding z-10">
+<div class="flex items-center h-full">
+<!-- Navigation Tabs (Only 'Dashboard' is conceptually active here based on intent) -->
+<nav class="flex h-full space-x-6">
+<a class="flex items-center h-full text-primary font-bold border-b-2 border-primary pb-1 cursor-pointer transition-colors font-headline-sm text-headline-sm" href="#">
+                        Dashboard
+                    </a>
+<!-- Assuming other top-level views might exist, but omitted for simplicity as per prompt focus -->
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">help</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Page Content -->
+<main class="flex-1 overflow-y-auto pt-[calc(48px+24px)] px-container-padding pb-container-padding">
+<!-- Page Header -->
+<div class="mb-8">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-1">Good morning, Dr. Vance 👋</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Thursday, October 26, 2023</p>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- LEFT COLUMN (Span 8) -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Section: Needs Attention -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col">
+<div class="px-5 py-4 border-b border-outline-variant/50 bg-surface-bright flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center">
+<span class="material-symbols-outlined mr-2 text-error text-[20px]">error</span>
+                                Needs Attention
+                            </h3>
+<button class="font-label-md text-label-md text-primary hover:underline">View All</button>
+</div>
+<div class="flex flex-col">
+<!-- List Item 1 -->
+<div class="px-5 py-3 border-b border-outline-variant/30 flex justify-between items-center hover:bg-surface-container-low/50 transition-colors">
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-medium">React Hooks Fundamentals</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">CS 301 • Due Yesterday</p>
+</div>
+<div class="bg-error-container/30 text-on-error-container px-2 py-1 rounded border border-error-container/50 font-label-sm text-label-sm flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">grading</span>
+                                    5 Ungraded
+                                </div>
+</div>
+<!-- List Item 2 -->
+<div class="px-5 py-3 border-b border-outline-variant/30 bg-surface/50 flex justify-between items-center hover:bg-surface-container-low/50 transition-colors">
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-medium">Midterm Project Proposals</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Web Dev II • Due Oct 24</p>
+</div>
+<div class="bg-error-container/30 text-on-error-container px-2 py-1 rounded border border-error-container/50 font-label-sm text-label-sm flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">grading</span>
+                                    12 Ungraded
+                                </div>
+</div>
+<!-- List Item 3 -->
+<div class="px-5 py-3 flex justify-between items-center hover:bg-surface-container-low/50 transition-colors">
+<div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-medium">Attendance Review</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">System Alert</p>
+</div>
+<div class="bg-secondary-container/30 text-on-secondary-container px-2 py-1 rounded border border-secondary-container/50 font-label-sm text-label-sm flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">warning</span>
+                                    Action Required
+                                </div>
+</div>
+</div>
+</section>
+<!-- Section: Recent Submissions -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col">
+<div class="px-5 py-4 border-b border-outline-variant/50 bg-surface-bright flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center">
+<span class="material-symbols-outlined mr-2 text-primary-fixed-dim text-[20px]">history</span>
+                                Recent Submissions
+                            </h3>
+<button class="font-label-md text-label-md text-primary hover:underline">Refresh</button>
+</div>
+<div class="p-2 flex flex-col gap-1">
+<!-- Submission 1 -->
+<div class="p-3 rounded-md hover:bg-surface-container flex items-center space-x-4 transition-colors cursor-pointer group">
+<img alt="Student Avatar" class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A bright, high-quality headshot of a young female college student looking energetic and confident. She has curly brown hair and is wearing a yellow sweater. The background is a crisp, minimalist library setting with soft white natural lighting, adhering to a modern corporate-academic visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDi6_MxNPwg-f-blhpblTifa53bWtdqgCirAeBxVZvccnY2SWwhfUnlq-QUcK-Kagw9m3zW5zZ6CV9NIyhO6kTzuwphvwws5HaqjjD-dotQx2U92g-UDkaKrYyrIbytYsinwoLjmcEO_DDG7D8qLKvQanjxLOTq3rBiFynQy0nbwMMYaiAEpCsb3q5nNnyvTeVMg64iqvulBntix7mXVF0m_KoGUH8vDGy94sxYV5ENyVfyG3xwRh4LhA9srxRVOSlTRZqtuocESm0J"/>
+<div class="flex-1">
+<div class="flex justify-between items-baseline mb-0.5">
+<h4 class="font-body-md text-body-md font-medium text-on-surface group-hover:text-primary transition-colors">Sarah Jenkins</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10 mins ago</span>
+</div>
+<p class="font-table-data text-table-data text-on-surface-variant truncate w-[250px] lg:w-[400px]">Submitted: Portfolio Redesign v2.zip</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Submission 2 -->
+<div class="p-3 rounded-md hover:bg-surface-container flex items-center space-x-4 transition-colors cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md text-label-md border border-outline-variant">MJ</div>
+<div class="flex-1">
+<div class="flex justify-between items-baseline mb-0.5">
+<h4 class="font-body-md text-body-md font-medium text-on-surface group-hover:text-primary transition-colors">Marcus Johnson</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">45 mins ago</span>
+</div>
+<p class="font-table-data text-table-data text-on-surface-variant truncate w-[250px] lg:w-[400px]">Submitted: Database Schema Draft.pdf</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Submission 3 -->
+<div class="p-3 rounded-md hover:bg-surface-container flex items-center space-x-4 transition-colors cursor-pointer group">
+<img alt="Student Avatar" class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A professional, clear headshot of a young male student with short dark hair, wearing a casual gray t-shirt. He has a neutral, focused expression. The background is a plain, light-gray gradient that emphasizes a clean, minimalist aesthetic suitable for an educational platform profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBe6_0H1IrI-JxIJRrLcrCdxVc0yAk_4Hc-WWFBq3dIPTFpAADVyLt0pUqjVqFWQIgifkwqr8D-N_Br7akMWX0xzZiDVNpf-Nzik67iAJYH9_jUmP8R6ai0TM7Xf_dYGrns93R3YCtKWqhoSlPf9-27_9DbVoDfSRmbX_gdBCUstg-kH_dRDKqdCnK2bivPGkkOmX4IBd3SuWDNb0SNGZRE1ZFrCAIbbnitjZVzYmm_oKuXR_4nHStzuid999H_FQPuk373rntuUsB"/>
+<div class="flex-1">
+<div class="flex justify-between items-baseline mb-0.5">
+<h4 class="font-body-md text-body-md font-medium text-on-surface group-hover:text-primary transition-colors">David Chen</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 hours ago</span>
+</div>
+<p class="font-table-data text-table-data text-on-surface-variant truncate w-[250px] lg:w-[400px]">Submitted: React Components Lab.js</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN (Span 4) -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- Section: Quick Actions -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-5 flex flex-col gap-3">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Quick Actions</h3>
+<button class="w-full bg-secondary-container hover:bg-secondary-fixed transition-colors text-on-secondary-container font-label-md text-label-md py-3 px-4 rounded-lg flex items-center justify-center space-x-2 border border-secondary-container/50 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Create New Assignment</span>
+</button>
+<button class="w-full bg-secondary-container hover:bg-secondary-fixed transition-colors text-on-secondary-container font-label-md text-label-md py-3 px-4 rounded-lg flex items-center justify-center space-x-2 border border-secondary-container/50 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">campaign</span>
+<span>Post Announcement</span>
+</button>
+</section>
+<!-- Section: Class Overview Stats -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+<div class="px-5 py-4 border-b border-outline-variant/50 bg-surface-bright">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Class Overview</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">CS 301 - Fall Semester</p>
+</div>
+<div class="grid grid-cols-1 divide-y divide-outline-variant/30">
+<!-- Stat 1 -->
+<div class="px-5 py-4 flex justify-between items-center hover:bg-surface-container-low/30 transition-colors">
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-[20px]">groups</span>
+<span class="font-body-md text-body-md">Total Students</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">24</span>
+</div>
+<!-- Stat 2 -->
+<div class="px-5 py-4 flex justify-between items-center hover:bg-surface-container-low/30 transition-colors">
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-[20px]">task</span>
+<span class="font-body-md text-body-md">Active Assignments</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">12</span>
+</div>
+<!-- Stat 3 -->
+<div class="px-5 py-4 flex justify-between items-center hover:bg-surface-container-low/30 transition-colors bg-surface-container-low/10">
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-[20px]">analytics</span>
+<span class="font-body-md text-body-md">Class Average</span>
+</div>
+<div class="flex items-center">
+<span class="font-headline-sm text-headline-sm text-primary">82%</span>
+<span class="material-symbols-outlined text-[16px] text-primary ml-1">arrow_upward</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+</body></html>

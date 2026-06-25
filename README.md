@@ -9,6 +9,8 @@ cd learningPlatform
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+npm install
+npm run build:css
 python manage.py migrate
 python manage.py seed_admin
 python manage.py runserver
@@ -21,44 +23,38 @@ Open http://127.0.0.1:8000/
 - **Email:** `admin@example.com`
 - **Password:** `changeme123`
 
-## Stage 4 — Assignments, Grades & Progress
+### CSS build
 
-### Student portal (`/student/`)
+Tailwind is compiled locally (not CDN). After changing templates or `static/src/input.css`:
 
-| URL | Page |
-|-----|------|
-| `/student/` | Dashboard with due-this-week assignments and overall grade |
-| `/student/assignments/` | List of published assignments + submission status |
-| `/student/assignments/<id>/` | View instructions, submit file (validated client + server) |
-| `/student/grades/` | Grade breakdown (visible after teacher releases grades) |
-| `/student/materials/` | Published weekly materials |
-| `/student/profile/` | Profile picture + bio (Markdown) |
-| `/student/settings/` | Theme, phone, notifications, password |
+```bash
+npm run build:css
+# or watch during development:
+npm run watch:css
+```
 
-### Teacher portal (`/teacher/`)
+## Stage 5 — Projects, Announcements & Notifications
 
-| URL | Page |
-|-----|------|
-| `/teacher/` | Dashboard with assignment stats + needs-attention list |
-| `/teacher/assignments/` | Manage all assignments |
-| `/teacher/assignments/create/` | Create assignment (file rules, due date, publish) |
-| `/teacher/assignments/<id>/` | Submission tracker with filters |
-| `/teacher/assignments/<id>/grade/<submission_id>/` | Grade submission + feedback |
-| `/teacher/students/` | Class roster with search |
-| `/teacher/students/<id>/` | Student profile + grade breakdown |
-| `/teacher/progress/` | Class progress dashboard |
-| `/teacher/materials/` | Manage weekly course materials |
+### New features
 
-### Stage 4 test flow
+| Area | URLs / behavior |
+|------|-----------------|
+| **Student project** | `/student/project/` — create/edit capstone, publish to public page |
+| **Student announcements** | Banner on all portal pages; `/student/announcements/` list |
+| **Teacher announcements** | `/teacher/announcements/` — post, view read receipts |
+| **Teacher projects** | `/teacher/projects/` — browse all student projects |
+| **Public showcases** | `/students/` — published projects; `/students/<id>/` — full profile |
+| **Email notifications** | Assignment published, submission received, grades released, announcements, account approved/rejected (console in dev) |
 
-1. Log in as **teacher** → **Assignments** → **Create Assignment**
-2. Set title, week, due date, instructions, allowed file types (e.g. `.pdf`), check **Publish**
-3. Log in as **student** → **Assignments** → open assignment → upload a valid file
-4. Teacher → assignment detail → **Grade** submission → enter score + feedback
-5. Teacher → **Release Grades** on the assignment
-6. Student → **Grades** → verify score appears
-7. Teacher → **Students** / **Progress** → verify roster and stats
+### Stage 5 test flow
 
-Announcements and notifications wire in Stage 5.
+1. **Teacher** → Announcements → Post (try "Students only" visibility)
+2. **Student** → see banner on dashboard → open announcement (marks as read)
+3. **Student** → My Project → fill details, upload images, check **Publish**
+4. Visit **/students/** → click student card → verify public project page
+5. **Teacher** → Projects → view student project
+6. Toggle **email notifications** off in Settings → trigger an announcement → confirm no console email for that user
+
+PostgreSQL and production deployment config are deferred.
 
 Emails print to the **console** in development.

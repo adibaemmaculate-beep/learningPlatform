@@ -1,93 +1,164 @@
 {% extends "base_public.html" %}
-{% block title %}Dev Academy - AI &amp; Coding Program{% endblock %}
+{% load static %}
+{% block title %}Shamva AI - From Shamva to the World{% endblock %}
+{% block extra_head %}
+<style>
+    .hero-bg-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
+        z-index: 0;
+    }
+    .hero-bg-slide.active {
+        opacity: 1;
+    }
+</style>
+{% endblock %}
 {% block public_content %}
-<!-- Hero -->
-<section class="bg-surface-container-low border-b border-outline-variant">
-    <div class="max-w-[1280px] mx-auto px-gutter py-xxl grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
-        <div>
-            <span class="inline-block bg-secondary-container text-on-secondary-container font-label-md text-label-md px-3 py-1 rounded-full mb-md">Zimbabwe Cohort 2025</span>
-            <h1 class="font-headline-xl text-headline-xl text-primary mb-md">Teaching AI &amp; Coding to Solve Real Problems</h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">A closed, invite-only program empowering middle school students in Zimbabwe to learn artificial intelligence and programming — and apply those skills to challenges in their communities.</p>
-            <div class="flex gap-md">
-                <a href="{% url 'public:about' %}" class="bg-secondary-container text-primary font-headline-sm px-lg py-3 rounded hover:bg-secondary-fixed transition-colors">Learn More</a>
-                <a href="{% url 'accounts:register' %}" class="border border-outline-variant text-on-surface font-body-md px-lg py-3 rounded hover:bg-surface-container-low transition-colors">Apply</a>
+<!-- Hero Section -->
+<section class="bg-primary-container text-on-primary py-xxl px-gutter relative overflow-hidden flex items-center min-h-[500px]" id="hero-carousel">
+    <!-- Background Images Layer -->
+    <div class="absolute inset-0 z-0">
+        <div class="hero-bg-slide active" style="background-image: url('{% static 'hero/hero1.jpg' %}');"></div>
+        <div class="hero-bg-slide" style="background-image: url('{% static 'hero/hero2.jpg' %}');"></div>
+        <div class="hero-bg-slide" style="background-image: url('{% static 'hero/hero3.jpg' %}');"></div>
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black/65 z-10"></div>
+    </div>
+    <div class="absolute inset-0 opacity-10 z-20" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="max-w-[1280px] mx-auto relative z-30 text-center space-y-lg">
+        <h1 class="font-headline-xl text-headline-xl text-surface-bright font-extrabold leading-tight lg:text-[64px] lg:leading-tight">
+            From Shamva to the World
+        </h1>
+        <p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-2xl mx-auto">
+            A six-week AI engineering program teaching students in rural Zimbabwe to build, host, and share real software that solves problems in their own community.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center pt-sm">
+            <a href="{% url 'accounts:register' %}" class="bg-secondary-container text-primary font-label-md text-label-md px-8 py-3 rounded hover:bg-secondary-fixed transition-all font-bold shadow-sm">
+                Apply
+            </a>
+            <a href="{% url 'public:about' %}" class="bg-transparent border border-surface-variant/30 text-surface-bright font-label-md text-label-md px-8 py-3 rounded hover:bg-surface-variant/10 transition-all">
+                Learn More
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Mission, Vision & Values -->
+<section class="py-xxl px-gutter bg-surface-container-lowest">
+    <div class="max-w-[1280px] mx-auto">
+        <div class="text-center mb-xl">
+            <h2 class="font-headline-lg text-headline-lg text-primary">Mission, Vision &amp; Values</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Mission -->
+            <div class="space-y-md">
+                <div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined">rocket_launch</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-primary">Mission</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">To teach students in Shamva the foundations of AI engineering in a way that is accessible, practical, and directly connected to the problems they see in their own lives — equipping them not just with technical skill, but with the confidence to apply it to their community.</p>
+            </div>
+            <!-- Vision -->
+            <div class="space-y-md">
+                <div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined">visibility</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-primary">Vision</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">An independent, self-sustaining organization based in Shamva that continues to grow long after the first cohort graduates — with a permanent club at Wadzanai High School, graduates mentoring new students, and a community that no longer sees problem-solving as something reserved for adults or for elsewhere.</p>
+            </div>
+            <!-- Values -->
+            <div class="space-y-md">
+                <div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined">favorite</span>
+                </div>
+                <h3 class="font-headline-sm text-headline-sm text-primary">Values</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Curiosity over memorization. Building over lecturing. Real problems over abstract exercises. We believe students learn fastest when what they build matters to someone — starting with themselves, and extending to their families, their school, and their community.</p>
             </div>
         </div>
-        <div class="bg-surface-container rounded-xl p-xl border border-outline-variant flex items-center justify-center min-h-[280px]">
-            {% include "partials/site_logo.html" with css_class="max-h-56 w-auto max-w-full" %}
-        </div>
     </div>
 </section>
 
-<!-- Values -->
-<section class="max-w-[1280px] mx-auto px-gutter py-xxl">
-    <h2 class="font-headline-lg text-headline-lg text-primary text-center mb-xl">Our Core Values</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
-        {% for icon, title, desc in values %}
-        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg text-center">
-            <span class="material-symbols-outlined text-4xl text-secondary mb-md">{{ icon }}</span>
-            <h3 class="font-headline-sm text-headline-sm text-on-surface mb-sm">{{ title }}</h3>
-            <p class="font-body-sm text-body-sm text-on-surface-variant">{{ desc }}</p>
-        </div>
-        {% empty %}
-        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg text-center">
-            <span class="material-symbols-outlined text-4xl text-secondary mb-md">lightbulb</span>
-            <h3 class="font-headline-sm text-headline-sm mb-sm">Innovation</h3>
-            <p class="font-body-sm text-on-surface-variant">Creative problem-solving through technology</p>
-        </div>
-        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg text-center">
-            <span class="material-symbols-outlined text-4xl text-secondary mb-md">groups</span>
-            <h3 class="font-headline-sm text-headline-sm mb-sm">Community</h3>
-            <p class="font-body-sm text-on-surface-variant">Building solutions for local challenges</p>
-        </div>
-        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg text-center">
-            <span class="material-symbols-outlined text-4xl text-secondary mb-md">school</span>
-            <h3 class="font-headline-sm text-headline-sm mb-sm">Excellence</h3>
-            <p class="font-body-sm text-on-surface-variant">High standards in learning and delivery</p>
-        </div>
-        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg text-center">
-            <span class="material-symbols-outlined text-4xl text-secondary mb-md">public</span>
-            <h3 class="font-headline-sm text-headline-sm mb-sm">Access</h3>
-            <p class="font-body-sm text-on-surface-variant">Opportunities for underserved youth</p>
-        </div>
-        {% endfor %}
-    </div>
-</section>
-
-<!-- Mission -->
-<section class="bg-surface-container border-y border-outline-variant py-xxl">
-    <div class="max-w-[1280px] mx-auto px-gutter grid grid-cols-1 lg:grid-cols-2 gap-xl">
-        <div>
-            <h2 class="font-headline-lg text-headline-lg text-primary mb-md">Our Mission</h2>
-            <p class="font-body-md text-on-surface-variant mb-md">To equip middle school students in Zimbabwe with practical AI and coding skills, enabling them to design and build technology solutions that address real challenges in their schools and communities.</p>
-        </div>
-        <div>
-            <h2 class="font-headline-lg text-headline-lg text-primary mb-md">Our Vision</h2>
-            <p class="font-body-md text-on-surface-variant">A generation of young Zimbabwean technologists who use AI responsibly and creatively to drive positive change at home and beyond.</p>
+<!-- The Problem & Our Solution -->
+<section class="py-xxl px-gutter bg-surface-container-low border-y border-surface-variant">
+    <div class="max-w-[1280px] mx-auto">
+        <h2 class="font-headline-lg text-headline-lg text-primary mb-xl text-center">The Problem &amp; Our Solution</h2>
+        <div class="grid md:grid-cols-2 gap-xl">
+            <div class="p-lg bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm">
+                <h3 class="font-headline-sm text-headline-sm text-primary mb-md flex items-center gap-2">
+                    <span class="material-symbols-outlined text-error">warning</span> The Problem
+                </h3>
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                    Students in Shamva are deeply curious and capable, but they've had almost no exposure to computer science, programming, or modern technology. Of the students surveyed at Wadzanai High School before our first program, not a single one knew any programming language, and only 13.7% had even heard of AI. Schools don't teach robotics, internet access is limited, and the most visible economic path is small-scale gold mining. Meanwhile, the community faces real and urgent challenges — drug abuse, early child marriage, water and electricity shortages, high unemployment — and young people currently have few tools to respond to any of it.
+                </p>
+            </div>
+            <div class="p-lg bg-primary-container text-on-primary rounded-xl shadow-sm border border-primary-fixed-dim/20">
+                <h3 class="font-headline-sm text-headline-sm text-surface-bright mb-md flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary-container">auto_awesome</span> Our Solution
+                </h3>
+                <p class="font-body-md text-body-md text-primary-fixed-dim leading-relaxed">
+                    A six-week, live-taught program that takes students from their very first line of code to a fully built, deployed AI-powered application — one they design themselves, around a problem they've identified in their own community. Two Zoom sessions a week plus a hands-on lab keep learning consistent and practical, while a trusted partner on the ground ensures students have the space, equipment, and support to make it real. By the final week, every student has something they can point to and say: I made that, and you can use it.
+                </p>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- News -->
-<section class="max-w-[1280px] mx-auto px-gutter py-xxl">
-    <h2 class="font-headline-lg text-headline-lg text-primary mb-xl">Latest News</h2>
-    {% if latest_updates %}
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
-        {% for update in latest_updates %}
-        <article class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-            <div class="h-40 bg-surface-container flex items-center justify-center">
-                <span class="material-symbols-outlined text-5xl text-primary/30">newspaper</span>
-            </div>
-            <div class="p-lg">
-                <time class="font-label-sm text-label-sm text-on-surface-variant">{{ update.published_at|date:"M d, Y" }}</time>
-                <h3 class="font-headline-sm text-headline-sm text-on-surface mt-xs mb-sm">{{ update.title }}</h3>
-                <p class="font-body-sm text-body-sm text-on-surface-variant">{{ update.excerpt }}</p>
-            </div>
-        </article>
-        {% endfor %}
+<section class="py-xxl px-gutter bg-surface-container-lowest">
+    <div class="max-w-[1280px] mx-auto">
+        <div class="flex justify-between items-end mb-xl border-b border-surface-variant pb-4">
+            <h2 class="font-headline-lg text-headline-lg text-primary">Latest Updates</h2>
+            {% if latest_updates %}
+            <a href="{% url 'public:updates' %}" class="font-label-md text-label-md text-primary flex items-center gap-1 hover:text-on-surface-variant transition-colors">
+                View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+            {% endif %}
+        </div>
+        {% if latest_updates %}
+        <div class="grid md:grid-cols-3 gap-8">
+            {% for update in latest_updates %}
+            <article class="group">
+                <a href="{% url 'public:update_detail' update.id %}" class="block">
+                    <div class="aspect-[16/10] rounded-lg overflow-hidden bg-surface-variant mb-4 border border-surface-variant relative">
+                        {% if update.cover_image_url %}
+                        <img src="{{ update.cover_image_url }}" alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        {% else %}
+                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface-container to-surface-container-high">
+                            <span class="material-symbols-outlined text-5xl text-primary/30">newspaper</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <time class="font-label-sm text-label-sm text-on-surface-variant">{{ update.published_at|date:"M d, Y" }}</time>
+                    <h3 class="font-headline-sm text-headline-sm text-primary mt-2 mb-2 group-hover:text-surface-tint transition-colors">{{ update.title }}</h3>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">{{ update.excerpt }}</p>
+                    <span class="font-label-md text-label-md text-primary group-hover:underline flex items-center gap-1">Read more <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="font-body-md text-on-surface-variant">News updates coming soon.</p>
+        {% endif %}
     </div>
-    {% else %}
-    <p class="font-body-md text-on-surface-variant">News updates coming soon.</p>
-    {% endif %}
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.hero-bg-slide');
+        if (slides.length <= 1) return;
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 5000); // 5 seconds rotation
+    });
+</script>
 {% endblock %}

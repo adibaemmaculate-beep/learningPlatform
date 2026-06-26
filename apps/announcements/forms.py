@@ -1,6 +1,7 @@
 from django import forms
 
 from apps.accounts.models import User
+from config.form_widgets import MARKDOWN_TEXTAREA_ATTRS
 
 from .models import Announcement
 
@@ -11,7 +12,7 @@ class AnnouncementForm(forms.ModelForm):
         fields = ['title', 'body', 'visibility', 'target_student']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'w-full border border-outline-variant rounded-lg px-3 py-2'}),
-            'body': forms.Textarea(attrs={'rows': 6, 'class': 'w-full border border-outline-variant rounded-lg px-3 py-2'}),
+            'body': forms.Textarea(attrs=MARKDOWN_TEXTAREA_ATTRS),
             'visibility': forms.Select(attrs={'class': 'w-full border border-outline-variant rounded-lg px-3 py-2', 'id': 'id_visibility'}),
             'target_student': forms.Select(attrs={'class': 'w-full border border-outline-variant rounded-lg px-3 py-2', 'id': 'id_target_student'}),
         }

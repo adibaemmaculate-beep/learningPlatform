@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.css">
+<link rel="stylesheet" href="{% static 'css/markdown_editor.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js" defer></script>
+<script src="{% static 'js/markdown_editor.js' %}" defer></script>
+{% endblock %}
 {% block html_class %}{% if current_user_profile %}{{ current_user_profile.theme }}{% else %}light{% endif %}{% endblock %}
 {% block body_class %}bg-background text-on-background font-body-md min-h-screen flex{% endblock %}
 {% block content %}

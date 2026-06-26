@@ -1,9 +1,14 @@
+import json
+
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 
 from apps.accounts.models import User
+from apps.assignments.services import get_active_students
 from apps.newsletter.models import Newsletter
 from apps.projects.models import Project
 from apps.updates.models import Update
@@ -33,22 +38,42 @@ def home(request):
 
 
 def about(request):
-    teachers = User.objects.filter(
-        type=User.UserType.TEACHER, status=User.UserStatus.ACTIVE
-    ).select_related('profile')[:6]
     return render(request, 'public/about.html', {
-        'teachers': teachers,
         'active_public_nav': 'about',
     })
 
 
 def students(request):
-    published_projects = Project.objects.filter(
-        is_published=True,
-        student__status=User.UserStatus.ACTIVE,
-    ).select_related('student', 'student__profile').prefetch_related('images')
+    students_qs = (
+        get_active_students()
+        .select_related('profile', 'project')
+        .order_by('first_name', 'last_name')
+    )
+    students_data = []
+    for student in students_qs:
+        profile = getattr(student, 'profile', None)
+        project = None
+        try:
+            project = student.project
+        except Project.DoesNotExist:
+            pass
+        profile_pic_url = None
+        if profile and profile.profile_pic:
+            profile_pic_url = profile.profile_pic.url
+        project_url = None
+        if project and project.is_published:
+            project_url = reverse('public:student_detail', args=[student.id])
+        students_data.append({
+            'id': str(student.id),
+            'name': student.get_full_name(),
+            'bio': profile.bio if profile else '',
+            'profile_pic_url': profile_pic_url,
+            'initials': f'{student.first_name[:1]}{student.last_name[:1]}',
+            'project_url': project_url,
+        })
     return render(request, 'public/students.html', {
-        'projects': published_projects,
+        'students': students_qs,
+        'students_json': json.dumps(students_data),
         'active_public_nav': 'students',
     })
 
@@ -69,6 +94,35 @@ def student_detail(request, student_id):
         'student': student,
         'project': project,
         'active_public_nav': 'students',
+    })
+
+
+def updates_list(request):
+    published = Update.objects.filter(published_at__isnull=False).select_related('writer')
+    paginator = Paginator(published, 9)
+    page_obj = paginator.get_page(request.GET.get('page'))
+    return render(request, 'public/updates.html', {
+        'page_obj': page_obj,
+        'updates': page_obj.object_list,
+        'active_public_nav': 'updates',
+    })
+
+
+def update_detail(request, update_id):
+    update = get_object_or_404(
+        Update.objects.select_related('writer'),
+        id=update_id,
+        published_at__isnull=False,
+    )
+    related_updates = (
+        Update.objects.filter(published_at__isnull=False)
+        .exclude(id=update.id)
+        .select_related('writer')[:3]
+    )
+    return render(request, 'public/update_detail.html', {
+        'update': update,
+        'related_updates': related_updates,
+        'active_public_nav': 'updates',
     })
 
 

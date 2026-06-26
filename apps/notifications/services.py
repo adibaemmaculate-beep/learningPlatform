@@ -60,7 +60,7 @@ class EmailNotificationService:
         EmailNotificationService._send(
             user,
             'Your account has been approved',
-            f'Hello {user.first_name}, your Dev Academy account has been approved. You can now log in.',
+            f'Hello {user.first_name}, your Shamva Innovators account has been approved. You can now log in.',
         )
 
     @staticmethod
@@ -68,7 +68,7 @@ class EmailNotificationService:
         EmailNotificationService._send(
             user,
             'Account registration update',
-            f'Hello {user.first_name}, unfortunately your Dev Academy registration was not approved at this time.',
+            f'Hello {user.first_name}, unfortunately your Shamva Innovators registration was not approved at this time.',
         )
 
     @staticmethod
@@ -77,7 +77,7 @@ class EmailNotificationService:
             return
         send_mail(
             subject='Account registration update',
-            message=f'Hello {first_name}, unfortunately your Dev Academy registration was not approved at this time.',
+            message=f'Hello {first_name}, unfortunately your Shamva Innovators registration was not approved at this time.',
             from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[email],
             fail_silently=True,

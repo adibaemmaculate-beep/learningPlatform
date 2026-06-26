@@ -11,7 +11,7 @@
             <div><label class="block font-label-md mb-1">Week Number</label>{{ form.week }}</div>
             <div><label class="block font-label-md mb-1">Title</label>{{ form.title }}</div>
         </div>
-        <div><label class="block font-label-md mb-1">Description (Markdown)</label>{{ form.description }}</div>
+        <div><label class="block font-label-md mb-1">Description</label>{{ form.description }}</div>
         <div><label class="block font-label-md mb-1">Learning Objectives</label>{{ form.objectives_text }}</div>
         <div><label class="block font-label-md mb-1">Slides PDF</label>{{ form.slides }}{% if editing and material.slides %}<p class="text-body-sm text-on-surface-variant mt-1">Current: {{ material.slides.name }}</p>{% endif %}</div>
         <div><label class="block font-label-md mb-1">Notes PDF</label>{{ form.notes }}{% if editing and material.notes %}<p class="text-body-sm text-on-surface-variant mt-1">Current: {{ material.notes.name }}</p>{% endif %}</div>

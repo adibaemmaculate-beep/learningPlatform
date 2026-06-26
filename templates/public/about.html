@@ -1,48 +1,158 @@
 {% extends "base_public.html" %}
-{% block title %}About the Program - Dev Academy{% endblock %}
+{% block title %}About the Program - Shamva Innovators{% endblock %}
+{% block extra_head %}
+<style>
+    .timeline-dot::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        width: 100%;
+        height: 2px;
+        background-color: #c6c6cd;
+        transform: translateY(-50%);
+        z-index: -1;
+    }
+    .timeline-item:last-child .timeline-dot::after {
+        display: none;
+    }
+</style>
+{% endblock %}
 {% block public_content %}
-<section class="max-w-[1280px] mx-auto px-gutter py-xxl">
-    <h1 class="font-headline-xl text-headline-xl text-primary mb-lg">About the Program</h1>
-    <div class="prose max-w-none font-body-md text-on-surface-variant space-y-md mb-xxl">
-        <p>The Dev Academy AI &amp; Coding Program was created to give middle school students in Zimbabwe hands-on experience with artificial intelligence and software development. Students learn by doing — building projects that matter to their communities.</p>
-        <p>Over the course of the program, students progress from foundational coding concepts through to machine learning basics, culminating in a final community-impact project they design, build, and present publicly.</p>
-        <p>Our methodology combines structured weekly coursework, collaborative assignments, teacher mentorship, and peer learning in a supportive cohort environment.</p>
+<!-- Hero -->
+<section class="bg-primary-container py-xxl px-gutter">
+    <div class="max-w-[1280px] mx-auto text-center">
+        <h1 class="font-headline-xl text-headline-xl text-on-primary">About the Program</h1>
     </div>
+</section>
 
-    <h2 class="font-headline-lg text-headline-lg text-primary mb-lg">The Team</h2>
-    {% if teachers %}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg mb-xxl">
-        {% for teacher in teachers %}
-        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg text-center">
-            <div class="w-20 h-20 rounded-full bg-primary-container text-on-primary mx-auto mb-md flex items-center justify-center font-headline-md text-xl">
-                {{ teacher.first_name|slice:":1" }}{{ teacher.last_name|slice:":1" }}
+<!-- Background & Origin -->
+<section class="py-xxl px-gutter bg-surface-container-low">
+    <div class="max-w-[700px] mx-auto bg-surface-container-lowest border border-outline-variant rounded-xl p-lg md:p-xl shadow-sm">
+        <h2 class="font-headline-lg text-headline-lg text-primary mb-lg">Background &amp; Origin</h2>
+        <div class="space-y-md font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            <p>This program builds on a first attempt. In December 2023, six students from Shamva spent three weeks during their school holiday learning the basics of C, C++, and electronics — taught with almost no resources: one borrowed laptop, two sets of borrowed electronics components, and mobile phones as coding devices. The program confirmed what earlier research had already shown: students in Shamva are deeply curious and capable, but they have had almost no exposure to computer science, programming, or modern technology. Of the 51 students surveyed at Wadzanai High School beforehand, not a single one knew any programming language.</p>
+            <p>This second program goes further. Rather than teaching general programming, it focuses on the foundations of AI engineering — one of the most important and fast-growing fields in the world — in a way that is accessible, practical, and directly tied to the problems students see in their own lives: drug abuse, water and electricity shortages, early child marriage, and high unemployment. The goal isn't just exposure to technology. It's building the foundation for an independent, self-sustaining organization that equips young people in Shamva with the skills and mindset to build solutions to their community's problems.</p>
+            <p>The format reflects the lessons learned the first time around. Students meet twice a week for live Zoom lessons taught remotely, plus a weekly hands-on lab session, all from a dedicated room at Wadzanai High School. Six weeks take students from their first lines of Python code to a fully built, deployed AI-powered web application — one that they host, share, and can point to and say: I made that, and you can use it.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Why This Program Matters -->
+<section class="py-xxl px-gutter">
+    <div class="max-w-[800px] mx-auto">
+        <h2 class="font-headline-lg text-headline-lg text-primary mb-lg">Why This Program Matters</h2>
+        <div class="space-y-md font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+            <p>Young people in Shamva grow up in a community where the most visible economic path is small-scale gold mining. Schools do not teach robotics, and while computer science is technically part of the curriculum, it rarely emphasizes computational thinking, problem solving, or real-world application. Internet access is limited, and exposure to fields like AI — fields that are rapidly reshaping the global economy — is almost nonexistent.</p>
+            <p>This matters for two reasons. First, AI and software skills open up career paths that most students in Shamva have never had reason to consider. Second, and just as importantly, these skills are tools for something bigger: a student who understands how AI works can start to think about how to use it to address drug abuse in their neighborhood, improve access to medicine, or help girls stay in school. The technical knowledge is the means. Community problem-solving is the purpose.</p>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="py-xxl px-gutter bg-surface-container-lowest">
+    <div class="max-w-[1280px] mx-auto">
+        <h2 class="font-headline-lg text-headline-lg text-primary text-center mb-xl">How It Works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+            <div class="p-lg border border-outline-variant rounded-xl hover:border-secondary transition-colors text-center group">
+                <div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mx-auto mb-md group-hover:bg-secondary-fixed transition-colors">
+                    <span class="material-symbols-outlined text-primary text-3xl">school</span>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-primary mb-sm">Learn</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Six weeks of live, mentor-led lessons covering Python, Streamlit, and AI APIs — two Zoom sessions a week, plus a hands-on lab session where students build what they've just learned.</p>
             </div>
-            <h3 class="font-headline-sm text-headline-sm text-on-surface">{{ teacher.get_full_name }}</h3>
-            <p class="font-body-sm text-on-surface-variant mt-sm">{% if teacher.profile and teacher.profile.bio %}{{ teacher.profile.bio|truncatewords:20 }}{% else %}Program Instructor{% endif %}</p>
+            <div class="p-lg border border-outline-variant rounded-xl hover:border-secondary transition-colors text-center group">
+                <div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mx-auto mb-md group-hover:bg-secondary-fixed transition-colors">
+                    <span class="material-symbols-outlined text-primary text-3xl">build</span>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-primary mb-sm">Build</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">Students turn each week's lessons into real software, working on problems they've identified in their own community — from drug-abuse awareness to early warning systems and access to information.</p>
+            </div>
+            <div class="p-lg border border-outline-variant rounded-xl hover:border-secondary transition-colors text-center group">
+                <div class="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center mx-auto mb-md group-hover:bg-secondary-fixed transition-colors">
+                    <span class="material-symbols-outlined text-primary text-3xl">rocket_launch</span>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-primary mb-sm">Deploy</h3>
+                <p class="font-body-md text-body-md text-on-surface-variant">In the final week, every student hosts their project live on the internet and presents it at a community showcase — a real, working application that anyone with the link can open and use.</p>
+            </div>
         </div>
-        {% endfor %}
     </div>
-    {% else %}
-    <p class="font-body-md text-on-surface-variant mb-xxl">Our teaching team profiles will appear here.</p>
-    {% endif %}
+</section>
 
-    <h2 class="font-headline-lg text-headline-lg text-primary mb-lg">Program Structure</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
-        <div class="bg-surface-container border border-outline-variant rounded-xl p-lg">
-            <span class="material-symbols-outlined text-3xl text-secondary mb-md">calendar_month</span>
-            <h3 class="font-headline-sm text-headline-sm mb-sm">Weekly Modules</h3>
-            <p class="font-body-sm text-on-surface-variant">Structured weekly lessons with slides, notes, and hands-on exercises.</p>
+<!-- Course Timeline -->
+<section class="py-xxl px-gutter bg-surface-container-low overflow-hidden">
+    <div class="max-w-[1280px] mx-auto">
+        <h2 class="font-headline-lg text-headline-lg text-primary text-center mb-xl">Six Weeks, Start to Finish</h2>
+        <div class="flex flex-col md:flex-row justify-between gap-xl relative">
+            <div class="flex-1 relative timeline-item">
+                <div class="timeline-dot w-4 h-4 bg-secondary rounded-full mb-md relative z-10 mx-auto md:mx-0"></div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-headline-sm text-headline-sm text-primary">Weeks 1–2</h4>
+                    <p class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-xs">Python: Learning to Speak to a Computer</p>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">Students learn the core building blocks of programming — variables, conditions, loops, functions — and develop the habit of thinking like a programmer: breaking a problem into steps and translating those steps into code.</p>
+                </div>
+            </div>
+            <div class="flex-1 relative timeline-item">
+                <div class="timeline-dot w-4 h-4 bg-secondary rounded-full mb-md relative z-10 mx-auto md:mx-0"></div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-headline-sm text-headline-sm text-primary">Week 3</h4>
+                    <p class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-xs">Streamlit: Turning Code Into Something People Can Use</p>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">Students learn to wrap their Python code in a simple, interactive web interface — the moment they realize that what they're building can actually be used by other people.</p>
+                </div>
+            </div>
+            <div class="flex-1 relative timeline-item">
+                <div class="timeline-dot w-4 h-4 bg-secondary rounded-full mb-md relative z-10 mx-auto md:mx-0"></div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-headline-sm text-headline-sm text-primary">Weeks 4–5</h4>
+                    <p class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-xs">AI and APIs: Making Software That Thinks</p>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">The heart of the course. Students learn how AI models work conceptually and how to connect them to their own applications through APIs — building software that uses AI to do something genuinely useful.</p>
+                </div>
+            </div>
+            <div class="flex-1 relative timeline-item">
+                <div class="timeline-dot w-4 h-4 bg-secondary rounded-full mb-md relative z-10 mx-auto md:mx-0"></div>
+                <div class="text-center md:text-left">
+                    <h4 class="font-headline-sm text-headline-sm text-primary">Week 6</h4>
+                    <p class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-xs">Final Projects: Build, Host, and Share</p>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant">No new lessons — just building. Students polish their final projects, deploy them live on the internet, and present them at a community showcase.</p>
+                </div>
+            </div>
         </div>
-        <div class="bg-surface-container border border-outline-variant rounded-xl p-lg">
-            <span class="material-symbols-outlined text-3xl text-secondary mb-md">assignment</span>
-            <h3 class="font-headline-sm text-headline-sm mb-sm">Assignments</h3>
-            <p class="font-body-sm text-on-surface-variant">Regular assignments with teacher feedback and graded submissions.</p>
+    </div>
+</section>
+
+<!-- Who's Involved -->
+<section class="py-xxl px-gutter max-w-[1280px] mx-auto">
+    <h2 class="font-headline-lg text-headline-lg text-primary text-center mb-xl">Who's Involved</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xl flex flex-col md:flex-row gap-lg items-center md:items-start text-center md:text-left">
+            <div class="w-32 h-32 rounded-full overflow-hidden bg-surface-variant flex-shrink-0 flex items-center justify-center">
+                <span class="font-headline-lg text-headline-lg text-on-surface-variant">SM</span>
+            </div>
+            <div>
+                <h4 class="font-headline-sm text-headline-sm text-primary">Sean Mutunhire</h4>
+                <div class="font-label-md text-label-md text-on-primary-container uppercase tracking-widest mb-sm">Remote Instructor</div>
+                <p class="font-body-md text-body-md text-on-surface-variant">Designs the full course curriculum — weekly notes, slides, and problem sets — and teaches all Zoom sessions live from the United States. Also builds and maintains the learning platform where students access materials, submit assignments, and publish their final projects, and provides ongoing feedback and technical support as students build and deploy their applications.</p>
+            </div>
         </div>
-        <div class="bg-surface-container border border-outline-variant rounded-xl p-lg">
-            <span class="material-symbols-outlined text-3xl text-secondary mb-md">rocket_launch</span>
-            <h3 class="font-headline-sm text-headline-sm mb-sm">Final Project</h3>
-            <p class="font-body-sm text-on-surface-variant">A community-focused capstone project showcased publicly at program end.</p>
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xl flex flex-col md:flex-row gap-lg items-center md:items-start text-center md:text-left">
+            <div class="w-32 h-32 rounded-full overflow-hidden bg-surface-variant flex-shrink-0 flex items-center justify-center">
+                <span class="font-headline-lg text-headline-lg text-on-surface-variant">MC</span>
+            </div>
+            <div>
+                <h4 class="font-headline-sm text-headline-sm text-primary">Mr. Chabata</h4>
+                <div class="font-label-md text-label-md text-on-primary-container uppercase tracking-widest mb-sm">On-the-Ground Partner</div>
+                <p class="font-body-md text-body-md text-on-surface-variant">An English teacher at Wadzanai High School and the reason this program is possible at all. Mr. Chabata selects the student cohort, secures laptops and learning space, sources all physical materials, sets up the technology before every session, and supervises and supports students throughout — including during final project week and the showcase.</p>
+            </div>
         </div>
+    </div>
+</section>
+
+<!-- Looking Ahead -->
+<section class="bg-primary-container py-xxl px-gutter text-center">
+    <div class="max-w-[800px] mx-auto">
+        <h2 class="font-headline-xl text-headline-xl text-on-primary mb-lg">Looking Ahead</h2>
+        <p class="font-body-lg text-body-lg text-inverse-primary mb-xl">After this cohort finishes, the plan is to collect detailed feedback from every student, revise the curriculum based on what worked and what didn't, and restart the program roughly a month later with a new cohort — each one helping make the next better. The long-term goal is a permanent club at Wadzanai High School, where graduates mentor newer students, and an independent organization that doesn't depend on any one person to keep running.</p>
+        <a href="{% url 'public:contact' %}" class="inline-block bg-secondary-container text-on-secondary-container font-headline-sm text-headline-sm px-xl py-md rounded-lg hover:bg-secondary-fixed transition-all font-bold shadow-lg">Get in touch</a>
     </div>
 </section>
 {% endblock %}

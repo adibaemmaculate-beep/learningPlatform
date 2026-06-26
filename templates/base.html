@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" class="{% block html_class %}light{% endblock %}" {% if current_user_profile %}data-user-theme="{{ current_user_profile.theme }}"{% endif %}>
+<html lang="en" class="{% block html_class %}light{% endblock %}"{% if current_user_profile %} data-user-theme="{{ current_user_profile.theme }}"{% endif %}>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Dev Academy{% endblock %}</title>
+    <title>{% block title %}Shamva Innovators{% endblock %}</title>
     {% load static %}
     <link rel="icon" href="{% static 'logo.png' %}" type="image/png" sizes="32x32">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     {% block extra_head %}{% endblock %}
-    <script src="{% static 'js/theme.js' %}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="{% static 'js/markdown.js' %}" defer></script>
     <script src="{% static 'js/collapsible.js' %}" defer></script>

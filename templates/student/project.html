@@ -10,7 +10,18 @@
         {% if form.non_field_errors %}<div class="text-error text-body-sm">{{ form.non_field_errors.0 }}</div>{% endif %}
         <div><label class="block font-label-md mb-1">Title</label>{{ form.title }}</div>
         <div><label class="block font-label-md mb-1">Short Description</label>{{ form.description }}</div>
-        <div><label class="block font-label-md mb-1">Write-up (Markdown)</label>{{ form.write_up }}</div>
+        <div>
+            <label class="block font-label-md mb-1">Write-up (PDF)</label>
+            {{ form.write_up }}
+            {% if form.write_up.errors %}<p class="text-error text-body-sm mt-1">{{ form.write_up.errors.0 }}</p>{% endif %}
+            <p class="font-body-sm text-on-surface-variant mt-1">Upload your project write-up as a PDF. Max 10 MB.</p>
+            {% if project.write_up %}
+            <p class="font-body-sm mt-2">
+                Current file:
+                <a href="{{ project.write_up.url }}" target="_blank" class="text-primary font-label-md hover:underline">View uploaded PDF</a>
+            </p>
+            {% endif %}
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div><label class="block font-label-md mb-1">Codebase URL</label>{{ form.codebase_url }}</div>
             <div><label class="block font-label-md mb-1">Live Demo URL</label>{{ form.live_url }}</div>
@@ -34,11 +45,16 @@
         <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Save Project</button>
     </form>
 </div>
-{% if project.write_up or project.description %}
+{% if project.description or project.write_up or project.codebase_url or project.live_url %}
 <div class="max-w-3xl mt-xl bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
     <h2 class="font-headline-sm text-headline-sm mb-md">Preview</h2>
     {% if project.description %}<p class="font-body-md text-on-surface-variant mb-4">{{ project.description }}</p>{% endif %}
-    {% if project.write_up %}<div class="markdown-content font-body-md">{{ project.write_up }}</div>{% endif %}
+    {% if project.write_up %}
+    <a href="{{ project.write_up.url }}" target="_blank" class="inline-flex items-center gap-2 text-primary font-label-md hover:underline mb-4">
+        <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+        View Write-up PDF
+    </a>
+    {% endif %}
     {% if project.codebase_url or project.live_url %}
     <div class="flex gap-4 mt-4">
         {% if project.codebase_url %}<a href="{{ project.codebase_url }}" target="_blank" class="text-primary font-label-md hover:underline">View Codebase →</a>{% endif %}

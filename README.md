@@ -1,4 +1,4 @@
-# Dev Academy — AI & Coding Learning Platform
+# Shamva Innovators — AI & Coding Learning Platform
 
 Django backend with HTML, Tailwind CSS, and JavaScript frontend.
 

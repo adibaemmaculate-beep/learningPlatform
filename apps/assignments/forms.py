@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 
 from apps.courses.forms import get_active_course
+from config.form_widgets import MARKDOWN_TEXTAREA_ATTRS
 
 from .models import Assignment, AssignmentSubmission
 
@@ -34,7 +35,7 @@ class AssignmentForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'w-full border border-outline-variant rounded-lg px-3 py-2'}),
             'week': forms.NumberInput(attrs={'class': 'w-full border border-outline-variant rounded-lg px-3 py-2', 'min': 1}),
             'due_date': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'w-full border border-outline-variant rounded-lg px-3 py-2'}),
-            'instructions': forms.Textarea(attrs={'rows': 6, 'class': 'w-full border border-outline-variant rounded-lg px-3 py-2'}),
+            'instructions': forms.Textarea(attrs=MARKDOWN_TEXTAREA_ATTRS),
             'total_score': forms.NumberInput(attrs={'class': 'w-full border border-outline-variant rounded-lg px-3 py-2', 'min': 1}),
             'max_file_size_mb': forms.NumberInput(attrs={'class': 'w-full border border-outline-variant rounded-lg px-3 py-2', 'min': 1}),
         }
@@ -94,7 +95,7 @@ class GradeSubmissionForm(forms.Form):
     score_obtained = forms.IntegerField(min_value=0)
     comments = forms.CharField(
         required=False,
-        widget=forms.Textarea(attrs={'rows': 5, 'class': 'w-full border border-outline-variant rounded-lg px-3 py-2'}),
+        widget=forms.Textarea(attrs=MARKDOWN_TEXTAREA_ATTRS),
     )
 
     def __init__(self, *args, max_score=100, **kwargs):

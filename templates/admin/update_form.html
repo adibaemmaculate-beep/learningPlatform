@@ -2,23 +2,104 @@
 {% block title %}{% if editing %}Edit{% else %}Create{% endif %} Update - Admin{% endblock %}
 {% block portal_content %}
 <div class="mb-4"><a href="{% url 'admin_portal:updates' %}" class="text-primary font-label-md hover:underline">← Back to Updates</a></div>
-<div class="max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+<div class="max-w-4xl bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
     <h1 class="font-headline-md text-headline-md text-on-surface mb-6">{% if editing %}Edit Update{% else %}Create Update{% endif %}</h1>
-    <form method="post" class="space-y-4">
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
         {% csrf_token %}
+        {% if form.non_field_errors %}<div class="text-error text-body-sm">{{ form.non_field_errors.0 }}</div>{% endif %}
+
         <div>
-            <label class="block font-label-md mb-1">Title</label>
+            <label class="block font-label-md mb-1" for="id_title">Title</label>
             {{ form.title }}
+            {% if form.title.errors %}<p class="text-error text-body-sm mt-1">{{ form.title.errors.0 }}</p>{% endif %}
         </div>
+
         <div>
-            <label class="block font-label-md mb-1">Description (Markdown)</label>
-            {{ form.description }}
+            <label class="block font-label-md mb-1" for="id_author_name">Author name</label>
+            {{ form.author_name }}
+            <p class="font-body-sm text-on-surface-variant mt-1">Displayed as the writer on the public article page.</p>
+            {% if form.author_name.errors %}<p class="text-error text-body-sm mt-1">{{ form.author_name.errors.0 }}</p>{% endif %}
         </div>
+
+        <div>
+            <label class="block font-label-md mb-1">Cover Image</label>
+            <div id="cover-dropzone" class="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center bg-surface-container-low/30 hover:bg-surface-container-low/80 transition-colors cursor-pointer group">
+                <span class="material-symbols-outlined text-outline text-4xl mb-2 group-hover:text-primary transition-colors">image</span>
+                <p class="font-label-md text-on-surface">Click to upload or drag and drop</p>
+                <p class="font-label-sm text-outline mt-1">JPG, PNG, or WebP (max 5 MB)</p>
+            </div>
+            {{ form.cover_image }}
+            {% if form.cover_image.errors %}<p class="text-error text-body-sm mt-1">{{ form.cover_image.errors.0 }}</p>{% endif %}
+            <div id="cover-preview" class="mt-4 {% if not editing or not update_obj.cover_image_url %}hidden{% endif %}">
+                <img id="cover-preview-img" src="{% if editing and update_obj.cover_image_url %}{{ update_obj.cover_image_url }}{% endif %}" alt="Cover preview" class="w-full max-h-64 object-cover rounded-lg border border-outline-variant">
+            </div>
+            {% if editing and update_obj.cover_image_url %}
+            <div class="flex items-center gap-2 mt-3">
+                {{ form.remove_cover_image }}
+                <label for="id_remove_cover_image" class="font-body-sm text-on-surface-variant">Remove current cover image</label>
+            </div>
+            {% endif %}
+            <div class="mt-4">
+                <label class="block font-label-md mb-1" for="id_cover_image_caption">Cover image caption</label>
+                {{ form.cover_image_caption }}
+                {% if form.cover_image_caption.errors %}<p class="text-error text-body-sm mt-1">{{ form.cover_image_caption.errors.0 }}</p>{% endif %}
+            </div>
+        </div>
+
+        <div>
+            <label class="block font-label-md mb-1" for="id_description">Description</label>
+            <textarea name="description" id="id_description" cols="40" rows="8" class="w-full border border-outline-variant rounded-lg p-3" data-markdown-editor="true" data-markdown-editor-upload-url="{% url 'admin_portal:update_image_upload' %}">{{ form.description.value|default:'' }}</textarea>
+            <p class="font-body-sm text-on-surface-variant mt-1">Use the image button in the toolbar to add more images to the article body.</p>
+            {% if form.description.errors %}<p class="text-error text-body-sm mt-1">{{ form.description.errors.0 }}</p>{% endif %}
+        </div>
+
         <div class="flex items-center gap-2">
             {{ form.publish }}
-            <label for="id_publish" class="font-body-sm">Publish now (shows on public homepage)</label>
+            <label for="id_publish" class="font-body-sm">Publish now (shows on public site)</label>
         </div>
-        <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Save</button>
+
+        <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md hover:brightness-95 transition-all">Save</button>
     </form>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const dropzone = document.getElementById('cover-dropzone');
+    const fileInput = document.getElementById('id_cover_image');
+    const preview = document.getElementById('cover-preview');
+    const previewImg = document.getElementById('cover-preview-img');
+    if (!dropzone || !fileInput) return;
+
+    function showPreview(file) {
+        if (!file || !file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            previewImg.src = e.target.result;
+            preview.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+    }
+
+    dropzone.addEventListener('click', function () { fileInput.click(); });
+    dropzone.addEventListener('dragover', function (e) {
+        e.preventDefault();
+        dropzone.classList.add('border-primary');
+    });
+    dropzone.addEventListener('dragleave', function () {
+        dropzone.classList.remove('border-primary');
+    });
+    dropzone.addEventListener('drop', function (e) {
+        e.preventDefault();
+        dropzone.classList.remove('border-primary');
+        const file = e.dataTransfer.files[0];
+        if (!file) return;
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        fileInput.files = dt.files;
+        showPreview(file);
+    });
+    fileInput.addEventListener('change', function () {
+        showPreview(fileInput.files[0]);
+    });
+});
+</script>
 {% endblock %}

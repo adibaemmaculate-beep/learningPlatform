@@ -24,8 +24,10 @@ admin_panel_patterns = ([
     path('invite-codes/<uuid:code_id>/deactivate/', admin_portal_views.deactivate_invite_code, name='deactivate_invite_code'),
     path('updates/', admin_portal_views.updates_list, name='updates'),
     path('updates/create/', admin_portal_views.update_create, name='update_create'),
+    path('updates/upload-image/', admin_portal_views.update_image_upload, name='update_image_upload'),
     path('updates/<uuid:update_id>/edit/', admin_portal_views.update_edit, name='update_edit'),
     path('updates/<uuid:update_id>/delete/', admin_portal_views.update_delete, name='update_delete'),
+    path('newsletter/', admin_portal_views.newsletter_subscribers, name='newsletter'),
     path('settings/', admin_portal_views.settings_view, name='settings'),
 ], 'admin_portal')
 

@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from apps.courses.models import CourseMaterial
+from config.form_widgets import MARKDOWN_TEXTAREA_ATTRS
 
 
 def get_active_course():
@@ -28,7 +29,7 @@ class CourseMaterialForm(forms.ModelForm):
         widgets = {
             'week': forms.NumberInput(attrs={'class': 'w-full border border-outline-variant rounded-lg px-3 py-2', 'min': 1}),
             'title': forms.TextInput(attrs={'class': 'w-full border border-outline-variant rounded-lg px-3 py-2'}),
-            'description': forms.Textarea(attrs={'rows': 5, 'class': 'w-full border border-outline-variant rounded-lg px-3 py-2'}),
+            'description': forms.Textarea(attrs=MARKDOWN_TEXTAREA_ATTRS),
             'slides': forms.ClearableFileInput(attrs={'accept': '.pdf', 'class': 'w-full text-body-sm'}),
             'notes': forms.ClearableFileInput(attrs={'accept': '.pdf', 'class': 'w-full text-body-sm'}),
         }

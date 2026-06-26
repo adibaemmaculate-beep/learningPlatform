@@ -4,6 +4,8 @@ from django import forms
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
+from config.form_widgets import MARKDOWN_TEXTAREA_ATTRS
+
 from apps.profiles.models import Profile
 
 
@@ -13,9 +15,8 @@ class ProfileForm(forms.ModelForm):
         fields = ['bio', 'profile_pic']
         widgets = {
             'bio': forms.Textarea(attrs={
-                'rows': 8,
-                'class': 'w-full border border-outline-variant rounded-lg px-3 py-2 font-body-sm',
-                'placeholder': 'Tell your story in Markdown...',
+                **MARKDOWN_TEXTAREA_ATTRS,
+                'placeholder': 'Tell your story...',
             }),
         }
 

@@ -15,7 +15,12 @@
     <div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
         <h1 class="font-headline-lg font-bold text-on-surface mb-2">{{ project.title }}</h1>
         {% if project.description %}<p class="font-body-md text-on-surface-variant mb-4">{{ project.description }}</p>{% endif %}
-        {% if project.write_up %}<div class="markdown-content font-body-md mb-4">{{ project.write_up }}</div>{% endif %}
+        {% if project.write_up %}
+        <a href="{{ project.write_up.url }}" target="_blank" class="inline-flex items-center gap-2 text-primary font-label-md hover:underline mb-4">
+            <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+            View Write-up PDF
+        </a>
+        {% endif %}
         <div class="flex gap-4 mb-4">
             {% if project.codebase_url %}<a href="{{ project.codebase_url }}" target="_blank" class="text-primary font-label-md hover:underline">Codebase →</a>{% endif %}
             {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="text-primary font-label-md hover:underline">Live Demo →</a>{% endif %}

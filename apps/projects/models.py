@@ -10,6 +10,11 @@ def project_image_upload_path(instance, filename):
     return f'projects/{instance.project.student_id}/{uuid.uuid4().hex}{ext}'
 
 
+def project_write_up_upload_path(instance, filename):
+    ext = os.path.splitext(filename)[1]
+    return f'projects/{instance.student_id}/write-up/{uuid.uuid4().hex}{ext}'
+
+
 class ProjectImage(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='images')
@@ -27,7 +32,7 @@ class Project(models.Model):
     )
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    write_up = models.TextField(blank=True)
+    write_up = models.FileField(upload_to=project_write_up_upload_path, blank=True)
     codebase_url = models.URLField(blank=True, max_length=500)
     live_url = models.URLField(blank=True, max_length=500)
     is_published = models.BooleanField(default=False)

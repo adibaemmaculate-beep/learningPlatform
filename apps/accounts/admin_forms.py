@@ -1,11 +1,14 @@
+import os
 from datetime import timedelta
 
 from django import forms
 from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 from django.utils import timezone
 
 from apps.accounts.models import InviteCode, User
 from apps.updates.models import Update
+from config.form_widgets import MARKDOWN_TEXTAREA_ATTRS
 
 
 class GenerateInviteCodeForm(forms.Form):
@@ -53,14 +56,60 @@ class CreateAdminForm(forms.Form):
 
 class UpdateForm(forms.ModelForm):
     publish = forms.BooleanField(required=False, label='Publish now')
+    remove_cover_image = forms.BooleanField(required=False, label='Remove cover image')
 
     class Meta:
         model = Update
-        fields = ['title', 'description']
+        fields = ['title', 'author_name', 'description', 'cover_image', 'cover_image_caption']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 8, 'class': 'w-full border border-outline-variant rounded-lg p-3'}),
+            'description': forms.Textarea(attrs=MARKDOWN_TEXTAREA_ATTRS),
             'title': forms.TextInput(attrs={'class': 'w-full border border-outline-variant rounded-lg p-3'}),
+            'author_name': forms.TextInput(attrs={
+                'class': 'w-full border border-outline-variant rounded-lg p-3',
+                'placeholder': 'e.g. Jane Doe',
+            }),
+            'cover_image_caption': forms.TextInput(attrs={
+                'class': 'w-full border border-outline-variant rounded-lg p-3',
+                'placeholder': 'Describe the cover image (optional)',
+            }),
+            'cover_image': forms.FileInput(attrs={
+                'accept': '.jpg,.jpeg,.png,.webp',
+                'class': 'hidden',
+                'id': 'id_cover_image',
+            }),
         }
+
+    def clean_cover_image(self):
+        file_obj = self.cleaned_data.get('cover_image')
+        if file_obj and hasattr(file_obj, 'size'):
+            ext = os.path.splitext(file_obj.name)[1].lower()
+            if ext not in {'.jpg', '.jpeg', '.png', '.webp'}:
+                raise ValidationError('Cover image must be JPG, PNG, or WebP.')
+            if file_obj.size > 5 * 1024 * 1024:
+                raise ValidationError('Cover image must be under 5 MB.')
+        return file_obj
+
+    def save(self, commit=True):
+        if self.instance.pk:
+            try:
+                old = Update.objects.get(pk=self.instance.pk)
+                old_cover = old.cover_image
+            except Update.DoesNotExist:
+                old_cover = None
+        else:
+            old_cover = None
+
+        instance = super().save(commit=False)
+        if self.cleaned_data.get('remove_cover_image'):
+            if instance.cover_image:
+                instance.cover_image.delete(save=False)
+            instance.cover_image = None
+        elif old_cover and instance.cover_image and old_cover.name != instance.cover_image.name:
+            old_cover.delete(save=False)
+
+        if commit:
+            instance.save()
+        return instance
 
 
 class AdminSettingsForm(forms.Form):

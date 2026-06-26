@@ -1,5 +1,5 @@
 {% extends "base_public.html" %}
-{% block title %}{{ student.get_full_name }} - Dev Academy{% endblock %}
+{% block title %}{{ student.get_full_name }} - Shamva Innovators{% endblock %}
 {% block public_content %}
 <section class="max-w-[960px] mx-auto px-gutter py-xxl">
     <div class="mb-4"><a href="{% url 'public:students' %}" class="text-primary font-label-md hover:underline">← Meet the Students</a></div>
@@ -18,7 +18,15 @@
         <div class="lg:col-span-2">
             <h2 class="font-headline-md text-on-surface mb-2">{{ project.title }}</h2>
             {% if project.description %}<p class="font-body-lg text-on-surface-variant mb-6">{{ project.description }}</p>{% endif %}
-            {% if project.write_up %}<div class="markdown-content font-body-md mb-6">{{ project.write_up }}</div>{% endif %}
+            {% if project.write_up %}
+            <div class="mb-6">
+                <a href="{{ project.write_up.url }}" target="_blank" class="inline-flex items-center gap-2 bg-surface-container text-on-surface px-4 py-2 rounded-lg font-label-md hover:bg-surface-container-high transition-colors mb-4">
+                    <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                    View Write-up PDF
+                </a>
+                <iframe src="{{ project.write_up.url }}" title="Project write-up" class="w-full h-[480px] rounded-xl border border-outline-variant"></iframe>
+            </div>
+            {% endif %}
             <div class="flex flex-wrap gap-4 mb-6">
                 {% if project.codebase_url %}<a href="{{ project.codebase_url }}" target="_blank" class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md">View Codebase</a>{% endif %}
                 {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="bg-secondary-container text-primary px-4 py-2 rounded-lg font-label-md">Live Demo</a>{% endif %}

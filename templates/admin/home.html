@@ -5,7 +5,7 @@
     <h1 class="font-headline-md text-headline-md text-on-surface">Dashboard</h1>
     <a href="{% url 'admin_portal:invite_codes' %}" class="bg-secondary-container text-primary px-4 py-2 rounded-lg font-label-md hover:bg-secondary-fixed transition-colors">Generate Invite Code</a>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 flex flex-col gap-2">
         <span class="font-label-md text-on-surface-variant">Total Students</span>
         <span class="font-headline-lg text-headline-lg text-on-surface">{{ stats.total_students }}</span>
@@ -26,9 +26,13 @@
         <span class="font-label-md text-on-surface-variant">Submissions This Week</span>
         <span class="font-headline-lg text-headline-lg text-on-surface">{{ stats.submissions_this_week }}</span>
     </div>
+    <a href="{% url 'admin_portal:newsletter' %}" class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 flex flex-col gap-2 hover:border-primary transition-colors">
+        <span class="font-label-md text-on-surface-variant">Newsletter Subscribers</span>
+        <span class="font-headline-lg text-headline-lg text-on-surface">{{ stats.newsletter_subscribers }}</span>
+    </a>
 </div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:items-start">
+    <div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col max-h-[28rem] min-h-0">
         <div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center">
             <h3 class="font-headline-sm text-headline-sm text-on-surface">Pending Approvals</h3>
             <span class="bg-surface-container border border-outline-variant font-label-sm px-2 py-1 rounded-full">{{ pending_users|length }} Pending</span>
@@ -76,11 +80,11 @@
             {% endif %}
         </div>
     </div>
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col max-h-[28rem] min-h-0">
         <div class="px-6 py-4 border-b border-outline-variant">
             <h3 class="font-headline-sm text-headline-sm text-on-surface">Recent Audit Log</h3>
         </div>
-        <div class="flex-1 overflow-y-auto p-6">
+        <div class="flex-1 min-h-0 overflow-y-auto p-6">
             {% if recent_audit %}
             <div class="relative border-l border-outline-variant ml-3 space-y-6">
                 {% for entry in recent_audit %}

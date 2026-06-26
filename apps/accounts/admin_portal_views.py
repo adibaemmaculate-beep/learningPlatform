@@ -1,13 +1,17 @@
+import os
 import secrets
 import string
+import uuid as uuid_mod
 from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import default_storage
 from django.core.mail import send_mail
 from apps.notifications.services import EmailNotificationService
 from django.db.models import Q
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_POST
@@ -26,6 +30,7 @@ from apps.audit.models import AuditLog
 from apps.audit.utils import log_action
 from apps.profiles.models import Profile
 from apps.assignments.models import Assignment, AssignmentSubmission
+from apps.newsletter.models import Newsletter
 from apps.updates.models import Update
 
 
@@ -49,6 +54,7 @@ def admin_home(request):
         'submissions_this_week': AssignmentSubmission.objects.filter(
             submitted_at__gte=timezone.now() - timedelta(days=7)
         ).count(),
+        'newsletter_subscribers': Newsletter.objects.count(),
     }
     return render(request, 'admin/home.html', {
         'pending_users': pending_users,
@@ -255,7 +261,11 @@ def updates_list(request):
 
 @admin_required
 def update_create(request):
-    form = UpdateForm(request.POST or None)
+    form = UpdateForm(
+        request.POST or None,
+        request.FILES or None,
+        initial={'author_name': request.user.get_full_name()},
+    )
     if request.method == 'POST' and form.is_valid():
         update = form.save(commit=False)
         update.writer = request.user
@@ -275,7 +285,7 @@ def update_create(request):
 @admin_required
 def update_edit(request, update_id):
     update = get_object_or_404(Update, id=update_id)
-    form = UpdateForm(request.POST or None, instance=update)
+    form = UpdateForm(request.POST or None, request.FILES or None, instance=update)
     if request.method == 'POST' and form.is_valid():
         update = form.save(commit=False)
         if form.cleaned_data.get('publish') and not update.published_at:
@@ -294,6 +304,22 @@ def update_edit(request, update_id):
 
 @admin_required
 @require_POST
+def update_image_upload(request):
+    file_obj = request.FILES.get('image')
+    if not file_obj:
+        return JsonResponse({'error': 'No image provided.'}, status=400)
+    ext = os.path.splitext(file_obj.name)[1].lower()
+    if ext not in {'.jpg', '.jpeg', '.png', '.webp'}:
+        return JsonResponse({'error': 'Invalid file type. Use JPG, PNG, or WebP.'}, status=400)
+    if file_obj.size > 5 * 1024 * 1024:
+        return JsonResponse({'error': 'Image must be under 5 MB.'}, status=400)
+    path = f'updates/inline/{uuid_mod.uuid4().hex}{ext}'
+    saved = default_storage.save(path, file_obj)
+    return JsonResponse({'url': default_storage.url(saved)})
+
+
+@admin_required
+@require_POST
 def update_delete(request, update_id):
     update = get_object_or_404(Update, id=update_id)
     title = update.title
@@ -301,6 +327,20 @@ def update_delete(request, update_id):
     log_action(request.user, 'update_deleted', 'update', update_id, {'title': title})
     messages.success(request, f'Update "{title}" deleted.')
     return redirect('admin_portal:updates')
+
+
+@admin_required
+def newsletter_subscribers(request):
+    q = request.GET.get('q', '').strip()
+    subscribers = Newsletter.objects.all()
+    if q:
+        subscribers = subscribers.filter(email__icontains=q)
+    return render(request, 'admin/newsletter.html', {
+        'subscribers': subscribers,
+        'search_query': q,
+        'total_count': Newsletter.objects.count(),
+        'active_nav': 'newsletter',
+    })
 
 
 @admin_required

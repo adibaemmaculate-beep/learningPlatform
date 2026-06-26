@@ -16,6 +16,7 @@
         <li><a href="{% url 'admin_portal:users' %}" class="nav-link {% if active_nav == 'users' %}nav-active{% endif %}"><span class="material-symbols-outlined">group</span><span>Users</span></a></li>
         <li><a href="{% url 'admin_portal:invite_codes' %}" class="nav-link {% if active_nav == 'invite_codes' %}nav-active{% endif %}"><span class="material-symbols-outlined">vpn_key</span><span>Invite Codes</span></a></li>
         <li><a href="{% url 'admin_portal:updates' %}" class="nav-link {% if active_nav == 'updates' %}nav-active{% endif %}"><span class="material-symbols-outlined">system_update_alt</span><span>Updates</span></a></li>
+        <li><a href="{% url 'admin_portal:newsletter' %}" class="nav-link {% if active_nav == 'newsletter' %}nav-active{% endif %}"><span class="material-symbols-outlined">mail</span><span>Newsletter</span></a></li>
         <li><a href="{% url 'admin_portal:settings' %}" class="nav-link {% if active_nav == 'settings' %}nav-active{% endif %}"><span class="material-symbols-outlined">settings</span><span>Settings</span></a></li>
         {% elif portal_role == 'teacher' %}
         <li><a href="{% url 'teacher:home' %}" class="nav-link {% if active_nav == 'dashboard' %}nav-active{% endif %}"><span class="material-symbols-outlined">home</span><span>Home</span></a></li>

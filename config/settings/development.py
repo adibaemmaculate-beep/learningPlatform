@@ -1,3 +1,5 @@
+import os
+
 from .base import *  # noqa: F401, F403
 
 DEBUG = True
@@ -9,7 +11,13 @@ DATABASES = {
     }
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# Use real SMTP when credentials are configured; otherwise print to console.
+if os.getenv('EMAIL_HOST_USER') and os.getenv('EMAIL_HOST_PASSWORD'):
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Temporarily skip email verification during local development.
-REQUIRE_EMAIL_VERIFICATION = False
+# Allow .env to re-enable verification during local SMTP testing.
+REQUIRE_EMAIL_VERIFICATION = os.getenv(
+    'REQUIRE_EMAIL_VERIFICATION', 'False'
+).lower() in ('true', '1', 'yes')

@@ -44,7 +44,7 @@ npm run watch:css
 | **Teacher announcements** | `/teacher/announcements/` — post, view read receipts |
 | **Teacher projects** | `/teacher/projects/` — browse all student projects |
 | **Public showcases** | `/students/` — published projects; `/students/<id>/` — full profile |
-| **Email notifications** | Assignment published, submission received, grades released, announcements, account approved/rejected (console in dev) |
+| **Email notifications** | Assignment published, submission received, grades released, announcements, account approved/rejected (console in dev unless SMTP configured) |
 
 ### Stage 5 test flow
 
@@ -57,4 +57,38 @@ npm run watch:css
 
 PostgreSQL and production deployment config are deferred.
 
-Emails print to the **console** in development.
+## Email (Gmail SMTP)
+
+By default, development prints emails to the **console**. To send real email via Gmail:
+
+1. Copy `.env.example` to `.env` if you have not already.
+2. Use a dedicated Gmail or Google Workspace account.
+3. Enable **2-Step Verification**, then create an [App Password](https://myaccount.google.com/apppasswords).
+4. Set these in `.env`:
+   - `EMAIL_HOST_USER` — your Gmail address
+   - `EMAIL_HOST_PASSWORD` — the 16-character app password
+   - `DEFAULT_FROM_EMAIL` — must use the **same** Gmail address (e.g. `AI Program Zimbabwe <yourprogram@gmail.com>`)
+   - `ADMIN_EMAIL` — inbox for contact form submissions (can be the same Gmail)
+
+Verify the setup:
+
+```bash
+python manage.py send_test_email your@email.com
+```
+
+When `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD` are set, development automatically switches to SMTP. To test verification emails locally, add `REQUIRE_EMAIL_VERIFICATION=True` to `.env`.
+
+### Emails sent by the app
+
+| Trigger | Recipient |
+|---------|-----------|
+| Registration | Verification link to new user |
+| Forgot password / admin reset | Password reset link |
+| Account approved / rejected | Applicant |
+| Assignment published, grades released, announcements | Students (if notifications enabled) |
+| New submission | Teachers |
+| Contact form | `ADMIN_EMAIL` |
+
+Verification and reset links use the site URL from the current request. Locally they point to `http://127.0.0.1:8000/...`; in production set `ALLOWED_HOSTS` to your real domain.
+
+Production uses SMTP automatically (`config.settings.production`). Provide the same `.env` email values on the server.

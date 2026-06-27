@@ -190,14 +190,6 @@ html.dark {
   max-height: 24rem;
 }
 
-.floating-input:focus ~ .floating-label,
-.floating-input:not(:placeholder-shown) ~ .floating-label {
-  transform: translateY(-1.5rem) scale(0.85);
-  color: #000000;
-  background-color: white;
-  padding: 0 4px;
-}
-
 .input-glow:focus {
   box-shadow: 0 0 0 2px rgba(254, 208, 27, 0.2);
   border-color: #000000;

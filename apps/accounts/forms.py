@@ -6,11 +6,11 @@ from .models import InviteCode, User
 
 class LoginForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={
-        'class': 'floating-input input-glow block w-full px-md py-3 text-on-surface bg-surface-container-lowest border border-outline-variant rounded appearance-none focus:outline-none bg-transparent transition-colors duration-200',
+        'class': 'peer input-glow block w-full px-md pt-5 pb-2 text-on-surface bg-surface-container-lowest border border-outline-variant rounded appearance-none focus:outline-none transition-colors duration-200',
         'placeholder': ' ',
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'floating-input input-glow block w-full px-md py-3 text-on-surface bg-surface-container-lowest border border-outline-variant rounded appearance-none focus:outline-none bg-transparent transition-colors duration-200',
+        'class': 'peer input-glow block w-full px-md pt-5 pb-2 text-on-surface bg-surface-container-lowest border border-outline-variant rounded appearance-none focus:outline-none transition-colors duration-200',
         'placeholder': ' ',
     }))
 

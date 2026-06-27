@@ -1,12 +1,12 @@
 venv/
 db.sqlite3
-# .env
+.env
 
-# __pycache__/
-# *.py[cod]
-# uploads/*
-# !uploads/.gitkeep
-# staticfiles/
-# node_modules/
-# *.log
-# .DS_Store
+__pycache__/
+*.py[cod]
+uploads/*
+!uploads/.gitkeep
+staticfiles/
+node_modules/
+*.log
+.DS_Store

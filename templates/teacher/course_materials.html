@@ -4,7 +4,6 @@
 <div class="flex justify-between items-center mb-xl">
     <div>
         <h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">Course Syllabus</h1>
-        <p class="font-body-md text-on-surface-variant">{% if course %}{{ course.name }}{% else %}No active course{% endif %}</p>
     </div>
     <a href="{% url 'teacher:material_create' %}" class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md flex items-center gap-2 hover:opacity-90">
         <span class="material-symbols-outlined text-sm">add</span> Add Week

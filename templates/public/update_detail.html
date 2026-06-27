@@ -1,0 +1,62 @@
+{% extends "base_public.html" %}
+{% block title %}{{ update.title }} - Shamva Innovators{% endblock %}
+{% block public_content %}
+<article class="py-xxl px-gutter">
+    <div class="max-w-3xl mx-auto">
+        <a href="{% url 'public:updates' %}" class="font-label-md text-label-md tracking-wider text-primary hover:underline flex items-center gap-1 mb-xl">
+            <span class="material-symbols-outlined text-sm">arrow_back</span> All Updates
+        </a>
+
+        <span class="  inline-block mb-md"></span>
+        <h1 class="font-headline-lg text-headline-lg text-primary font-bold mb-md">{{ update.title }}</h1>
+
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-body-md text-body-md text-on-surface-variant mb-xl pb-lg border-b border-outline-variant">
+            <time datetime="{{ update.published_at|date:'Y-m-d' }}">{{ update.published_at|date:"F d, Y" }}</time>
+            <span class="text-outline-variant" aria-hidden="true">&middot;</span>
+            <span>{{ update.display_author }}</span>
+        </div>
+
+        {% if update.cover_image_url %}
+        <figure class="update-hero-figure mb-xl">
+            <img src="{{ update.cover_image_url }}" alt="{{ update.cover_image_caption|default:update.title }}">
+            {% if update.cover_image_caption %}
+            <figcaption>{{ update.cover_image_caption }}</figcaption>
+            {% endif %}
+        </figure>
+        {% endif %}
+
+        <div class="markdown-content font-body-md text-on-surface mb-xxl">{{ update.description }}</div>
+
+        {% if related_updates %}
+        <section class="pt-xl border-t border-outline-variant">
+            <div class="flex items-center gap-3 mb-xl">
+                <span class=" "></span>
+                <h2 class="font-headline-md text-headline-md text-primary">More Updates</h2>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg">
+                {% for related in related_updates %}
+                <article class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
+                    <a href="{% url 'public:update_detail' related.id %}" class="block">
+                        <div class="aspect-[16/10] overflow-hidden bg-surface-variant relative">
+                            {% if related.cover_image_url %}
+                            <img src="{{ related.cover_image_url }}" alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            {% else %}
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface-container to-surface-container-high">
+                                <span class="material-symbols-outlined text-5xl text-outline-variant">newspaper</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="p-lg">
+                            <time class="font-label-sm text-label-sm tracking-wider uppercase text-on-surface-variant">{{ related.published_at|date:"M d, Y" }}</time>
+                            <h3 class="font-headline-sm text-headline-sm text-primary mt-2 mb-2 group-hover:text-surface-tint transition-colors line-clamp-2">{{ related.title }}</h3>
+                            <span class="font-label-md text-label-md tracking-wider text-primary group-hover:underline flex items-center gap-1">Read more <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+                        </div>
+                    </a>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+    </div>
+</article>
+{% endblock %}

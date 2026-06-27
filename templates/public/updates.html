@@ -1,0 +1,61 @@
+{% extends "base_public.html" %}
+{% block title %}Latest Updates - Shamva Innovators{% endblock %}
+{% block public_content %}
+<section class="bg-primary-container text-on-primary-container py-xxl px-gutter text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="max-w-2xl mx-auto relative z-10">
+        <h1 class="font-headline-xl text-headline-xl md:text-headline-xl text-headline-lg-mobile text-surface-bright font-extrabold mb-md">Latest Updates</h1>
+        <div class="flex justify-center mb-md">
+            <span class="block w-20 h-1 bg-secondary-container rounded-full"></span>
+        </div>
+        <p class="font-body-lg text-body-lg text-primary-fixed-dim"></p>
+    </div>
+</section>
+<section class="py-xxl px-gutter bg-surface-container-lowest">
+    <div class="max-w-[1280px] mx-auto">
+        {% if updates %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+            {% for update in updates %}
+            <article class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
+                <a href="{% url 'public:update_detail' update.id %}" class="block">
+                    <div class="aspect-[16/10] overflow-hidden bg-surface-variant relative">
+                        {% if update.cover_image_url %}
+                        <img src="{{ update.cover_image_url }}" alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        {% else %}
+                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface-container to-surface-container-high">
+                            <span class="material-symbols-outlined text-5xl text-outline-variant">newspaper</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="p-lg">
+                        <time class="font-label-sm text-label-sm tracking-wider uppercase text-on-surface-variant">{{ update.published_at|date:"M d, Y" }}</time>
+                        <h2 class="font-headline-sm text-headline-sm text-primary mt-2 mb-2 group-hover:text-surface-tint transition-colors">{{ update.title }}</h2>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">{{ update.excerpt }}</p>
+                        <span class="font-label-md text-label-md tracking-wider text-primary group-hover:underline flex items-center gap-1">Read more <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+                    </div>
+                </a>
+            </article>
+            {% endfor %}
+        </div>
+
+        {% if page_obj.has_other_pages %}
+        <div class="flex justify-center items-center gap-lg mt-xxl">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="font-label-md text-label-md tracking-wider text-primary hover:underline flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">arrow_back</span> Previous
+            </a>
+            {% endif %}
+            <span class="font-body-sm text-body-sm text-on-surface-variant">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="font-label-md text-label-md tracking-wider text-primary hover:underline flex items-center gap-1">
+                Next <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
+        {% else %}
+        <p class="font-body-md text-on-surface-variant">News updates coming soon.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

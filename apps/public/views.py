@@ -2,9 +2,11 @@ import json
 
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.staticfiles import finders
 from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
+from django.templatetags.static import static
 from django.urls import reverse
 
 from apps.accounts.models import User
@@ -14,6 +16,43 @@ from apps.projects.models import Project
 from apps.updates.models import Update
 
 from .forms import ContactForm, NewsletterSignupForm
+
+TEAM_IMAGE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.webp')
+
+TEAM_MEMBERS = [
+    {
+        'slug': 'sean_mutunhire',
+        'name': 'Sean Mutunhire',
+        'initials': 'SM',
+        'role': 'Remote Instructor',
+        'bio': (
+            'Designs the full course curriculum — weekly notes, slides, and problem sets — '
+            'and teaches all Zoom sessions live from the United States. Also builds and maintains '
+            'the learning platform where students access materials, submit assignments, and publish '
+            'their final projects, and provides ongoing feedback and technical support as students '
+            'build and deploy their applications.'
+        ),
+    },
+    {
+        'slug': 'mr_chabata',
+        'name': 'Mr. Chabata',
+        'initials': 'MC',
+        'role': 'On-the-Ground Partner',
+        'bio': (
+            'An English teacher at Wadzanai High School and the reason this program is possible at all. '
+            'Mr. Chabata selects the student cohort, secures laptops and learning space, sources all '
+            'physical materials, sets up the technology before every session, and supervises and supports '
+            'students throughout — including during final project week and the showcase.'
+        ),
+    },
+]
+
+
+def _team_image_url(slug):
+    for ext in TEAM_IMAGE_EXTENSIONS:
+        if finders.find(f'{slug}{ext}'):
+            return static(f'{slug}{ext}')
+    return None
 
 
 def home(request):
@@ -38,8 +77,13 @@ def home(request):
 
 
 def about(request):
+    team_members = [
+        {**member, 'image_url': _team_image_url(member['slug'])}
+        for member in TEAM_MEMBERS
+    ]
     return render(request, 'public/about.html', {
         'active_public_nav': 'about',
+        'team_members': team_members,
     })
 
 

@@ -5,40 +5,50 @@
 <script src="{% static 'js/student_overlay.js' %}" defer></script>
 {% endblock %}
 {% block public_content %}
-<section class="bg-primary-container py-xxl px-gutter text-on-primary text-center">
-    <h1 class="font-headline-xl text-headline-xl md:text-headline-xl text-headline-lg-mobile mb-4">Meet the Students</h1>
-    <p class="font-body-lg text-body-lg max-w-2xl mx-auto opacity-80">Discover the talented individuals building the future of AI and software engineering at Shamva Innovators.</p>
+<section class="bg-primary-container text-on-primary-container py-xxl px-gutter text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="max-w-2xl mx-auto relative z-10">
+        <h1 class="font-headline-xl text-headline-xl md:text-headline-xl text-headline-lg-mobile text-surface-bright font-extrabold mb-md">Meet the Students</h1>
+        <div class="flex justify-center mb-md">
+            <span class="block w-20 h-1 bg-secondary-container rounded-full"></span>
+        </div>
+        <p class="font-body-lg text-body-lg text-primary-fixed-dim"></p>
+    </div>
 </section>
-<section class="max-w-[1280px] mx-auto px-gutter py-xl">
+<section class="max-w-[1280px] mx-auto px-gutter py-xxl">
     {% if students %}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-lg">
         {% for student in students %}
-        <div class="student-card bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col items-center text-center transition-shadow hover:shadow-md cursor-pointer"
+        <div class="student-card group relative rounded-xl overflow-hidden cursor-pointer shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-container focus-visible:ring-offset-2"
              role="button"
              tabindex="0"
              data-student-id="{{ student.id }}"
              aria-label="View profile for {{ student.get_full_name }}">
-            <div class="w-24 h-24 rounded-full overflow-hidden mb-4 border-2 border-outline-variant group-hover:border-primary transition-colors">
-                {% if student.profile and student.profile.profile_pic %}
-                <img src="{{ student.profile.profile_pic.url }}" alt="{{ student.get_full_name }}" class="w-full h-full object-cover">
-                {% else %}
-                <div class="w-full h-full bg-primary-container text-on-primary flex items-center justify-center text-2xl font-bold">{{ student.first_name|slice:":1" }}{{ student.last_name|slice:":1" }}</div>
+            {% if student.profile and student.profile.profile_pic %}
+            <img src="{{ student.profile.profile_pic.url }}" alt="{{ student.get_full_name }}" class="block w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105">
+            {% else %}
+            <img src="{% static 'placeholder_image.png' %}" alt="{{ student.get_full_name }}" class="block w-full aspect-[3/4] object-cover transition-transform duration-500 group-hover:scale-105">
+            {% endif %}
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute inset-x-0 bottom-0 p-lg text-left">
+                <h3 class="font-headline-sm text-headline-sm text-surface-bright font-bold">{{ student.get_full_name }}</h3>
+                {% if student.profile and student.profile.bio %}
+                <p class="font-body-sm text-body-sm text-surface-bright/80 mt-1 line-clamp-2 text-white">{{ student.profile.bio|striptags|truncatewords:18 }}</p>
+                {% endif %}
+                {% if student.project and student.project.is_published %}
+                <a href="{% url 'public:student_detail' student.id %}"
+                   class="student-project-link mt-sm inline-flex items-center gap-1 text-surface-bright font-label-md text-label-md font-bold uppercase tracking-wider hover:underline"
+                   onclick="event.stopPropagation()">
+                    Show project <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
                 {% endif %}
             </div>
-            <h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">{{ student.get_full_name }}</h3>
-            {% if student.project and student.project.is_published %}
-            <a href="{% url 'public:student_detail' student.id %}"
-               class="student-project-link mt-auto bg-secondary-container text-on-secondary-fixed w-full py-2 px-4 rounded-lg font-label-md text-label-md font-bold uppercase tracking-wider hover:bg-secondary-fixed transition-colors flex items-center justify-center gap-2"
-               onclick="event.stopPropagation()">
-                Show project <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-            </a>
-            {% endif %}
         </div>
         {% endfor %}
     </div>
     {% else %}
-    <div class="text-center py-xxl bg-surface-container rounded-xl border border-outline-variant">
-        <span class="material-symbols-outlined text-6xl text-primary/30 mb-md">groups</span>
+    <div class="text-center py-xxl bg-surface-container-lowest rounded-xl border border-outline-variant">
+        <span class="material-symbols-outlined text-6xl text-outline-variant mb-md">groups</span>
         <p class="font-body-md text-on-surface-variant">Student profiles will appear here once students join the program.</p>
     </div>
     {% endif %}
@@ -49,7 +59,7 @@
      role="dialog"
      aria-modal="true"
      aria-labelledby="student-overlay-name">
-    <div id="student-overlay-backdrop" class="absolute inset-0 bg-black/50"></div>
+    <div id="student-overlay-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
     <div class="absolute inset-0 flex items-center justify-center p-gutter pointer-events-none">
         <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto pointer-events-auto">
             <div class="flex justify-end p-md pb-0">
@@ -62,14 +72,14 @@
             </div>
             <div class="flex flex-col sm:flex-row gap-xl p-lg pt-0">
                 <div class="flex-shrink-0 flex justify-center sm:justify-start">
-                    <div id="student-overlay-avatar" class="w-32 h-32 rounded-full overflow-hidden border-4 border-outline-variant"></div>
+                    <div id="student-overlay-avatar" class="w-32 h-32 rounded-full overflow-hidden border-4 border-secondary-container"></div>
                 </div>
                 <div class="flex-1 min-w-0">
-                    <h2 id="student-overlay-name" class="font-headline-lg text-headline-lg text-on-surface mb-4"></h2>
+                    <h2 id="student-overlay-name" class="font-headline-lg text-headline-lg text-primary mb-md"></h2>
                     <div id="student-overlay-bio" class="markdown-content font-body-md text-on-surface-variant"></div>
                     <a id="student-overlay-project"
                        href="#"
-                       class="hidden mt-6 inline-flex items-center gap-2 bg-secondary-container text-on-secondary-fixed py-2 px-4 rounded-lg font-label-md text-label-md font-bold uppercase tracking-wider hover:bg-secondary-fixed transition-colors">
+                       class="hidden mt-6 inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container py-2 px-4 rounded-lg font-label-md text-label-md font-bold uppercase tracking-wider hover:bg-secondary-fixed transition-colors">
                         Show project <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                     </a>
                 </div>
@@ -78,5 +88,5 @@
     </div>
 </div>
 
-<script type="application/json" id="students-data">{{ students_json|safe }}</script>
+<script type="application/json" id="students-data" data-placeholder-url="{% static 'placeholder_image.png' %}">{{ students_json|safe }}</script>
 {% endblock %}

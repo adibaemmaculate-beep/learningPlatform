@@ -10,7 +10,7 @@
             {% if profile.profile_pic %}
             <img src="{{ profile.profile_pic.url }}" alt="">
             {% else %}
-            <div class="profile-picture-fallback bg-primary-container text-on-primary text-2xl">{{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}</div>
+            {% include "partials/profile_placeholder.html" %}
             {% endif %}
             </div>
             <div>

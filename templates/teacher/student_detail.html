@@ -5,9 +5,13 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 text-center">
         {% if detail_student.profile and detail_student.profile.profile_pic %}
-        <img src="{{ detail_student.profile.profile_pic.url }}" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover">
+        <div class="profile-picture-round mx-auto mb-4">
+            <img src="{{ detail_student.profile.profile_pic.url }}" alt="" class="w-full h-full object-cover">
+        </div>
         {% else %}
-        <div class="w-24 h-24 rounded-full bg-primary-container text-on-primary mx-auto mb-4 flex items-center justify-center text-2xl font-bold">{{ detail_student.first_name|slice:":1" }}{{ detail_student.last_name|slice:":1" }}</div>
+        <div class="profile-picture-round mx-auto mb-4">
+            {% include "partials/profile_placeholder.html" %}
+        </div>
         {% endif %}
         <h1 class="font-headline-md">{{ detail_student.get_full_name }}</h1>
         <p class="text-on-surface-variant">{{ detail_student.email }}</p>

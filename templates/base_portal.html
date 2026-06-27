@@ -5,12 +5,14 @@
 <link rel="stylesheet" href="{% static 'css/markdown_editor.css' %}">
 <script src="https://cdn.jsdelivr.net/npm/easymde/dist/easymde.min.js" defer></script>
 <script src="{% static 'js/markdown_editor.js' %}" defer></script>
+<script src="{% static 'js/sidebar.js' %}" defer></script>
 {% endblock %}
 {% block html_class %}{% if current_user_profile %}{{ current_user_profile.theme }}{% else %}light{% endif %}{% endblock %}
 {% block body_class %}bg-background text-on-background font-body-md min-h-screen flex{% endblock %}
 {% block content %}
 {% include "partials/sidebar.html" %}
-<div class="ml-64 w-full flex flex-col min-h-screen">
+<div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+<div class="md:ml-64 w-full flex flex-col min-h-screen">
     {% include "partials/navbar.html" %}
     {% include "partials/announcement_banner.html" %}
     <main class="p-container-padding flex-1 flex flex-col gap-6">

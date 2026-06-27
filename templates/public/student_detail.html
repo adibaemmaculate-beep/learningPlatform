@@ -1,38 +1,48 @@
 {% extends "base_public.html" %}
+{% load static %}
 {% block title %}{{ student.get_full_name }} - Shamva Innovators{% endblock %}
 {% block public_content %}
 <section class="max-w-[960px] mx-auto px-gutter py-xxl">
-    <div class="mb-4"><a href="{% url 'public:students' %}" class="text-primary font-label-md hover:underline">← Meet the Students</a></div>
+    <div class="mb-lg">
+        <a href="{% url 'public:students' %}" class="inline-flex items-center gap-1 text-primary font-label-md text-label-md tracking-wider hover:underline">
+            <span class="material-symbols-outlined text-sm">arrow_back</span> Meet the Students
+        </a>
+    </div>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
-        <div class="text-center">
-            {% if student.profile and student.profile.profile_pic %}
-            <img src="{{ student.profile.profile_pic.url }}" alt="" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-outline-variant">
-            {% else %}
-            <div class="w-32 h-32 rounded-full bg-primary-container text-on-primary mx-auto mb-4 flex items-center justify-center text-3xl font-bold">{{ student.first_name|slice:":1" }}{{ student.last_name|slice:":1" }}</div>
-            {% endif %}
-            <h1 class="font-headline-lg text-on-surface">{{ student.get_full_name }}</h1>
-            {% if student.profile and student.profile.bio %}
-            <div class="markdown-content font-body-md text-on-surface-variant mt-4 text-left">{{ student.profile.bio }}</div>
-            {% endif %}
+        <div class="lg:col-span-1">
+            <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm text-center">
+                {% if student.profile and student.profile.profile_pic %}
+                <img src="{{ student.profile.profile_pic.url }}" alt="" class="w-32 h-32 rounded-full mx-auto mb-md object-cover border-4 border-secondary-container">
+                {% else %}
+                <img src="{% static 'placeholder_image.png' %}" alt="" class="w-32 h-32 rounded-full mx-auto mb-md object-cover border-4 border-secondary-container">
+                {% endif %}
+                <h1 class="font-headline-lg text-headline-lg text-primary">{{ student.get_full_name }}</h1>
+                {% if student.profile and student.profile.bio %}
+                <div class="markdown-content font-body-md text-on-surface-variant mt-md text-left">{{ student.profile.bio }}</div>
+                {% endif %}
+            </div>
         </div>
         <div class="lg:col-span-2">
-            <h2 class="font-headline-md text-on-surface mb-2">{{ project.title }}</h2>
-            {% if project.description %}<p class="font-body-lg text-on-surface-variant mb-6">{{ project.description }}</p>{% endif %}
+            <div class="flex items-center gap-3 mb-sm">
+                <span class=" "></span>
+                <h2 class="font-headline-md text-headline-md text-primary">{{ project.title }}</h2>
+            </div>
+            {% if project.description %}<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed">{{ project.description }}</p>{% endif %}
+            <div class="flex flex-wrap gap-3 mb-lg">
+                {% if project.codebase_url %}<a href="{{ project.codebase_url }}" target="_blank" class="inline-flex items-center gap-2 bg-surface-container-lowest border border-primary text-primary px-4 py-2 rounded-lg font-label-md text-label-md tracking-wider font-bold hover:bg-surface-container transition-colors">View Codebase</a>{% endif %}
+                {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg font-label-md text-label-md tracking-wider font-bold hover:bg-secondary-fixed transition-colors">Live Demo</a>{% endif %}
+            </div>
             {% if project.write_up %}
-            <div class="mb-6">
-                <a href="{{ project.write_up.url }}" target="_blank" class="inline-flex items-center gap-2 bg-surface-container text-on-surface px-4 py-2 rounded-lg font-label-md hover:bg-surface-container-high transition-colors mb-4">
+            <div class="mb-lg">
+                <a href="{{ project.write_up.url }}" target="_blank" class="inline-flex items-center gap-2 bg-surface-container text-on-surface px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-colors mb-md">
                     <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
                     View Write-up PDF
                 </a>
                 <iframe src="{{ project.write_up.url }}" title="Project write-up" class="w-full h-[480px] rounded-xl border border-outline-variant"></iframe>
             </div>
             {% endif %}
-            <div class="flex flex-wrap gap-4 mb-6">
-                {% if project.codebase_url %}<a href="{{ project.codebase_url }}" target="_blank" class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md">View Codebase</a>{% endif %}
-                {% if project.live_url %}<a href="{{ project.live_url }}" target="_blank" class="bg-secondary-container text-primary px-4 py-2 rounded-lg font-label-md">Live Demo</a>{% endif %}
-            </div>
             {% if project.images.all %}
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
                 {% for img in project.images.all %}
                 <img src="{{ img.image.url }}" alt="" class="rounded-xl border border-outline-variant object-cover w-full h-48">
                 {% endfor %}

@@ -1,46 +1,59 @@
 {% extends "base_public.html" %}
 {% block title %}Contact Us - Shamva Innovators{% endblock %}
-{% block extra_head %}<style>.custom-input:focus{border-color:#000;box-shadow:0 0 0 2px rgba(254,208,27,.2);outline:none;}</style>{% endblock %}
+{% block extra_head %}<style>.custom-input:focus{border-color:var(--color-primary);box-shadow:0 0 0 3px rgba(254,208,27,.35);outline:none;}</style>{% endblock %}
 {% block public_content %}
+<section class="bg-primary-container text-on-primary-container py-xxl px-gutter text-center relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="max-w-2xl mx-auto relative z-10">
+        <h1 class="font-headline-xl text-headline-xl md:text-headline-xl text-headline-lg-mobile text-surface-bright font-extrabold mb-md">Contact Us</h1>
+        <div class="flex justify-center mb-md">
+            <span class="block w-20 h-1 bg-secondary-container rounded-full"></span>
+        </div>
+        <p class="font-body-lg text-body-lg text-primary-fixed-dim"></p>
+    </div>
+</section>
 <section class="max-w-[1280px] mx-auto px-gutter py-xxl">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-xxl">
         <div>
-            <h1 class="font-headline-xl text-headline-xl text-primary mb-md">Contact Us</h1>
-            <p class="font-body-lg text-on-surface-variant mb-xl">Have questions about the program? We'd love to hear from you.</p>
-            <div class="space-y-lg">
-                <div class="flex items-start gap-md">
-                    <span class="material-symbols-outlined text-primary mt-1">mail</span>
+            <h2 class="font-headline-md text-headline-md text-primary mb-lg">Get in Touch</h2>
+            <div class="space-y-md">
+                <div class="flex items-start gap-md bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+                    <div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-on-secondary-container">mail</span>
+                    </div>
                     <div>
                         <h3 class="font-headline-sm text-headline-sm text-on-surface">Email</h3>
-                        <p class="font-body-md text-on-surface-variant">admin@example.com</p>
+                        <p class="font-body-md text-body-md text-on-surface-variant">shamva.innovators@gmail.com</p>
                     </div>
                 </div>
-                <div class="flex items-start gap-md">
-                    <span class="material-symbols-outlined text-primary mt-1">location_on</span>
+                <div class="flex items-start gap-md bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+                    <div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-on-secondary-container">phone</span>
+                    </div>
                     <div>
-                        <h3 class="font-headline-sm text-headline-sm text-on-surface">Location</h3>
-                        <p class="font-body-md text-on-surface-variant">Harare, Zimbabwe</p>
+                        <h3 class="font-headline-sm text-headline-sm text-on-surface">Phone Number</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant">+1 603 276 5901</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xl">
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xl shadow-sm">
             <h2 class="font-headline-md text-headline-md text-primary mb-lg">Send a Message</h2>
             <form method="post" class="space-y-md">
                 {% csrf_token %}
                 <div>
-                    <label class="block font-label-md text-label-md mb-xs" for="id_name">Name</label>
-                    <input class="w-full border border-outline-variant rounded-lg px-3 py-2 custom-input font-body-sm" id="id_name" name="name" required value="{{ form.name.value|default:'' }}">
+                    <label class="block font-label-md text-label-md tracking-wider uppercase text-on-surface-variant mb-xs" for="id_name">Name</label>
+                    <input class="w-full border border-outline-variant rounded-lg px-3 py-2 custom-input font-body-sm bg-surface-container-lowest text-on-surface" id="id_name" name="name" required value="{{ form.name.value|default:'' }}">
                 </div>
                 <div>
-                    <label class="block font-label-md text-label-md mb-xs" for="id_email">Email</label>
-                    <input class="w-full border border-outline-variant rounded-lg px-3 py-2 custom-input font-body-sm" id="id_email" name="email" type="email" required value="{{ form.email.value|default:'' }}">
+                    <label class="block font-label-md text-label-md tracking-wider uppercase text-on-surface-variant mb-xs" for="id_email">Email</label>
+                    <input class="w-full border border-outline-variant rounded-lg px-3 py-2 custom-input font-body-sm bg-surface-container-lowest text-on-surface" id="id_email" name="email" type="email" required value="{{ form.email.value|default:'' }}">
                 </div>
                 <div>
-                    <label class="block font-label-md text-label-md mb-xs" for="id_message">Message</label>
-                    <textarea class="w-full border border-outline-variant rounded-lg px-3 py-2 custom-input font-body-sm" id="id_message" name="message" rows="5" required>{{ form.message.value|default:'' }}</textarea>
+                    <label class="block font-label-md text-label-md tracking-wider uppercase text-on-surface-variant mb-xs" for="id_message">Message</label>
+                    <textarea class="w-full border border-outline-variant rounded-lg px-3 py-2 custom-input font-body-sm bg-surface-container-lowest text-on-surface" id="id_message" name="message" rows="5" required>{{ form.message.value|default:'' }}</textarea>
                 </div>
-                <button type="submit" class="w-full bg-secondary-container text-primary font-headline-sm py-3 rounded-lg hover:bg-secondary-fixed transition-colors">Send Message</button>
+                <button type="submit" class="w-full bg-secondary-container text-on-secondary-container font-label-md text-label-md tracking-wider font-bold py-3 rounded-lg hover:bg-secondary-fixed transition-colors">Send Message</button>
             </form>
         </div>
     </div>

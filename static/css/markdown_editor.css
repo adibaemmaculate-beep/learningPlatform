@@ -1,0 +1,87 @@
+.EasyMDEContainer {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.EasyMDEContainer .CodeMirror {
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 0 0 0.5rem 0.5rem;
+    background: var(--color-surface-container-lowest);
+    color: var(--color-on-surface);
+    font-family: 'Geist', 'Inter', sans-serif;
+    font-size: 14px;
+    min-height: 200px;
+}
+
+.EasyMDEContainer .editor-toolbar {
+    border: 1px solid var(--color-outline-variant);
+    border-bottom: 0;
+    border-radius: 0.5rem 0.5rem 0 0;
+    background: var(--color-surface-container-lowest);
+    opacity: 1;
+}
+
+.EasyMDEContainer .editor-toolbar button {
+    color: var(--color-on-surface-variant) !important;
+    border: none;
+}
+
+.EasyMDEContainer .editor-toolbar button:hover,
+.EasyMDEContainer .editor-toolbar button.active {
+    background: var(--color-surface-container);
+    border-color: transparent;
+}
+
+.EasyMDEContainer .editor-toolbar i.separator {
+    border-left-color: var(--color-outline-variant);
+    border-right-color: transparent;
+}
+
+.EasyMDEContainer .editor-toolbar button.easymde-line-break,
+.EasyMDEContainer .editor-toolbar button.easymde-color,
+.EasyMDEContainer .editor-toolbar button.easymde-upload-image {
+    min-width: 28px;
+    height: 28px;
+}
+
+.EasyMDEContainer .editor-toolbar .easymde-line-break::before,
+.EasyMDEContainer .editor-toolbar .easymde-color::before,
+.EasyMDEContainer .editor-toolbar .easymde-upload-image::before {
+    pointer-events: none;
+}
+
+.EasyMDEContainer .editor-toolbar .easymde-line-break::before {
+    content: 'format_line_spacing';
+    font-family: 'Material Symbols Outlined';
+    font-size: 18px;
+    line-height: 1;
+}
+
+.EasyMDEContainer .editor-toolbar .easymde-color::before {
+    content: 'palette';
+    font-family: 'Material Symbols Outlined';
+    font-size: 18px;
+    line-height: 1;
+}
+
+.EasyMDEContainer .editor-toolbar .easymde-upload-image::before {
+    content: 'image';
+    font-family: 'Material Symbols Outlined';
+    font-size: 18px;
+    line-height: 1;
+}
+
+.EasyMDEContainer .editor-preview,
+.EasyMDEContainer .editor-preview-side {
+    background: var(--color-surface-container-lowest);
+    border-color: var(--color-outline-variant);
+    color: var(--color-on-surface);
+}
+
+.EasyMDEContainer .CodeMirror-cursor {
+    border-left-color: var(--color-on-surface);
+}
+
+html.dark .EasyMDEContainer .CodeMirror-cursor {
+    border-left-color: var(--color-secondary-container);
+}

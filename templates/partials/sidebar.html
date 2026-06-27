@@ -1,12 +1,10 @@
-<nav class="h-screen w-64 fixed left-0 top-0 bg-primary-container flex flex-col z-20">
+<nav id="portal-sidebar" class="h-screen w-64 fixed left-0 top-0 bg-primary-container flex flex-col z-40 transform -translate-x-full transition-transform duration-300 md:translate-x-0">
     {% if user.is_authenticated %}
     <div class="mb-4 w-full profile-picture-sidebar">
         {% if current_user_profile and current_user_profile.profile_pic %}
         <img src="{{ current_user_profile.profile_pic.url }}" alt="">
         {% else %}
-        <div class="profile-picture-fallback bg-surface-container-low text-on-primary text-4xl">
-            {{ user.first_name|slice:":1" }}{{ user.last_name|slice:":1" }}
-        </div>
+        {% include "partials/profile_placeholder.html" %}
         {% endif %}
     </div>
     {% endif %}
@@ -40,7 +38,7 @@
         {% endif %}
     </ul>
     <div class="px-4">
-        <a href="{% url 'accounts:logout' %}" class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container/70 font-medium hover:bg-surface-container-highest/5 transition-colors">
+        <a href="{% url 'accounts:logout' %}" class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-primary-container/70 font-medium w-full hover:bg-red-200 text-red-600 transition-colors">
             <span class="material-symbols-outlined">logout</span><span>Logout</span>
         </a>
     </div>

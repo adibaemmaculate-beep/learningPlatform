@@ -1,5 +1,8 @@
 <header class="bg-surface docked sticky top-0 border-b border-outline-variant flex justify-between items-center w-full px-container-padding h-row-height-standard z-10">
     <div class="flex items-center gap-4">
+        <button id="sidebar-toggle" type="button" class="md:hidden flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" aria-label="Open menu" aria-controls="portal-sidebar" aria-expanded="false">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
         <a href="{% url 'public:home' %}" class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors font-label-md" title="Back to public site">
             <span class="material-symbols-outlined text-xl">arrow_back</span>
             <span>Back to Site</span>

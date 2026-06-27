@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shamva AI -  Shamva Innovators</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#f8f9ff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "inverse-surface": "#233144",
+                      "primary-fixed": "#dae2fd",
+                      "on-primary-fixed": "#131b2e",
+                      "inverse-primary": "#bec6e0",
+                      "on-surface-variant": "#45464d",
+                      "on-secondary-fixed": "#231b00",
+                      "surface-container": "#e6eeff",
+                      "on-primary": "#ffffff",
+                      "secondary": "#735c00",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#191c1e",
+                      "surface-variant": "#d5e3fc",
+                      "surface": "#f8f9ff",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#000000",
+                      "on-tertiary-fixed-variant": "#444749",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#c4c7c9",
+                      "tertiary-fixed": "#e0e3e5",
+                      "outline-variant": "#c6c6cd",
+                      "on-secondary-container": "#6f5900",
+                      "background": "#f8f9ff",
+                      "on-secondary-fixed-variant": "#574500",
+                      "surface-container-highest": "#d5e3fc",
+                      "on-tertiary-fixed": "#191c1e",
+                      "on-error": "#ffffff",
+                      "surface-dim": "#ccdbf3",
+                      "secondary-container": "#fed01b",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed-dim": "#bec6e0",
+                      "secondary-fixed": "#ffe083",
+                      "primary": "#000000",
+                      "on-background": "#0d1c2e",
+                      "on-primary-container": "#7c839b",
+                      "primary-container": "#131b2e",
+                      "inverse-on-surface": "#eaf1ff",
+                      "secondary-fixed-dim": "#eec200",
+                      "error-container": "#ffdad6",
+                      "outline": "#76777d",
+                      "surface-container-high": "#dce9ff",
+                      "on-surface": "#0d1c2e",
+                      "surface-tint": "#565e74",
+                      "surface-container-low": "#eff4ff",
+                      "on-tertiary-container": "#818486"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "gutter": "24px",
+                      "xxl": "48px",
+                      "container-max": "1280px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "xs": "4px",
+                      "base": "8px",
+                      "sm": "12px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Geist"],
+                      "body-sm": ["Inter"],
+                      "label-sm": ["Geist"],
+                      "headline-sm": ["Geist"],
+                      "headline-xl": ["Geist"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Geist"],
+                      "body-lg": ["Inter"],
+                      "headline-md": ["Geist"],
+                      "headline-lg-mobile": ["Geist"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-sm": ["10px", {"lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    .hero-bg-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
+        z-index: 0;
+    }
+    .hero-bg-slide.active {
+        opacity: 1;
+    }
+</style>
+</head>
+<body class="bg-background font-body-md text-on-background antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-surface-variant transition-all duration-300 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.05)] h-16">
+<div class="max-w-[1280px] mx-auto px-gutter h-full flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Shamva AI</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-md text-label-md text-primary border-b-2 border-secondary pb-1" href="#">Home</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">About</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Our Projects</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Get Involved</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-secondary-container text-on-secondary-container font-label-md text-label-md px-6 py-2 rounded-lg hover:bg-secondary-fixed transition-colors font-bold">
+                Support the Program
+            </button>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="mt-16">
+<!-- Hero Section -->
+<section class="bg-primary-container text-on-primary pt-xxl pb-xxl px-gutter relative overflow-hidden flex items-center min-h-[500px]" id="hero-carousel">
+<!-- Background Images Layer -->
+<div class="absolute inset-0 z-0">
+<div class="hero-bg-slide active" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCmR4ZJEE3sQS7eP0-PEFzs3oNj25pYDOg13hKr2G5dgynG0wlVoeufaZstnhBSIQko7AjeucTBkO2aIRO2VQTV-yWOmuAY-HVo-vd4IkWSBFEzZb5320_dj8pw_hSk7IisAuTKXUuIhfk5o83dcDlUH8V3A16jJwny8ozID9I35U2MwyskkCalNPm3VFWH_wEQh1w3XOSWWpJyebsYrOBqT72LefjuS27M8BQiCsYlqeBSskznXuZviGXaW_Oawekqi6Ohetn8_C4');"></div>
+<div class="hero-bg-slide" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBexzAsNPtZ9Xr6ItdQXhQYKIPl-uUh0lPfZh601Ng0aFBXsarfjXxwJG7yVDkQ0VOMg77BoKPL5fGVB5VdqupGYFhwcwkAKPlreUVHKdKRdlFCsBwSk6nqHiB_Rn7qnn8577fg9dl22-dpZqGBAk2NJ3p0WEPyHkF-0dI0_NIMPPzDN-A_s7gnGHTYTKda_osqslFD1gD3Z7Ft5ZLzgIew66FvfdZ-2pvZoBUtdIWqADnWtehxnjpJhQvxji6fOmXTOmQkmL1RGTY');"></div>
+<div class="hero-bg-slide" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAkCLI0cbQ-3-Ye5Coka8OKUU4jj4dwMhmXquJrjigUYGJmUVINg9JPYrW8Inu_pV1FFV7Pmj5y8bYLgx0smz2s3EE3yL_cGKPhPRXT_Z-Y5lg3fGBBxlkHR43LWrpUaX-1Ok4txtPG9ZT2AubuFusUGxqXr30i-tj35W7sV3vbxCDXgmgDCzrx_kPr1AarQN-wHUR-53Ql0fZGbgmiCvVBs2Qy92yNtB0qe2OEHf3VFy6qW1NDJ0x8BFKSvHAUTLbfLTckwJbhLFU');"></div>
+<!-- Dark Overlay (65% opacity) -->
+<div class="absolute inset-0 bg-black/65 z-10"></div>
+</div>
+<div class="absolute inset-0 opacity-10 z-20" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 32px 32px;"></div>
+<div class="max-w-[1280px] mx-auto relative z-30 text-center space-y-lg">
+<h1 class="font-headline-xl text-headline-xl text-surface-bright font-extrabold leading-tight lg:text-[64px] lg:leading-tight">
+                 Shamva Innovators
+            </h1>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-2xl mx-auto">
+                A six-week AI engineering program teaching students in rural Zimbabwe to build, host, and share real software that solves problems in their own community.
+            </p>
+<div class="flex flex-wrap gap-4 justify-center pt-sm">
+<button class="bg-secondary-container text-primary font-label-md text-label-md px-8 py-3 rounded-DEFAULT hover:bg-secondary-fixed transition-all font-bold shadow-sm">
+                    Support the Program
+                </button>
+<button class="bg-transparent border border-surface-variant/30 text-surface-bright font-label-md text-label-md px-8 py-3 rounded-DEFAULT hover:bg-surface-variant/10 transition-all">
+                    Learn More
+                </button>
+</div>
+</div>
+</section>
+<!-- Mission, Vision & Values -->
+<section class="py-xxl px-gutter bg-surface-container-lowest">
+<div class="max-w-[1280px] mx-auto">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-primary">Mission, Vision &amp; Values</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Mission -->
+<div class="space-y-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Mission</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">To teach students in Shamva the foundations of AI engineering in a way that is accessible, practical, and directly connected to the problems they see in their own lives — equipping them not just with technical skill, but with the confidence to apply it to their community.</p>
+</div>
+<!-- Vision -->
+<div class="space-y-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Vision</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">An independent, self-sustaining organization based in Shamva that continues to grow long after the first cohort graduates — with a permanent club at Wadzanai High School, graduates mentoring new students, and a community that no longer sees problem-solving as something reserved for adults or for elsewhere.</p>
+</div>
+<!-- Values -->
+<div class="space-y-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Values</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Curiosity over memorization. Building over lecturing. Real problems over abstract exercises. We believe students learn fastest when what they build matters to someone — starting with themselves, and extending to their families, their school, and their community.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Problem & Our Solution -->
+<section class="py-xxl px-gutter bg-surface-container-low border-y border-surface-variant">
+<div class="max-w-[1280px] mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-xl text-center">The Problem &amp; Our Solution</h2>
+<div class="grid md:grid-cols-2 gap-xl">
+<div class="p-lg bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-md flex items-center gap-2">
+ The Problem</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                        Students in Shamva are deeply curious and capable, but they've had almost no exposure to computer science, programming, or modern technology. Of the students surveyed at Wadzanai High School before our first program, not a single one knew any programming language, and only 13.7% had even heard of AI. Schools don't teach robotics, internet access is limited, and the most visible economic path is small-scale gold mining. Meanwhile, the community faces real and urgent challenges — drug abuse, early child marriage, water and electricity shortages, high unemployment — and young people currently have few tools to respond to any of it.
+                    </p>
+</div>
+<div class="p-lg bg-primary-container text-on-primary rounded-xl shadow-sm border border-primary-fixed-dim/20">
+<h3 class="font-headline-sm text-headline-sm text-surface-bright mb-md flex items-center gap-2">
+ Our Solution</h3>
+<p class="font-body-md text-body-md text-primary-fixed-dim leading-relaxed">
+                        A six-week, live-taught program that takes students from their very first line of code to a fully built, deployed AI-powered application — one they design themselves, around a problem they've identified in their own community. Two Zoom sessions a week plus a hands-on lab keep learning consistent and practical, while a trusted partner on the ground ensures students have the space, equipment, and support to make it real. By the final week, every student has something they can point to and say: I made that, and you can use it.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Latest Updates Section -->
+<section class="py-xxl px-gutter bg-surface-container-lowest">
+<div class="max-w-[1280px] mx-auto">
+<div class="flex justify-between items-end mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-primary">Latest Updates</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<article class="group border border-surface-variant rounded-lg p-md hover:shadow-md transition-shadow">
+<div class="mb-4">
+<span class="bg-secondary-container text-primary font-label-sm text-label-sm px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Cohort Selection Begins</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Mr. Chabata begins selecting the first group of 20 students at Wadzanai High School for our Summer 2026 cohort.</p>
+<a class="font-label-md text-label-md text-primary group-hover:underline flex items-center gap-1" href="#">Read More →</a>
+</article>
+<!-- Card 2 -->
+<article class="group border border-surface-variant rounded-lg p-md hover:shadow-md transition-shadow">
+<div class="mb-4">
+<span class="bg-secondary-container text-primary font-label-sm text-label-sm px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Curriculum Finalized</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">The full six-week curriculum — covering Python, Streamlit, and AI APIs — is locked in and ready to teach.</p>
+<a class="font-label-md text-label-md text-primary group-hover:underline flex items-center gap-1" href="#">Read More →</a>
+</article>
+<!-- Card 3 -->
+<article class="group border border-surface-variant rounded-lg p-md hover:shadow-md transition-shadow">
+<div class="mb-4">
+<span class="bg-secondary-container text-primary font-label-sm text-label-sm px-2 py-1 rounded-full uppercase tracking-wider">Coming Soon</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">Program Launches</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6">Live Zoom sessions begin, with students gathering twice a week at Wadzanai High School to learn directly from their instructor in the U.S.</p>
+<a class="font-label-md text-label-md text-primary group-hover:underline flex items-center gap-1" href="#">Read More →</a>
+</article>
+</div>
+<div class="text-center mt-xl">
+<a class="font-label-md text-label-md text-primary hover:underline inline-flex items-center gap-2" href="#">
+                    View All Updates →
+                </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary-container text-on-primary-fixed-variant pt-xl pb-lg px-gutter border-t border-primary-fixed-dim/20">
+<div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-xl mb-xl">
+<!-- Brand Column -->
+<div class="col-span-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-surface-bright tracking-tight">Shamva AI</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary-fixed-dim/80 mb-6 max-w-xs">
+                Empowering students in rural Zimbabwe to engineer AI-powered solutions for their own communities.
+            </p>
+<div class="flex gap-4">
+<a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#"><span class="material-symbols-outlined">forum</span></a>
+</div>
+</div>
+<!-- Quick Links -->
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-surface-bright mb-4 uppercase tracking-wider">Quick Links</h4>
+<ul class="space-y-3 font-body-sm text-body-sm">
+<li><a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#">Curriculum Overview</a></li>
+<li><a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#">Admissions Process</a></li>
+<li><a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#">Student Outcomes</a></li>
+<li><a class="text-primary-fixed-dim hover:text-surface-bright transition-colors" href="#">Our Partner</a></li>
+</ul>
+</div>
+<!-- Contact -->
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-surface-bright mb-4 uppercase tracking-wider">Contact</h4>
+<ul class="space-y-3 font-body-sm text-body-sm">
+<li class="flex items-start gap-2 text-primary-fixed-dim">
+<span class="material-symbols-outlined text-sm mt-0.5">mail</span>
+                    contact@shamva.ai
+                </li>
+<li class="flex items-start gap-2 text-primary-fixed-dim">
+<span class="material-symbols-outlined text-sm mt-0.5">location_on</span>
+                    Wadzanai High School<br/>Shamva, Zimbabwe
+                </li>
+</ul>
+</div>
+<!-- Newsletter -->
+<div class="col-span-1">
+<h4 class="font-label-md text-label-md text-surface-bright mb-4 uppercase tracking-wider">Stay Updated</h4>
+<form class="flex flex-col gap-2">
+<input class="bg-primary-fixed/10 border border-primary-fixed-dim/30 rounded-DEFAULT px-3 py-2 text-surface-bright font-body-sm focus:outline-none focus:border-secondary-fixed transition-colors placeholder:text-primary-fixed-dim/50" placeholder="Enter your email" type="email"/>
+<button class="bg-secondary-container text-primary font-label-md text-label-md px-4 py-2 rounded-DEFAULT hover:bg-secondary-fixed transition-colors font-bold mt-2" type="submit">
+                    Subscribe
+                </button>
+</form>
+</div>
+</div>
+<div class="max-w-[1280px] mx-auto pt-6 border-t border-primary-fixed-dim/10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="font-body-sm text-body-sm text-primary-fixed-dim/60">© 2024 Shamva AI. All rights reserved.</p>
+<div class="flex gap-6 font-body-sm text-body-sm text-primary-fixed-dim/60">
+<a class="hover:text-surface-bright transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-surface-bright transition-colors" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.hero-bg-slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 5000); // 5 seconds rotation
+    });
+</script>
+</body></html>

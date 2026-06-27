@@ -15,7 +15,7 @@ DATABASES = {
     }
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'config.email_backend.EmailBackend'
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True

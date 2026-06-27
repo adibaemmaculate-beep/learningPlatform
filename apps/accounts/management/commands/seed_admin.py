@@ -27,7 +27,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f'Created admin user: {email}'))
 
         course, created = Course.objects.get_or_create(
-            name='AI & Coding — Cohort 1',
+            name=' ',
             defaults={
                 'description': 'Middle school AI and coding program — Cohort 1',
                 'is_active': True,

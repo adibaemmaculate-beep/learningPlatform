@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render
 from django.utils import timezone
 
@@ -16,14 +18,23 @@ from apps.courses.models import CourseMaterial
 from apps.profiles.models import Profile
 
 
+GREETINGS = (
+    'Hi',
+    'Howdy',
+    "What's up",
+    'Hey there',
+    'Hello',
+    'Yo',
+    'Welcome back',
+    'Glad to see you',
+    'Hiya',
+    'Greetings',
+    'Wagwaan',
+)
+
+
 def _greeting_name(user):
-    hour = timezone.localtime().hour
-    if hour < 12:
-        greeting = 'Good morning'
-    elif hour < 17:
-        greeting = 'Good afternoon'
-    else:
-        greeting = 'Good evening'
+    greeting = random.choice(GREETINGS)
     return f'{greeting}, {user.first_name} 👋'
 
 

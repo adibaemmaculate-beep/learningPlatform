@@ -1,0 +1,8 @@
+{% load static %}
+<img
+    src="{% static 'logo.png' %}"
+    alt="Shamva Innovators"
+    class="object-contain {{ css_class|default:'h-10 w-auto' }}"
+    {% if width %}width="{{ width }}"{% endif %}
+    {% if height %}height="{{ height }}"{% endif %}
+>

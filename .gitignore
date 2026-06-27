@@ -1,6 +1,6 @@
 venv/
 db.sqlite3
-.env
+# .env is intentionally committed (contains live secrets — keep this repo PRIVATE)
 
 __pycache__/
 *.py[cod]

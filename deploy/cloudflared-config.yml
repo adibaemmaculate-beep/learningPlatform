@@ -1,0 +1,27 @@
+# Cloudflare Tunnel config for the learning platform.
+#
+# Use this when the server has NO public IP (e.g. reachable only via Tailscale /
+# behind NAT/CGNAT) but you want a custom domain (bought on Namecheap, DNS moved
+# to Cloudflare) accessible from anywhere on the internet.
+#
+# Flow: Internet -> Cloudflare edge (TLS) -> cloudflared (outbound tunnel)
+#       -> Nginx (127.0.0.1:8080) -> Gunicorn (127.0.0.1:8000) -> Django
+#
+# Install to: ~/.cloudflared/config.yml  (on the server, for the user that runs
+# the tunnel). See README "Public deployment (Cloudflare Tunnel)" for full steps.
+#
+# --- EDIT TUNNEL_ID, the credentials path, and the hostnames below ---
+
+tunnel: TUNNEL_ID
+credentials-file: /home/sean/.cloudflared/TUNNEL_ID.json
+
+ingress:
+  # Public hostname -> Nginx (which serves /static/ and /uploads/ and proxies
+  # everything else to Gunicorn). Keep Nginx in front: WhiteNoise serves static
+  # files but NOT media uploads (/uploads/), so Gunicorn alone would 404 them.
+  - hostname: shamvainnovators.org
+    service: http://localhost:8080
+  - hostname: www.shamvainnovators.org
+    service: http://localhost:8080
+  # Required catch-all.
+  - service: http_status:404

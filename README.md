@@ -55,7 +55,109 @@ npm run watch:css
 5. **Teacher** → Projects → view student project
 6. Toggle **email notifications** off in Settings → trigger an announcement → confirm no console email for that user
 
-PostgreSQL and production deployment config are deferred.
+## Public deployment (Cloudflare Tunnel)
+
+Use this when the Ubuntu server has **no public IP** (e.g. reachable only via
+Tailscale / behind NAT/CGNAT) but you want a **custom domain** (bought on
+Namecheap) accessible from anywhere. Cloudflare Tunnel terminates TLS and routes
+public traffic to the server over an outbound-only connection — no open ports.
+
+```
+Internet → Cloudflare edge (TLS, your domain)
+         → cloudflared (outbound tunnel, on the server)
+         → Nginx (127.0.0.1:8080)  # serves /static/ and /uploads/
+         → Gunicorn (127.0.0.1:8000)
+         → Django (config.settings.production)
+```
+
+> Keep Nginx in front: WhiteNoise serves static files but **not** media uploads
+> (`/uploads/`), which Nginx handles. Files: `deploy/nginx.conf`,
+> `deploy/gunicorn.service`, `deploy/cloudflared-config.yml`.
+
+### 1. Domain + DNS
+
+1. Buy the domain on Namecheap.
+2. Create a free Cloudflare account → **Add a site** → enter your domain.
+3. In Namecheap (**Domain List → Manage → Nameservers → Custom DNS**), replace
+   the nameservers with the two Cloudflare gives you. (Domain stays registered at
+   Namecheap; only DNS moves to Cloudflare.) Wait for propagation.
+4. In Cloudflare **SSL/TLS**, set encryption mode to **Flexible** (simplest; the
+   tunnel itself is encrypted).
+
+### 2. App on the server
+
+```bash
+cd /home/sean
+git clone <your-repo-url> learningPlatform && cd learningPlatform
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+npm install && npm run build:css
+export DJANGO_SETTINGS_MODULE=config.settings.production
+python manage.py migrate
+python manage.py collectstatic --noinput
+python manage.py seed_admin
+```
+
+> The repo's `.env` is committed and already production-ready (`DEBUG=False`,
+> `ALLOWED_HOSTS`/`CSRF_TRUSTED_ORIGINS` set to `shamvainnovators.org`,
+> `SECURE_SSL_REDIRECT=True`, SQLite). **Keep this repository PRIVATE** — `.env`
+> contains the live `SECRET_KEY` and Gmail app password.
+>
+> SQLite note: `db.sqlite3` is git-ignored, so a fresh `migrate` starts with an
+> empty database. To carry over existing data, copy your local `db.sqlite3` to the
+> server (e.g. `scp db.sqlite3 sean@<tailscale-ip>:~/learningPlatform/`).
+
+### 3. Gunicorn + Nginx (systemd)
+
+Edit `deploy/gunicorn.service` (User/Group/paths) and `deploy/nginx.conf`
+(the `/static/` and `/uploads/` alias paths), then:
+
+```bash
+sudo cp deploy/gunicorn.service /etc/systemd/system/learningplatform.service
+sudo systemctl daemon-reload && sudo systemctl enable --now learningplatform
+
+sudo cp deploy/nginx.conf /etc/nginx/sites-available/learningplatform
+sudo ln -s /etc/nginx/sites-available/learningplatform /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+### 4. Cloudflare Tunnel
+
+```bash
+curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb
+sudo dpkg -i cloudflared.deb
+cloudflared tunnel login                      # authorize your domain
+cloudflared tunnel create learningplatform    # note the TUNNEL_ID it prints
+```
+
+Copy `deploy/cloudflared-config.yml` to `~/.cloudflared/config.yml`, fill in
+`TUNNEL_ID` and the credentials path (hostnames are already set to
+`shamvainnovators.org`). Then:
+
+```bash
+cloudflared tunnel route dns learningplatform shamvainnovators.org
+cloudflared tunnel route dns learningplatform www.shamvainnovators.org
+sudo cloudflared service install
+sudo systemctl enable --now cloudflared
+```
+
+Visit `https://shamvainnovators.org`. Tailscale can stay installed for private
+SSH/admin access — it coexists with the public Cloudflare Tunnel.
+
+> Note: Tailscale Funnel cannot serve a custom domain (only `*.ts.net`), which is
+> why a custom domain uses Cloudflare Tunnel instead.
+
+### Updating later
+
+```bash
+cd /home/sean/learningPlatform && source venv/bin/activate
+git pull
+pip install -r requirements.txt
+npm run build:css
+python manage.py migrate
+python manage.py collectstatic --noinput
+sudo systemctl restart learningplatform
+```
 
 ## Email (Gmail SMTP)
 

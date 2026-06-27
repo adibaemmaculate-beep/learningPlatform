@@ -59,6 +59,9 @@
     </form>
     <div class="mt-lg pt-lg border-t border-outline-variant text-center">
         <p class="font-body-md text-on-surface-variant">Already have an account? <a class="text-primary hover:underline font-semibold" href="{% url 'accounts:login' %}">Log in</a></p>
+        <a class="mt-md inline-flex items-center gap-xs font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="{% url 'public:home' %}">
+            <span class="material-symbols-outlined text-[18px]">arrow_back</span> Back to main site
+        </a>
     </div>
 </main>
 {% endblock %}

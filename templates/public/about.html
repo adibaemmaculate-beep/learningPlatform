@@ -122,31 +122,4 @@
     </div>
 </section>
 
-<!-- Who's Involved -->
-<section class="py-xxl px-gutter bg-surface-container-lowest">
-    <div class="max-w-[1280px] mx-auto">
-        <div class="flex flex-col items-center text-center mb-xl">
-            <span class="  mb-md"></span>
-            <h2 class="font-headline-lg text-headline-lg text-primary">Who's Involved</h2>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
-            {% for member in team_members %}
-            <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xl shadow-sm flex flex-col md:flex-row gap-lg items-center md:items-start text-center md:text-left">
-                <div class="w-32 h-32 rounded-full overflow-hidden bg-primary-container text-surface-bright flex-shrink-0 flex items-center justify-center">
-                    {% if member.image_url %}
-                    <img src="{{ member.image_url }}" alt="{{ member.name }}" class="w-full h-full object-cover">
-                    {% else %}
-                    <span class="font-headline-lg text-headline-lg">{{ member.initials }}</span>
-                    {% endif %}
-                </div>
-                <div>
-                    <h4 class="font-headline-sm text-headline-sm text-primary">{{ member.name }}</h4>
-                    <div class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-sm mt-xs">{{ member.role }}</div>
-                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">{{ member.bio }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
 {% endblock %}

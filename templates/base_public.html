@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block body_class %}bg-background text-on-background font-body-md min-h-screen flex flex-col{% endblock %}
+{% block body_class %}bg-white text-[#1a1a2e] font-body-md min-h-screen flex flex-col{% endblock %}
 {% block content %}
 {% include "partials/public_navbar.html" %}
-<div class="pt-20 flex-1 flex flex-col">
+<div class="flex-1 flex flex-col">
     {% block public_content %}{% endblock %}
 </div>
 {% include "partials/public_footer.html" %}

@@ -1,179 +1,316 @@
 {% extends "base_public.html" %}
 {% load static %}
-{% block title %}Shamva AI -  Shamva Innovators{% endblock %}
+{% block title %}Shamva Innovators{% endblock %}
 {% block extra_head %}
 <style>
-    .hero-bg-slide {
-        position: absolute;
-        inset: 0;
-        background-size: cover;
-        background-position: center;
-        opacity: 0;
-        transition: opacity 1.5s ease-in-out;
-        z-index: 0;
+  .timeline-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 8px;
+    width: 2px;
+    background-color: #f5a623;
+  }
+  @media (min-width: 768px) {
+    .timeline-line::before {
+      left: 50%;
+      transform: translateX(-50%);
     }
-    .hero-bg-slide.active {
-        opacity: 1;
+    .md\:ml-1\/2 {
+      margin-left: 50%;
     }
+  }
+  @media (max-width: 767px) {
+    .timeline-item {
+      width: 100% !important;
+      margin-left: 0 !important;
+      padding-left: 2.5rem !important;
+      padding-right: 0 !important;
+      justify-content: flex-start !important;
+    }
+    .timeline-item .timeline-dot {
+      left: 2px !important;
+      right: auto !important;
+    }
+    .timeline-item .md\:text-right {
+      text-align: left;
+    }
+  }
+
+  .carousel-track {
+    transition: transform 0.4s ease;
+  }
+  .dot.active {
+    background-color: #1a3a5c;
+  }
 </style>
 {% endblock %}
 {% block public_content %}
-<!-- Hero Section -->
-<section class="bg-primary-container text-on-primary-container px-gutter relative overflow-hidden flex items-center min-h-[560px] py-xxl" id="hero-carousel">
-    <!-- Background Images Layer -->
-    <div class="absolute inset-0 z-0">
-        <div class="hero-bg-slide active" style="background-image: url('{% static 'hero/hero1.png' %}');"></div>
-        <div class="hero-bg-slide" style="background-image: url('{% static 'hero/hero2.png' %}');"></div>
-        <div class="hero-bg-slide" style="background-image: url('{% static 'hero/hero3.png' %}');"></div>
-        <!-- Brand Overlay -->
-        <div class="absolute inset-0 z-10" style="background: linear-gradient(to top, rgba(16,42,87,0.94), rgba(16,42,87,0.62) 55%, rgba(16,42,87,0.8));"></div>
-    </div>
-    <div class="absolute inset-0 opacity-10 z-20" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 32px 32px;"></div>
-    <div class="max-w-[1280px] w-full mx-auto relative z-30 text-center">
-        <div class="max-w-3xl mx-auto space-y-lg">
-            <h1 class="font-headline-xl text-headline-xl text-surface-bright font-extrabold leading-tight lg:text-[64px] lg:leading-tight">
-                 Shamva Innovators
-            </h1>
-            <div class="flex justify-center">
-                <span class="block w-20 h-1 bg-secondary-container rounded-full"></span>
-            </div>
-            <p class="font-body-lg text-body-lg text-primary-fixed-dim max-w-2xl mx-auto">
-                
-                
-            </p>
-            <div class="flex flex-wrap gap-4 justify-center pt-sm">
-                <a href="{% url 'public:students' %}" class="bg-secondary-container text-on-secondary-container font-label-md text-label-md tracking-wider px-8 py-3 rounded-lg hover:bg-secondary-fixed transition-all font-bold shadow-lg">
-                    Meet the Students
-                </a>
-                <a href="{% url 'public:about' %}" class="bg-transparent border-2 border-white/40 text-surface-bright font-label-md text-label-md tracking-wider px-8 py-3 rounded-lg hover:bg-white/10 hover:border-white/70 transition-all font-bold">
-                    Learn More
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Mission, Vision & Values -->
-<section class="py-xxl px-gutter bg-surface-container-lowest">
-    <div class="max-w-[1280px] mx-auto">
-        <div class="flex flex-col items-center text-center mb-xl">
-            <span class="  mb-md"></span>
-            <h2 class="font-headline-lg text-headline-lg text-primary">Mission, Vision &amp; Values</h2>
+  <!-- HERO -->
+  <section class="bg-cream py-10 md:py-16">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div class="order-2 md:order-1">
+        <h1 class="text-3xl sm:text-[42px] font-extrabold text-[#1a1a2e] leading-[1.15] mb-4">Shamva Innovators</h1>
+        <p class="text-sm sm:text-[15px] text-gray-600 mb-6 md:mb-8 leading-relaxed max-w-[420px]">Empowering students in Shamva to build AI-powered solutions for real-world challenges. From zero code to deployed impact.</p>
+        <div class="flex gap-3 flex-wrap">
+          <a href="#journey" class="px-5 sm:px-[22px] py-2.5 sm:py-[11px] bg-navy text-white rounded-md text-xs sm:text-sm font-semibold cursor-pointer hover:bg-navy-dark transition-colors inline-block">See Our 6-Week Journey</a>
+          <a href="{% url 'public:about' %}" class="px-5 sm:px-[22px] py-2.5 sm:py-[11px] bg-transparent text-navy border-2 border-navy rounded-md text-xs sm:text-sm font-semibold cursor-pointer hover:bg-navy hover:text-white transition-all inline-block">About the Program</a>
         </div>
-        <div class="grid md:grid-cols-3 gap-lg">
-            <!-- Mission -->
-            <div class="group bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md transition-all space-y-md">
-                <div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
-                    <span class="material-symbols-outlined">rocket_launch</span>
-                </div>
-                <h3 class="font-headline-sm text-headline-sm text-primary">Mission</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">To teach students in Shamva the foundations of AI engineering in a way that is accessible, practical, and directly connected to the problems they see in their own lives — equipping them not just with technical skill, but with the confidence to apply it to their community.</p>
-            </div>
-            <!-- Vision -->
-            <div class="group bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md transition-all space-y-md">
-                <div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
-                    <span class="material-symbols-outlined">visibility</span>
-                </div>
-                <h3 class="font-headline-sm text-headline-sm text-primary">Vision</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">An independent, self-sustaining organization based in Shamva that continues to grow long after the first cohort graduates — with a permanent club at Wadzanai High School, graduates mentoring new students, and a community that no longer sees problem-solving as something reserved for adults or for elsewhere.</p>
-            </div>
-            <!-- Values -->
-            <div class="group bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md transition-all space-y-md">
-                <div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container">
-                    <span class="material-symbols-outlined">favorite</span>
-                </div>
-                <h3 class="font-headline-sm text-headline-sm text-primary">Values</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Curiosity over memorization. Building over lecturing. Real problems over abstract exercises. We believe students learn fastest when what they build matters to someone — starting with themselves, and extending to their families, their school, and their community.</p>
-            </div>
-        </div>
+      </div>
+      <div class="order-1 md:order-2">
+        <img id="hero-image" src="{% static 'hero1.png' %}" alt="Hero image" class="w-full h-[220px] sm:h-[280px] md:h-[320px] object-cover rounded-xl shadow-lg" />
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- The Problem & Our Solution -->
-<section class="py-xxl px-gutter bg-surface-container-low border-y border-outline-variant">
-    <div class="max-w-[1280px] mx-auto">
-        <div class="flex flex-col items-center text-center mb-xl">
-            <span class="  mb-md"></span>
-            <h2 class="font-headline-lg text-headline-lg text-primary">The Problem &amp; Our Solution</h2>
+  <!-- MISSION VISION VALUES -->
+  <section class="py-12 md:py-[72px] bg-white">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-[28px] font-bold text-center title-underline">Mission, Vision &amp; Values</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-gray-200 rounded-[10px] px-6 py-8 text-center shadow-sm hover:shadow-lg transition-shadow">
+          <div class="w-14 h-14 rounded-full bg-[#eaf3fb] flex items-center justify-center mx-auto mb-4">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M16 4 L28 10 L28 22 L16 28 L4 22 L4 10 Z" stroke="#4a90d9" stroke-width="2" fill="none"/>
+              <circle cx="16" cy="16" r="4" fill="#4a90d9"/>
+            </svg>
+          </div>
+          <h3 class="text-[17px] font-bold text-[#1a1a2e] mb-3">Mission</h3>
+          <p class="text-[13.5px] text-gray-600 leading-relaxed">To teach students in Shamva the foundations of AI engineering in a way that is accessible, practical, and directly connected to the problems they see in their lives.</p>
         </div>
-        <div class="grid md:grid-cols-2 gap-lg">
-            <div class="p-xl bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm">
-                <h3 class="font-headline-sm text-headline-sm text-primary mb-md">
-                    The Problem
-                </h3>
-                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                    Students in Shamva are deeply curious and capable, but they've had almost no exposure to computer science, programming, or modern technology. Of the students surveyed at Wadzanai High School before our first program, not a single one knew any programming language, and only 13.7% had even heard of AI. Schools don't teach robotics, internet access is limited, and the most visible economic path is small-scale gold mining. Meanwhile, the community faces real and urgent challenges — drug abuse, early child marriage, water and electricity shortages, high unemployment — and young people currently have few tools to respond to any of it.
-                </p>
-            </div>
-            <div class="p-xl bg-primary-container text-on-primary-container rounded-xl shadow-lg">
-                <h3 class="font-headline-sm text-headline-sm text-surface-bright mb-md">
-                    Our Solution
-                </h3>
-                <p class="font-body-md text-body-md text-primary-fixed-dim leading-relaxed">
-                    A six-week, live-taught program that takes students from their very first line of code to a fully built, deployed AI-powered application — one they design themselves, around a problem they've identified in their own community. Two Zoom sessions a week plus a hands-on lab keep learning consistent and practical, while a trusted partner on the ground ensures students have the space, equipment, and support to make it real. By the final week, every student has something they can point to and say: I made that, and you can use it.
-                </p>
-            </div>
+        <div class="bg-white border border-gray-200 rounded-[10px] px-6 py-8 text-center shadow-sm hover:shadow-lg transition-shadow">
+          <div class="w-14 h-14 rounded-full bg-[#fff8ec] flex items-center justify-center mx-auto mb-4">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="16" rx="12" ry="7" stroke="#f5a623" stroke-width="2" fill="none"/>
+              <circle cx="16" cy="16" r="4" fill="#f5a623"/>
+            </svg>
+          </div>
+          <h3 class="text-[17px] font-bold text-[#1a1a2e] mb-3">Vision</h3>
+          <p class="text-[13.5px] text-gray-600 leading-relaxed">An independent, self-sustaining organization where graduates mentor new students, solving community problems through tech innovation.</p>
         </div>
+        <div class="bg-white border border-gray-200 rounded-[10px] px-6 py-8 text-center shadow-sm hover:shadow-lg transition-shadow">
+          <div class="w-14 h-14 rounded-full bg-[#fef0f0] flex items-center justify-center mx-auto mb-4">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M16 27 C16 27 4 20 4 12 C4 8.13 7.13 5 11 5 C13.24 5 15.24 6.12 16 7.5 C16.76 6.12 18.76 5 21 5 C24.87 5 28 8.13 28 12 C28 20 16 27 16 27Z" stroke="#e05a5a" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <h3 class="text-[17px] font-bold text-[#1a1a2e] mb-3">Values</h3>
+          <p class="text-[13.5px] text-gray-600 leading-relaxed">Curiosity over memorization. Building over lecturing. We believe students learn fastest when they build matters to their families and community.</p>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- News -->
-<section class="py-xxl px-gutter bg-surface-container-lowest">
-    <div class="max-w-[1280px] mx-auto">
-        <div class="flex flex-wrap gap-4 justify-between items-end mb-xl border-b border-outline-variant pb-4">
-            <div class="flex items-center gap-3">
-                <span class=" "></span>
-                <h2 class="font-headline-lg text-headline-lg text-primary">Latest Updates</h2>
-            </div>
-            {% if latest_updates %}
-            <a href="{% url 'public:updates' %}" class="font-label-md text-label-md tracking-wider text-primary flex items-center gap-1 hover:text-surface-tint transition-colors">
-                View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
-            </a>
-            {% endif %}
+  <!-- PROBLEM / SOLUTION -->
+  <section class="py-12 md:py-[72px] bg-cream">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="relative rounded-xl overflow-hidden p-8 sm:p-10 text-white">
+        <img src="{% static 'class6.jpg' %}" alt="" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-[#1a1a2e]/85"></div>
+        <div class="relative z-10">
+          <h2 class="text-[22px] font-bold mb-7">The Problem</h2>
+          <div class="mb-5">
+            <span class="block text-[42px] font-extrabold leading-none mb-1.5 text-gold">0%</span>
+            <p class="text-[13.5px] text-gray-300 leading-relaxed">of students surveyed at Wadzanai High School knew a programming language.</p>
+          </div>
+          <div class="mb-5">
+            <span class="block text-[42px] font-extrabold leading-none mb-1.5 text-gold">13.7%</span>
+            <p class="text-[13.5px] text-gray-300 leading-relaxed">had even heard of AI before the program launched.</p>
+          </div>
+          <p class="text-[13px] text-gray-400 mt-5 leading-relaxed">Community challenges like drug abuse, water shortages, and unemployment persist while young people lack the tools to respond effectively.</p>
         </div>
-        {% if latest_updates %}
-        <div class="grid md:grid-cols-3 gap-lg">
-            {% for update in latest_updates %}
-            <article class="group bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all">
-                <a href="{% url 'public:update_detail' update.id %}" class="block">
-                    <div class="aspect-[16/10] overflow-hidden bg-surface-variant relative">
-                        {% if update.cover_image_url %}
-                        <img src="{{ update.cover_image_url }}" alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        {% else %}
-                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface-container to-surface-container-high">
-                            <span class="material-symbols-outlined text-5xl text-outline-variant">newspaper</span>
-                        </div>
-                        {% endif %}
-                    </div>
-                    <div class="p-lg">
-                        <time class="font-label-sm text-label-sm tracking-wider uppercase text-on-surface-variant">{{ update.published_at|date:"M d, Y" }}</time>
-                        <h3 class="font-headline-sm text-headline-sm text-primary mt-2 mb-2 group-hover:text-surface-tint transition-colors">{{ update.title }}</h3>
-                        <p class="font-body-sm text-body-sm text-on-surface-variant mb-4 line-clamp-2">{{ update.excerpt }}</p>
-                        <span class="font-label-md text-label-md tracking-wider text-primary group-hover:underline flex items-center gap-1">Read more <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
-                    </div>
-                </a>
-            </article>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p class="font-body-md text-on-surface-variant">News updates coming soon.</p>
-        {% endif %}
+      </div>
+      <div class="bg-navy text-white rounded-xl p-8 sm:p-10">
+        <h2 class="text-[22px] font-bold text-gold mb-4">Our Solution</h2>
+        <p class="text-sm text-[#d0e4f7] leading-relaxed mb-7">A six-week, live-taught program taking students from their first line of code to a deployed AI-powered application.</p>
+        <ul class="list-none flex flex-col gap-3.5">
+          <li class="flex items-center gap-3 text-sm font-medium">
+            <span class="inline-flex items-center justify-center w-[22px] h-[22px] rounded-full border-2 border-gold text-gold text-xs font-bold shrink-0">&#10003;</span>
+            2x Weekly Zoom Sessions
+          </li>
+          <li class="flex items-center gap-3 text-sm font-medium">
+            <span class="inline-flex items-center justify-center w-[22px] h-[22px] rounded-full border-2 border-gold text-gold text-xs font-bold shrink-0">&#10003;</span>
+            Hands-on Local Lab support
+          </li>
+          <li class="flex items-center gap-3 text-sm font-medium">
+            <span class="inline-flex items-center justify-center w-[22px] h-[22px] rounded-full border-2 border-gold text-gold text-xs font-bold shrink-0">&#10003;</span>
+            Problem-Driven Curriculum
+          </li>
+        </ul>
+      </div>
     </div>
-</section>
+  </section>
+
+  <!-- 6-WEEK JOURNEY -->
+  <section id="journey" class="py-14 md:py-20 bg-navy-dark relative overflow-hidden">
+    <img src="{% static 'class18.jpg' %}" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" />
+    <div class="absolute inset-0 bg-navy-dark/80"></div>
+    <div class="relative z-10 max-w-[1100px] mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-[28px] font-bold text-white text-center mb-2">The 6-Week Journey</h2>
+      <p class="text-sm text-[#aac4e0] text-center mb-10 md:mb-14">Accelerated path to engineering impact</p>
+      <div class="relative timeline-line">
+
+        <div class="timeline-item flex items-start mb-10 md:mb-14 w-1/2 md:ml-1/2 md:pl-12 relative">
+          <div class="timeline-dot absolute top-1.5 w-3.5 h-3.5 rounded-full bg-gold border-[3px] border-navy-dark z-10 md:-left-[7px]"></div>
+          <div class="max-w-[380px]">
+            <span class="block text-[10px] font-bold tracking-[1.5px] text-gold uppercase mb-1.5">PHASE ONE</span>
+            <h3 class="text-base sm:text-[18px] font-bold text-white mb-2">Weeks 1-2: Foundations</h3>
+            <p class="text-[13px] sm:text-[13.5px] text-[#8aaccc] leading-relaxed">Mastering Python syntax, data structures, and the logic required to build computational solutions.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item flex items-start mb-10 md:mb-14 w-1/2 md:pr-12 md:justify-end relative">
+          <div class="timeline-dot absolute top-1.5 w-3.5 h-3.5 rounded-full bg-gold border-[3px] border-navy-dark z-10 md:-right-[7px]"></div>
+          <div class="max-w-[380px] md:text-right">
+            <span class="block text-[10px] font-bold tracking-[1.5px] text-gold uppercase mb-1.5">PHASE TWO</span>
+            <h3 class="text-base sm:text-[18px] font-bold text-white mb-2">Week 3: Interactive UI</h3>
+            <p class="text-[13px] sm:text-[13.5px] text-[#8aaccc] leading-relaxed">Deploying Streamlit to transform static scripts into dynamic web interfaces people can actually use.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item flex items-start mb-10 md:mb-14 w-1/2 md:ml-1/2 md:pl-12 relative">
+          <div class="timeline-dot absolute top-1.5 w-3.5 h-3.5 rounded-full bg-gold border-[3px] border-navy-dark z-10 md:-left-[7px]"></div>
+          <div class="max-w-[380px]">
+            <span class="block text-[10px] font-bold tracking-[1.5px] text-gold uppercase mb-1.5">PHASE THREE</span>
+            <h3 class="text-base sm:text-[18px] font-bold text-white mb-2">Weeks 4-5: AI &amp; APIs</h3>
+            <p class="text-[13px] sm:text-[13.5px] text-[#8aaccc] leading-relaxed">Integrating Large Language Models and external data sources to power intelligent features.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item flex items-start w-1/2 md:pr-12 md:justify-end relative">
+          <div class="timeline-dot absolute top-1.5 w-3.5 h-3.5 rounded-full bg-gold border-[3px] border-navy-dark z-10 md:-right-[7px]"></div>
+          <div class="max-w-[380px] md:text-right">
+            <span class="block text-[10px] font-bold tracking-[1.5px] text-gold uppercase mb-1.5">PHASE FOUR</span>
+            <h3 class="text-base sm:text-[18px] font-bold text-white mb-2">Week 6: Final Projects</h3>
+            <p class="text-[13px] sm:text-[13.5px] text-[#8aaccc] leading-relaxed">The culmination: Students launch community-focused apps that address real Zimbabwean challenges.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIDE THE LAB -->
+  <section class="py-12 md:py-[72px] md:pb-14 bg-cream">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
+      <div class="flex flex-col sm:flex-row sm:items-start justify-between mb-6 md:mb-8 gap-3">
+        <div>
+          <h2 class="text-2xl sm:text-[28px] font-bold text-left">Inside the Lab</h2>
+          <p class="text-sm text-gray-500 text-left m-0">Where theory meets creation</p>
+        </div>
+        <span class="bg-[#eaf3fb] text-navy text-xs font-bold px-3 py-[5px] rounded-full tracking-wide shrink-0 mt-1">#InnovateShamva</span>
+      </div>
+      <div class="relative flex items-center gap-3">
+        <button type="button" class="w-9 sm:w-10 h-9 sm:h-10 rounded-full border-none bg-white shadow-md text-navy text-xl sm:text-[22px] cursor-pointer flex items-center justify-center shrink-0 hover:bg-[#e8f0fa] transition-colors z-10" id="prevBtn">&#8249;</button>
+        <div class="flex-1 overflow-hidden rounded-xl">
+          <div class="flex carousel-track" id="carouselTrack">
+            <div class="min-w-full relative h-[220px] sm:h-[280px] md:h-[320px]">
+              <img src="{% static 'class3.jpg' %}" alt="Lab" class="w-full h-full object-cover rounded-xl" />
+              <div class="absolute bottom-5 left-6 text-white text-sm font-bold uppercase tracking-[2px] drop-shadow-lg">LAB</div>
+            </div>
+            <div class="min-w-full relative h-[220px] sm:h-[280px] md:h-[320px]">
+              <img src="{% static 'class13.jpg' %}" alt="Tech" class="w-full h-full object-cover rounded-xl" />
+              <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-2xl sm:text-[36px] font-black tracking-[2px] sm:tracking-[4px] drop-shadow-lg text-center whitespace-nowrap">TECH</div>
+            </div>
+            <div class="min-w-full relative h-[220px] sm:h-[280px] md:h-[320px]">
+              <img src="{% static 'class15.jpg' %}" alt="Students" class="w-full h-full object-cover rounded-xl" />
+              <div class="absolute bottom-5 left-6 text-white text-sm font-bold uppercase tracking-[2px] drop-shadow-lg">STUDENTS</div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="w-9 sm:w-10 h-9 sm:h-10 rounded-full border-none bg-white shadow-md text-navy text-xl sm:text-[22px] cursor-pointer flex items-center justify-center shrink-0 hover:bg-[#e8f0fa] transition-colors z-10" id="nextBtn">&#8250;</button>
+      </div>
+      <div class="flex justify-center gap-2 mt-[18px]" id="carouselDots">
+        <span class="dot active w-7 h-[5px] rounded-[3px] bg-navy transition-colors"></span>
+        <span class="dot w-7 h-[5px] rounded-[3px] bg-[#cdd8e8] transition-colors"></span>
+        <span class="dot w-7 h-[5px] rounded-[3px] bg-[#cdd8e8] transition-colors"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="py-12 md:py-[72px] md:pb-20 bg-white">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-[28px] font-bold text-center mb-2">The Team Behind the Mission</h2>
+      <p class="text-sm text-gray-500 text-center mb-8 md:mb-10">Bridging the gap between global expertise and local leadership</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
+        <div class="rounded-[10px] overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow">
+          <img src="{% static 'sean_mutunhire.png' %}" alt="Sean Mutunhire" class="w-full h-[200px] object-cover block" />
+          <div class="p-5">
+            <h3 class="text-base font-bold text-[#1a1a2e] mb-1">Sean Mutunhire</h3>
+            <span class="block text-[10.5px] font-bold tracking-[1px] text-gold uppercase mb-2.5">REMOTE INSTRUCTOR</span>
+            <p class="text-[13px] text-gray-600 leading-relaxed">Leading the technical curriculum and live instruction from overseas, bringing world-class AI engineering insights directly to Shamva.</p>
+          </div>
+        </div>
+        <div class="rounded-[10px] overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow">
+          <img src="{% static 'mr_chabata.png' %}" alt="Mr. Chabata" class="w-full h-[200px] object-cover block" />
+          <div class="p-5">
+            <h3 class="text-base font-bold text-[#1a1a2e] mb-1">Mr. Chabata</h3>
+            <span class="block text-[10.5px] font-bold tracking-[1px] text-gold uppercase mb-2.5">ON-THE-GROUND PARTNER</span>
+            <p class="text-[13px] text-gray-600 leading-relaxed">Ensuring students have the physical space, equipment, and mentorship required to succeed in a demanding technical environment.</p>
+          </div>
+        </div>
+        <div class="rounded-[10px] overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow">
+          <img src="{% static 'placeholder_image.png' %}" alt="Mr. Manyika" class="w-full h-[200px] object-cover block" />
+          <div class="p-5">
+            <h3 class="text-base font-bold text-[#1a1a2e] mb-1">Mr. Manyika</h3>
+            <span class="block text-[10.5px] font-bold tracking-[1px] text-gold uppercase mb-2.5">TECHNICAL LEAD ON-THE-GROUND</span>
+            <p class="text-[13px] text-gray-600 leading-relaxed">Providing essential technical support and infrastructure maintenance to ensure a seamless learning environment for all students.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const slides = document.querySelectorAll('.hero-bg-slide');
-        if (slides.length <= 1) return;
-        let currentSlide = 0;
+  (function () {
+    var hero = document.getElementById('hero-image');
+    if (hero) {
+      var srcs = [
+        '{% static "hero1.png" %}',
+        '{% static "hero2.png" %}'
+      ];
+      var hi = 0;
+      setInterval(function () {
+        hi = (hi + 1) % srcs.length;
+        hero.src = srcs[hi];
+      }, 5000);
+    }
 
-        function nextSlide() {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
+    var track = document.getElementById('carouselTrack');
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+    var dots = document.querySelectorAll('#carouselDots .dot');
+    if (track) {
+      var index = 0;
+      var slides = track.children.length;
 
-        setInterval(nextSlide, 5000); // 5 seconds rotation
-    });
+      function goTo(i) {
+        index = (i + slides) % slides;
+        track.style.transform = 'translateX(-' + (index * 100) + '%)';
+        dots.forEach(function (dot, d) {
+          if (d === index) {
+            dot.classList.add('active');
+            dot.classList.remove('bg-[#cdd8e8]');
+            dot.classList.add('bg-navy');
+          } else {
+            dot.classList.remove('active');
+            dot.classList.remove('bg-navy');
+            dot.classList.add('bg-[#cdd8e8]');
+          }
+        });
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(index - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(index + 1); });
+      dots.forEach(function (dot, d) {
+        dot.addEventListener('click', function () { goTo(d); });
+      });
+      goTo(0);
+      setInterval(function () { goTo(index + 1); }, 4000);
+    }
+  })();
 </script>
 {% endblock %}

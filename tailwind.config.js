@@ -62,6 +62,10 @@ module.exports = {
         'inverse-on-surface': 'var(--color-inverse-on-surface)',
         'inverse-primary': 'var(--color-inverse-primary)',
         'surface-tint': 'var(--color-surface-tint)',
+        cream: '#f5f0e8',
+        navy: '#1a3a5c',
+        'navy-dark': '#0f2740',
+        gold: '#f5a623',
       },
       borderRadius: {
         DEFAULT: '0.125rem',

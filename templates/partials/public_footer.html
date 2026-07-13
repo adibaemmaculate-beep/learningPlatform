@@ -1,31 +1,31 @@
-<footer class="bg-primary-container text-on-primary-container py-xxl mt-auto">
-    <div class="max-w-[1280px] mx-auto px-gutter grid grid-cols-1 md:grid-cols-3 gap-xl">
+<footer class="bg-navy-dark text-white py-12 mt-auto">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
-            <div class="rounded-lg bg-surface-container-lowest p-2 inline-block mb-md">
-                {% include "partials/site_logo.html" with css_class="h-20 w-auto max-w-[320px]" %}
+            <div class="rounded-lg bg-white p-2 inline-block mb-4">
+                {% include "partials/site_logo.html" with css_class="h-16 w-auto max-w-[240px]" %}
             </div>
         </div>
         <div>
-            <h4 class="eyebrow eyebrow-on-blue mb-md">Navigate</h4>
-            <ul class="space-y-sm font-body-sm">
-                <li><a href="{% url 'public:home' %}" class="text-on-primary-container hover:text-secondary-container transition-colors">Home</a></li>
-                <li><a href="{% url 'public:about' %}" class="text-on-primary-container hover:text-secondary-container transition-colors">About</a></li>
-                <li><a href="{% url 'public:students' %}" class="text-on-primary-container hover:text-secondary-container transition-colors">Meet the Students</a></li>
-                <li><a href="{% url 'public:updates' %}" class="text-on-primary-container hover:text-secondary-container transition-colors">Updates</a></li>
-                <li><a href="{% url 'public:contact' %}" class="text-on-primary-container hover:text-secondary-container transition-colors">Contact</a></li>
+            <h4 class="text-[10px] font-bold tracking-[1.5px] text-gold uppercase mb-4">Navigate</h4>
+            <ul class="list-none space-y-2 text-sm">
+                <li><a href="{% url 'public:home' %}" class="text-[#aac4e0] hover:text-white transition-colors">Home</a></li>
+                <li><a href="{% url 'public:about' %}" class="text-[#aac4e0] hover:text-white transition-colors">About</a></li>
+                <li><a href="{% url 'public:students' %}" class="text-[#aac4e0] hover:text-white transition-colors">Students</a></li>
+                <li><a href="{% url 'public:updates' %}" class="text-[#aac4e0] hover:text-white transition-colors">Updates</a></li>
+                <li><a href="{% url 'public:contact' %}" class="text-[#aac4e0] hover:text-white transition-colors">Contact</a></li>
             </ul>
         </div>
         <div>
-            <h4 class="eyebrow eyebrow-on-blue mb-md">Newsletter</h4>
+            <h4 class="text-[10px] font-bold tracking-[1.5px] text-gold uppercase mb-4">Newsletter</h4>
             <form method="post" action="{% url 'public:home' %}" class="flex flex-col sm:flex-row gap-2">
                 {% csrf_token %}
                 <input type="hidden" name="form_type" value="newsletter">
-                <input type="email" name="email" placeholder="Your email" required class="flex-1 min-w-0 px-3 py-2 rounded-lg bg-surface-container-lowest text-on-surface text-body-sm border-0 focus:outline-none focus:ring-2 focus:ring-secondary-container">
-                <button type="submit" class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg font-label-md tracking-wider font-bold hover:bg-secondary-fixed transition-colors">Subscribe</button>
+                <input type="email" name="email" placeholder="Your email" required class="flex-1 min-w-0 px-3 py-2 rounded-md bg-white text-[#1a1a2e] text-sm border-0 focus:outline-none focus:ring-2 focus:ring-gold">
+                <button type="submit" class="px-4 py-2 bg-navy text-white rounded-md text-sm font-semibold hover:bg-[#245078] transition-colors">Subscribe</button>
             </form>
         </div>
     </div>
-    <div class="max-w-[1280px] mx-auto px-gutter mt-xl pt-lg border-t border-white/15 text-center font-body-sm text-primary-fixed-dim">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6 mt-8 pt-6 border-t border-white/15 text-center text-sm text-[#8aaccc]">
         &copy; {% now "Y" %} Shamva Innovators
     </div>
 </footer>

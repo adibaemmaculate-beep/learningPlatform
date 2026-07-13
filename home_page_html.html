@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shamva Innovators</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-white text-[#1a1a2e]">
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6 h-[60px] flex items-center gap-4 md:gap-10">
+      <div class="flex items-center gap-2 shrink-0">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="13" stroke="#1a3a5c" stroke-width="2"/>
+          <path d="M8 14 L14 8 L20 14 L14 20 Z" fill="#1a3a5c"/>
+        </svg>
+        <span class="text-xs font-bold text-navy leading-tight uppercase tracking-wide">Shamva<br>Innovators</span>
+      </div>
+      <ul class="hidden md:flex list-none gap-7 flex-1">
+        <li><a href="#" class="text-navy text-sm font-medium">Home</a></li>
+        <li><a href="#" class="text-gray-600 text-sm font-medium hover:text-navy transition-colors">About</a></li>
+        <li><a href="#" class="text-gray-600 text-sm font-medium hover:text-navy transition-colors">Students</a></li>
+        <li><a href="#" class="text-gray-600 text-sm font-medium hover:text-navy transition-colors">Updates</a></li>
+        <li><a href="#" class="text-gray-600 text-sm font-medium hover:text-navy transition-colors">Contact</a></li>
+      </ul>
+      <button class="hidden md:block ml-auto px-[22px] py-2 bg-navy text-white rounded-md text-sm font-semibold cursor-pointer hover:bg-navy-dark transition-colors shrink-0">Login</button>
+      <button id="navToggle" class="mobile-nav-toggle md:hidden ml-auto w-10 h-10 flex-col justify-center items-center gap-1.5 bg-transparent border-none cursor-pointer">
+        <span class="block w-6 h-0.5 bg-navy"></span>
+        <span class="block w-6 h-0.5 bg-navy"></span>
+        <span class="block w-6 h-0.5 bg-navy"></span>
+      </button>
+    </div>
+    <div id="mobileMenu" class="mobile-menu md:hidden flex-col gap-4 px-4 pb-4 bg-white border-t border-gray-100">
+      <a href="#" class="text-navy text-sm font-medium py-2">Home</a>
+      <a href="#" class="text-gray-600 text-sm font-medium py-2">About</a>
+      <a href="#" class="text-gray-600 text-sm font-medium py-2">Students</a>
+      <a href="#" class="text-gray-600 text-sm font-medium py-2">Updates</a>
+      <a href="#" class="text-gray-600 text-sm font-medium py-2">Contact</a>
+      <button class="px-[22px] py-2 bg-navy text-white rounded-md text-sm font-semibold cursor-pointer hover:bg-navy-dark transition-colors mt-2">Login</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="bg-cream py-10 md:py-16">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div class="order-2 md:order-1">
+        <h1 class="text-3xl sm:text-[42px] font-extrabold text-[#1a1a2e] leading-[1.15] mb-4">Shamva Innovators</h1>
+        <p class="text-sm sm:text-[15px] text-gray-600 mb-6 md:mb-8 leading-relaxed max-w-[420px]">Empowering students in Shamva to build AI-powered solutions for real-world challenges. From zero code to deployed impact.</p>
+        <div class="flex gap-3 flex-wrap">
+          <button class="px-5 sm:px-[22px] py-2.5 sm:py-[11px] bg-navy text-white rounded-md text-xs sm:text-sm font-semibold cursor-pointer hover:bg-navy-dark transition-colors">See Our 6-Week Journey</button>
+          <button class="px-5 sm:px-[22px] py-2.5 sm:py-[11px] bg-transparent text-navy border-2 border-navy rounded-md text-xs sm:text-sm font-semibold cursor-pointer hover:bg-navy hover:text-white transition-all">About the Program</button>
+        </div>
+      </div>
+      <div class="order-1 md:order-2">
+        <img id="hero-image" src="" alt="Hero image" class="w-full h-[220px] sm:h-[280px] md:h-[320px] object-cover rounded-xl shadow-lg" />
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION VISION VALUES -->
+  <section class="py-12 md:py-[72px] bg-white">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-[28px] font-bold text-center title-underline">Mission, Vision &amp; Values</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-gray-200 rounded-[10px] px-6 py-8 text-center shadow-sm hover:shadow-lg transition-shadow">
+          <div class="w-14 h-14 rounded-full bg-[#eaf3fb] flex items-center justify-center mx-auto mb-4">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M16 4 L28 10 L28 22 L16 28 L4 22 L4 10 Z" stroke="#4a90d9" stroke-width="2" fill="none"/>
+              <circle cx="16" cy="16" r="4" fill="#4a90d9"/>
+            </svg>
+          </div>
+          <h3 class="text-[17px] font-bold text-[#1a1a2e] mb-3">Mission</h3>
+          <p class="text-[13.5px] text-gray-600 leading-relaxed">To teach students in Shamva the foundations of AI engineering in a way that is accessible, practical, and directly connected to the problems they see in their lives.</p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-[10px] px-6 py-8 text-center shadow-sm hover:shadow-lg transition-shadow">
+          <div class="w-14 h-14 rounded-full bg-[#fff8ec] flex items-center justify-center mx-auto mb-4">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="16" rx="12" ry="7" stroke="#f5a623" stroke-width="2" fill="none"/>
+              <circle cx="16" cy="16" r="4" fill="#f5a623"/>
+            </svg>
+          </div>
+          <h3 class="text-[17px] font-bold text-[#1a1a2e] mb-3">Vision</h3>
+          <p class="text-[13.5px] text-gray-600 leading-relaxed">An independent, self-sustaining organization where graduates mentor new students, solving community problems through tech innovation.</p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-[10px] px-6 py-8 text-center shadow-sm hover:shadow-lg transition-shadow">
+          <div class="w-14 h-14 rounded-full bg-[#fef0f0] flex items-center justify-center mx-auto mb-4">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M16 27 C16 27 4 20 4 12 C4 8.13 7.13 5 11 5 C13.24 5 15.24 6.12 16 7.5 C16.76 6.12 18.76 5 21 5 C24.87 5 28 8.13 28 12 C28 20 16 27 16 27Z" stroke="#e05a5a" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <h3 class="text-[17px] font-bold text-[#1a1a2e] mb-3">Values</h3>
+          <p class="text-[13.5px] text-gray-600 leading-relaxed">Curiosity over memorization. Building over lecturing. We believe students learn fastest when they build matters to their families and community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM / SOLUTION -->
+  <section class="py-12 md:py-[72px] bg-cream">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Problem card with background image -->
+      <div class="relative rounded-xl overflow-hidden p-8 sm:p-10 text-white">
+        <img src="https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" class="absolute inset-0 w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-[#1a1a2e]/85"></div>
+        <div class="relative z-10">
+          <h2 class="text-[22px] font-bold mb-7">The Problem</h2>
+          <div class="mb-5">
+            <span class="block text-[42px] font-extrabold leading-none mb-1.5 text-gold">0%</span>
+            <p class="text-[13.5px] text-gray-300 leading-relaxed">of students surveyed at Wadzanai High School knew a programming language.</p>
+          </div>
+          <div class="mb-5">
+            <span class="block text-[42px] font-extrabold leading-none mb-1.5 text-gold">13.7%</span>
+            <p class="text-[13.5px] text-gray-300 leading-relaxed">had even heard of AI before the program launched.</p>
+          </div>
+          <p class="text-[13px] text-gray-400 mt-5 leading-relaxed">Community challenges like drug abuse, water shortages, and unemployment persist while young people lack the tools to respond effectively.</p>
+        </div>
+      </div>
+      <!-- Solution card -->
+      <div class="bg-navy text-white rounded-xl p-8 sm:p-10">
+        <h2 class="text-[22px] font-bold text-gold mb-4">Our Solution</h2>
+        <p class="text-sm text-[#d0e4f7] leading-relaxed mb-7">A six-week, live-taught program taking students from their first line of code to a deployed AI-powered application.</p>
+        <ul class="list-none flex flex-col gap-3.5">
+          <li class="flex items-center gap-3 text-sm font-medium">
+            <span class="inline-flex items-center justify-center w-[22px] h-[22px] rounded-full border-2 border-gold text-gold text-xs font-bold shrink-0">&#10003;</span>
+            2x Weekly Zoom Sessions
+          </li>
+          <li class="flex items-center gap-3 text-sm font-medium">
+            <span class="inline-flex items-center justify-center w-[22px] h-[22px] rounded-full border-2 border-gold text-gold text-xs font-bold shrink-0">&#10003;</span>
+            Hands-on Local Lab support
+          </li>
+          <li class="flex items-center gap-3 text-sm font-medium">
+            <span class="inline-flex items-center justify-center w-[22px] h-[22px] rounded-full border-2 border-gold text-gold text-xs font-bold shrink-0">&#10003;</span>
+            Problem-Driven Curriculum
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6-WEEK JOURNEY -->
+  <section class="py-14 md:py-20 bg-navy-dark relative overflow-hidden">
+    <!-- Background image -->
+    <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="" class="absolute inset-0 w-full h-full object-cover opacity-20" />
+    <div class="absolute inset-0 bg-navy-dark/80"></div>
+    <div class="relative z-10 max-w-[1100px] mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-[28px] font-bold text-white text-center mb-2">The 6-Week Journey</h2>
+      <p class="text-sm text-[#aac4e0] text-center mb-10 md:mb-14">Accelerated path to engineering impact</p>
+      <div class="relative timeline-line">
+
+        <div class="timeline-item flex items-start mb-10 md:mb-14 w-1/2 md:ml-1/2 md:pl-12 relative">
+          <div class="timeline-dot absolute top-1.5 w-3.5 h-3.5 rounded-full bg-gold border-[3px] border-navy-dark z-10 md:-left-[7px]"></div>
+          <div class="max-w-[380px]">
+            <span class="block text-[10px] font-bold tracking-[1.5px] text-gold uppercase mb-1.5">PHASE ONE</span>
+            <h3 class="text-base sm:text-[18px] font-bold text-white mb-2">Weeks 1-2: Foundations</h3>
+            <p class="text-[13px] sm:text-[13.5px] text-[#8aaccc] leading-relaxed">Mastering Python syntax, data structures, and the logic required to build computational solutions.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item flex items-start mb-10 md:mb-14 w-1/2 md:pr-12 md:justify-end relative">
+          <div class="timeline-dot absolute top-1.5 w-3.5 h-3.5 rounded-full bg-gold border-[3px] border-navy-dark z-10 md:-right-[7px]"></div>
+          <div class="max-w-[380px] md:text-right">
+            <span class="block text-[10px] font-bold tracking-[1.5px] text-gold uppercase mb-1.5">PHASE TWO</span>
+            <h3 class="text-base sm:text-[18px] font-bold text-white mb-2">Week 3: Interactive UI</h3>
+            <p class="text-[13px] sm:text-[13.5px] text-[#8aaccc] leading-relaxed">Deploying Streamlit to transform static scripts into dynamic web interfaces people can actually use.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item flex items-start mb-10 md:mb-14 w-1/2 md:ml-1/2 md:pl-12 relative">
+          <div class="timeline-dot absolute top-1.5 w-3.5 h-3.5 rounded-full bg-gold border-[3px] border-navy-dark z-10 md:-left-[7px]"></div>
+          <div class="max-w-[380px]">
+            <span class="block text-[10px] font-bold tracking-[1.5px] text-gold uppercase mb-1.5">PHASE THREE</span>
+            <h3 class="text-base sm:text-[18px] font-bold text-white mb-2">Weeks 4-5: AI &amp; APIs</h3>
+            <p class="text-[13px] sm:text-[13.5px] text-[#8aaccc] leading-relaxed">Integrating Large Language Models and external data sources to power intelligent features.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item flex items-start w-1/2 md:pr-12 md:justify-end relative">
+          <div class="timeline-dot absolute top-1.5 w-3.5 h-3.5 rounded-full bg-gold border-[3px] border-navy-dark z-10 md:-right-[7px]"></div>
+          <div class="max-w-[380px] md:text-right">
+            <span class="block text-[10px] font-bold tracking-[1.5px] text-gold uppercase mb-1.5">PHASE FOUR</span>
+            <h3 class="text-base sm:text-[18px] font-bold text-white mb-2">Week 6: Final Projects</h3>
+            <p class="text-[13px] sm:text-[13.5px] text-[#8aaccc] leading-relaxed">The culmination: Students launch community-focused apps that address real Zimbabwean challenges.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIDE THE LAB -->
+  <section class="py-12 md:py-[72px] md:pb-14 bg-cream">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
+      <div class="flex flex-col sm:flex-row sm:items-start justify-between mb-6 md:mb-8 gap-3">
+        <div>
+          <h2 class="text-2xl sm:text-[28px] font-bold text-left">Inside the Lab</h2>
+          <p class="text-sm text-gray-500 text-left m-0">Where theory meets creation</p>
+        </div>
+        <span class="bg-[#eaf3fb] text-navy text-xs font-bold px-3 py-[5px] rounded-full tracking-wide shrink-0 mt-1">#InnovateShamva</span>
+      </div>
+      <div class="relative flex items-center gap-3">
+        <button class="w-9 sm:w-10 h-9 sm:h-10 rounded-full border-none bg-white shadow-md text-navy text-xl sm:text-[22px] cursor-pointer flex items-center justify-center shrink-0 hover:bg-[#e8f0fa] transition-colors z-10" id="prevBtn">&#8249;</button>
+        <div class="flex-1 overflow-hidden rounded-xl">
+          <div class="flex carousel-track" id="carouselTrack">
+            <div class="min-w-full relative h-[220px] sm:h-[280px] md:h-[320px]">
+              <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Lab" class="w-full h-full object-cover rounded-xl" />
+              <div class="absolute bottom-5 left-6 text-white text-sm font-bold uppercase tracking-[2px] drop-shadow-lg">LAB</div>
+            </div>
+            <div class="min-w-full relative h-[220px] sm:h-[280px] md:h-[320px]">
+              <img src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Tech" class="w-full h-full object-cover rounded-xl" />
+              <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-2xl sm:text-[36px] font-black tracking-[2px] sm:tracking-[4px] drop-shadow-lg text-center whitespace-nowrap">TECH</div>
+            </div>
+            <div class="min-w-full relative h-[220px] sm:h-[280px] md:h-[320px]">
+              <img src="https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Students" class="w-full h-full object-cover rounded-xl" />
+              <div class="absolute bottom-5 left-6 text-white text-sm font-bold uppercase tracking-[2px] drop-shadow-lg">STUDENTS</div>
+            </div>
+          </div>
+        </div>
+        <button class="w-9 sm:w-10 h-9 sm:h-10 rounded-full border-none bg-white shadow-md text-navy text-xl sm:text-[22px] cursor-pointer flex items-center justify-center shrink-0 hover:bg-[#e8f0fa] transition-colors z-10" id="nextBtn">&#8250;</button>
+      </div>
+      <div class="flex justify-center gap-2 mt-[18px]">
+        <span class="dot w-7 h-[5px] rounded-[3px] bg-[#cdd8e8] transition-colors"></span>
+        <span class="dot active w-7 h-[5px] rounded-[3px] bg-navy transition-colors"></span>
+        <span class="dot w-7 h-[5px] rounded-[3px] bg-[#cdd8e8] transition-colors"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="py-12 md:py-[72px] md:pb-20 bg-white">
+    <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl sm:text-[28px] font-bold text-center mb-2">The Team Behind the Mission</h2>
+      <p class="text-sm text-gray-500 text-center mb-8 md:mb-10">Bridging the gap between global expertise and local leadership</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
+        <div class="rounded-[10px] overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow">
+          <img src="https://images.pexels.com/photos/3184611/pexels-photo-3184611.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Sean Mutunhire" class="w-full h-[200px] object-cover block" />
+          <div class="p-5">
+            <h3 class="text-base font-bold text-[#1a1a2e] mb-1">Sean Mutunhire</h3>
+            <span class="block text-[10.5px] font-bold tracking-[1px] text-gold uppercase mb-2.5">REMOTE INSTRUCTOR</span>
+            <p class="text-[13px] text-gray-600 leading-relaxed">Leading the technical curriculum and live instruction from overseas, bringing world-class AI engineering insights directly to Shamva.</p>
+          </div>
+        </div>
+        <div class="rounded-[10px] overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow">
+          <img src="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Mr. Chabata" class="w-full h-[200px] object-cover block" />
+          <div class="p-5">
+            <h3 class="text-base font-bold text-[#1a1a2e] mb-1">Mr. Chabata</h3>
+            <span class="block text-[10.5px] font-bold tracking-[1px] text-gold uppercase mb-2.5">ON-THE-GROUND PARTNER</span>
+            <p class="text-[13px] text-gray-600 leading-relaxed">Ensuring students have the physical space, equipment, and mentorship required to succeed in a demanding technical environment.</p>
+          </div>
+        </div>
+        <div class="rounded-[10px] overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow">
+          <img src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Mr. Manyika" class="w-full h-[200px] object-cover block" />
+          <div class="p-5">
+            <h3 class="text-base font-bold text-[#1a1a2e] mb-1">Mr. Manyika</h3>
+            <span class="block text-[10.5px] font-bold tracking-[1px] text-gold uppercase mb-2.5">TECHNICAL LEAD ON-THE-GROUND</span>
+            <p class="text-[13px] text-gray-600 leading-relaxed">Providing essential technical support and infrastructure maintenance to ensure a seamless learning environment for all students.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

@@ -44,23 +44,42 @@
   .dot.active {
     background-color: #1a3a5c;
   }
+
+  .hero-section {
+    min-height: 75vh;
+  }
+  .hero-overlay {
+    background-color: rgba(15, 39, 64, 0.65);
+  }
+  .hero-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.6s ease-in-out;
+  }
+  .hero-bg-img.is-active {
+    opacity: 1;
+  }
 </style>
 {% endblock %}
 {% block public_content %}
 
   <!-- HERO -->
-  <section class="bg-cream py-10 md:py-16">
-    <div class="max-w-[1100px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-      <div class="order-2 md:order-1">
-        <h1 class="text-3xl sm:text-[42px] font-extrabold text-[#1a1a2e] leading-[1.15] mb-4">Shamva Innovators</h1>
-        <p class="text-sm sm:text-[15px] text-gray-600 mb-6 md:mb-8 leading-relaxed max-w-[420px]">Empowering students in Shamva to build AI-powered solutions for real-world challenges. From zero code to deployed impact.</p>
-        <div class="flex gap-3 flex-wrap">
-          <a href="#journey" class="px-5 sm:px-[22px] py-2.5 sm:py-[11px] bg-navy text-white rounded-md text-xs sm:text-sm font-semibold cursor-pointer hover:bg-navy-dark transition-colors inline-block">See Our 6-Week Journey</a>
-          <a href="{% url 'public:about' %}" class="px-5 sm:px-[22px] py-2.5 sm:py-[11px] bg-transparent text-navy border-2 border-navy rounded-md text-xs sm:text-sm font-semibold cursor-pointer hover:bg-navy hover:text-white transition-all inline-block">About the Program</a>
-        </div>
-      </div>
-      <div class="order-1 md:order-2">
-        <img id="hero-image" src="{% static 'hero1.png' %}" alt="Hero image" class="w-full h-[220px] sm:h-[280px] md:h-[320px] object-cover rounded-xl shadow-lg" />
+  <section class="hero-section relative flex items-center overflow-hidden">
+    <div class="absolute inset-0" aria-hidden="true">
+      <img class="hero-bg-img is-active" src="{% static 'hero1.png' %}" alt="" />
+      <img class="hero-bg-img" src="{% static 'hero2.png' %}" alt="" />
+    </div>
+    <div class="hero-overlay absolute inset-0 z-[1]"></div>
+    <div class="relative z-10 max-w-[1100px] mx-auto px-4 sm:px-6 w-full py-16 md:py-20">
+      <h1 class="text-4xl sm:text-5xl md:text-[56px] font-extrabold text-white leading-[1.1] mb-4">Shamva Innovators</h1>
+      <p class="text-sm sm:text-base text-white/90 mb-6 md:mb-8 leading-relaxed max-w-[480px]">Empowering students in Shamva to build AI-powered solutions for real-world challenges. From zero code to deployed impact.</p>
+      <div class="flex gap-3 flex-wrap">
+        <a href="#journey" class="px-5 sm:px-[22px] py-2.5 sm:py-[11px] bg-white text-navy rounded-md text-xs sm:text-sm font-semibold cursor-pointer hover:bg-white/90 transition-colors inline-block">See Our 6-Week Journey</a>
+        <a href="{% url 'public:about' %}" class="px-5 sm:px-[22px] py-2.5 sm:py-[11px] bg-transparent text-white border-2 border-white rounded-md text-xs sm:text-sm font-semibold cursor-pointer hover:bg-white hover:text-navy transition-all inline-block">About the Program</a>
       </div>
     </div>
   </section>
@@ -197,8 +216,8 @@
     <div class="max-w-[1100px] mx-auto px-4 sm:px-6">
       <div class="flex flex-col sm:flex-row sm:items-start justify-between mb-6 md:mb-8 gap-3">
         <div>
-          <h2 class="text-2xl sm:text-[28px] font-bold text-left">Inside the Lab</h2>
-          <p class="text-sm text-gray-500 text-left m-0">Where theory meets creation</p>
+          <h2 class="text-2xl sm:text-[28px] font-bold text-left">Gallery</h2>
+          <p class="text-sm text-gray-500 text-left m-0">Where it happens everyday.</p>
         </div>
         <span class="bg-[#eaf3fb] text-navy text-xs font-bold px-3 py-[5px] rounded-full tracking-wide shrink-0 mt-1">#InnovateShamva</span>
       </div>
@@ -241,7 +260,7 @@
           <div class="p-5">
             <h3 class="text-base font-bold text-[#1a1a2e] mb-1">Sean Mutunhire</h3>
             <span class="block text-[10.5px] font-bold tracking-[1px] text-gold uppercase mb-2.5">REMOTE INSTRUCTOR</span>
-            <p class="text-[13px] text-gray-600 leading-relaxed">Leading the technical curriculum and live instruction from overseas, bringing world-class AI engineering insights directly to Shamva.</p>
+            <p class="text-[13px] text-gray-600 leading-relaxed">Designs the course curriculum and teaches over Zoom sessions. Also builds and maintains the learning platform where students access materials, submit assignments, and publish their final projects.</p>
           </div>
         </div>
         <div class="rounded-[10px] overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-shadow">
@@ -266,17 +285,14 @@
 
 <script>
   (function () {
-    var hero = document.getElementById('hero-image');
-    if (hero) {
-      var srcs = [
-        '{% static "hero1.png" %}',
-        '{% static "hero2.png" %}'
-      ];
+    var heroImgs = document.querySelectorAll('.hero-bg-img');
+    if (heroImgs.length > 1) {
       var hi = 0;
       setInterval(function () {
-        hi = (hi + 1) % srcs.length;
-        hero.src = srcs[hi];
-      }, 5000);
+        heroImgs[hi].classList.remove('is-active');
+        hi = (hi + 1) % heroImgs.length;
+        heroImgs[hi].classList.add('is-active');
+      }, 6000);
     }
 
     var track = document.getElementById('carouselTrack');

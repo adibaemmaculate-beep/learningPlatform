@@ -6,7 +6,52 @@ from django.core.exceptions import ValidationError
 
 from config.form_widgets import MARKDOWN_TEXTAREA_ATTRS
 
+from apps.accounts.models import User
 from apps.profiles.models import Profile
+
+PROFILE_PIC_MAX_BYTES = 10 * 1024 * 1024
+PROFILE_PIC_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.webp'}
+PROFILE_PIC_ACCEPT = '.jpg,.jpeg,.png,.webp'
+PROFILE_PIC_HELP_TEXT = 'JPG, PNG, or WebP. Max 10 MB.'
+
+
+def validate_profile_pic(file_obj):
+    if not file_obj or not hasattr(file_obj, 'size'):
+        return file_obj
+    ext = os.path.splitext(file_obj.name)[1].lower()
+    if ext not in PROFILE_PIC_EXTENSIONS:
+        raise ValidationError('Profile picture must be JPG, PNG, or WebP.')
+    if file_obj.size > PROFILE_PIC_MAX_BYTES:
+        raise ValidationError('Profile picture must be under 10 MB.')
+    return file_obj
+
+
+class UserNameForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name']
+        widgets = {
+            'first_name': forms.TextInput(attrs={
+                'class': 'w-full border border-outline-variant rounded-lg px-3 py-2',
+                'required': True,
+            }),
+            'last_name': forms.TextInput(attrs={
+                'class': 'w-full border border-outline-variant rounded-lg px-3 py-2',
+                'required': True,
+            }),
+        }
+
+    def clean_first_name(self):
+        value = (self.cleaned_data.get('first_name') or '').strip()
+        if not value:
+            raise ValidationError('First name is required.')
+        return value
+
+    def clean_last_name(self):
+        value = (self.cleaned_data.get('last_name') or '').strip()
+        if not value:
+            raise ValidationError('Last name is required.')
+        return value
 
 
 class ProfileForm(forms.ModelForm):
@@ -18,18 +63,14 @@ class ProfileForm(forms.ModelForm):
                 **MARKDOWN_TEXTAREA_ATTRS,
                 'placeholder': 'Tell your story...',
             }),
+            'profile_pic': forms.FileInput(attrs={
+                'accept': PROFILE_PIC_ACCEPT,
+                'class': 'text-body-sm',
+            }),
         }
 
     def clean_profile_pic(self):
-        file_obj = self.cleaned_data.get('profile_pic')
-        if file_obj and hasattr(file_obj, 'size'):
-            valid_ext = {'.jpg', '.jpeg', '.png', '.webp'}
-            ext = os.path.splitext(file_obj.name)[1].lower()
-            if ext not in valid_ext:
-                raise ValidationError('Profile picture must be JPG, PNG, or WebP.')
-            if file_obj.size > 2 * 1024 * 1024:
-                raise ValidationError('Profile picture must be under 2 MB.')
-        return file_obj
+        return validate_profile_pic(self.cleaned_data.get('profile_pic'))
 
 
 class PortalSettingsForm(forms.Form):

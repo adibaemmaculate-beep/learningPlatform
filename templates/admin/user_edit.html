@@ -1,0 +1,46 @@
+{% extends "base_portal.html" %}
+{% block title %}Edit {{ detail_user.get_full_name }} - Admin{% endblock %}
+{% block portal_content %}
+<div class="mb-4">
+    <a href="{% url 'admin_portal:user_detail' detail_user.id %}" class="text-primary font-label-md hover:underline">← Back to User</a>
+</div>
+<div class="max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+    <h1 class="font-headline-md text-headline-md text-on-surface mb-2">Edit Student Profile</h1>
+    <p class="font-body-md text-on-surface-variant mb-6">{{ detail_user.email }}</p>
+    <form method="post" enctype="multipart/form-data" class="space-y-6">
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="text-error text-body-sm">{{ form.non_field_errors.0 }}</div>{% endif %}
+        <div class="flex items-center gap-6">
+            <div class="profile-picture-square">
+            {% if profile.profile_pic %}
+            <img src="{{ profile.profile_pic.url }}" alt="">
+            {% else %}
+            {% include "partials/profile_placeholder.html" %}
+            {% endif %}
+            </div>
+            <div>
+                <label class="block font-label-md mb-1" for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
+                {{ form.profile_pic }}
+                <p class="font-body-sm text-on-surface-variant mt-1">{{ form.profile_pic.help_text }}</p>
+                {% if form.profile_pic.errors %}<p class="text-error text-body-sm mt-1">{{ form.profile_pic.errors.0 }}</p>{% endif %}
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block font-label-md mb-1" for="{{ form.first_name.id_for_label }}">First Name</label>
+                {{ form.first_name }}
+                {% if form.first_name.errors %}<p class="text-error text-body-sm mt-1">{{ form.first_name.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+                <label class="block font-label-md mb-1" for="{{ form.last_name.id_for_label }}">Last Name</label>
+                {{ form.last_name }}
+                {% if form.last_name.errors %}<p class="text-error text-body-sm mt-1">{{ form.last_name.errors.0 }}</p>{% endif %}
+            </div>
+        </div>
+        <div class="flex gap-3">
+            <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Save Changes</button>
+            <a href="{% url 'admin_portal:user_detail' detail_user.id %}" class="border border-outline-variant px-6 py-2 rounded-lg font-label-md hover:bg-surface-container-low">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

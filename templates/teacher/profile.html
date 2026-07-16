@@ -14,8 +14,10 @@
             {% endif %}
             </div>
             <div>
-                <label class="block font-label-md mb-1">Profile Picture</label>
-                <input type="file" name="profile_pic" accept=".jpg,.jpeg,.png,.webp" class="text-body-sm">
+                <label class="block font-label-md mb-1" for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
+                {{ form.profile_pic }}
+                <p class="font-body-sm text-on-surface-variant mt-1">JPG, PNG, or WebP. Max 10 MB.</p>
+                {% if form.profile_pic.errors %}<p class="text-error text-body-sm mt-1">{{ form.profile_pic.errors.0 }}</p>{% endif %}
             </div>
         </div>
         <div>

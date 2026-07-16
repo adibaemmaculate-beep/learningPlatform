@@ -1,10 +1,11 @@
 from django.contrib import messages
+from django.db import transaction
 from django.shortcuts import redirect, render
 
 from apps.accounts.portal_decorators import student_required, teacher_required
 from apps.audit.utils import log_action
 
-from .forms import PortalSettingsForm, ProfileForm
+from .forms import PortalSettingsForm, ProfileForm, UserNameForm
 from .models import Profile
 
 
@@ -16,14 +17,18 @@ def _get_profile(user):
 @student_required
 def student_profile(request):
     profile = _get_profile(request.user)
+    name_form = UserNameForm(request.POST or None, instance=request.user)
     form = ProfileForm(request.POST or None, request.FILES or None, instance=profile)
-    if request.method == 'POST' and form.is_valid():
-        form.save()
+    if request.method == 'POST' and name_form.is_valid() and form.is_valid():
+        with transaction.atomic():
+            name_form.save()
+            form.save()
         log_action(request.user, 'profile_updated', 'profile', profile.id, {})
         messages.success(request, 'Profile updated.')
         return redirect('student:profile')
     return render(request, 'student/profile.html', {
         'form': form,
+        'name_form': name_form,
         'profile': profile,
         'active_nav': 'profile',
     })

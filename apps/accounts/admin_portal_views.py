@@ -20,6 +20,7 @@ from apps.accounts.admin_forms import (
     AdminSettingsForm,
     CreateAdminForm,
     GenerateInviteCodeForm,
+    StudentProfileEditForm,
     UpdateForm,
     UserFilterForm,
 )
@@ -120,8 +121,43 @@ def users_list(request):
 @admin_required
 def user_detail(request, user_id):
     user = get_object_or_404(User.objects.select_related('profile'), id=user_id)
+    profile = getattr(user, 'profile', None)
     return render(request, 'admin/user_detail.html', {
         'detail_user': user,
+        'profile': profile,
+        'active_nav': 'users',
+    })
+
+
+@admin_required
+def student_profile_edit(request, user_id):
+    student = get_object_or_404(
+        User.objects.select_related('profile'),
+        id=user_id,
+        type=User.UserType.STUDENT,
+    )
+    profile, _ = Profile.objects.get_or_create(user=student)
+    form = StudentProfileEditForm(
+        request.POST or None,
+        request.FILES or None,
+        user=student,
+        profile=profile,
+    )
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+        log_action(
+            request.user,
+            'student_profile_updated',
+            'user',
+            student.id,
+            {'first_name': student.first_name, 'last_name': student.last_name},
+        )
+        messages.success(request, f'Profile updated for {student.get_full_name()}.')
+        return redirect('admin_portal:user_detail', user_id=student.id)
+    return render(request, 'admin/user_edit.html', {
+        'form': form,
+        'detail_user': student,
+        'profile': profile,
         'active_nav': 'users',
     })
 

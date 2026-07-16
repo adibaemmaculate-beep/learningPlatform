@@ -5,6 +5,8 @@
 <div class="max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
     <form method="post" enctype="multipart/form-data" class="space-y-6">
         {% csrf_token %}
+        {% if form.non_field_errors %}<div class="text-error text-body-sm">{{ form.non_field_errors.0 }}</div>{% endif %}
+        {% if name_form.non_field_errors %}<div class="text-error text-body-sm">{{ name_form.non_field_errors.0 }}</div>{% endif %}
         <div class="flex items-center gap-6">
             <div class="profile-picture-square">
             {% if profile.profile_pic %}
@@ -14,18 +16,28 @@
             {% endif %}
             </div>
             <div>
-                <label class="block font-label-md mb-1">Profile Picture</label>
-                <input type="file" name="profile_pic" accept=".jpg,.jpeg,.png,.webp" class="text-body-sm">
-                <p class="font-body-sm text-on-surface-variant mt-1">JPG, PNG, or WebP. Max 2 MB.</p>
+                <label class="block font-label-md mb-1" for="{{ form.profile_pic.id_for_label }}">Profile Picture</label>
+                {{ form.profile_pic }}
+                <p class="font-body-sm text-on-surface-variant mt-1">JPG, PNG, or WebP. Max 10 MB.</p>
+                {% if form.profile_pic.errors %}<p class="text-error text-body-sm mt-1">{{ form.profile_pic.errors.0 }}</p>{% endif %}
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block font-label-md mb-1" for="{{ name_form.first_name.id_for_label }}">First Name</label>
+                {{ name_form.first_name }}
+                {% if name_form.first_name.errors %}<p class="text-error text-body-sm mt-1">{{ name_form.first_name.errors.0 }}</p>{% endif %}
+            </div>
+            <div>
+                <label class="block font-label-md mb-1" for="{{ name_form.last_name.id_for_label }}">Last Name</label>
+                {{ name_form.last_name }}
+                {% if name_form.last_name.errors %}<p class="text-error text-body-sm mt-1">{{ name_form.last_name.errors.0 }}</p>{% endif %}
             </div>
         </div>
         <div>
-            <label class="block font-label-md mb-1">Full Name</label>
-            <p class="font-body-md text-on-surface">{{ user.get_full_name }} <span class="text-on-surface-variant text-body-sm"> </span></p>
-        </div>
-        <div>
-            <label class="block font-label-md mb-1">Bio / Story</label>
+            <label class="block font-label-md mb-1" for="{{ form.bio.id_for_label }}">Bio / Story</label>
             {{ form.bio }}
+            {% if form.bio.errors %}<p class="text-error text-body-sm mt-1">{{ form.bio.errors.0 }}</p>{% endif %}
         </div>
         <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Save Profile</button>
     </form>

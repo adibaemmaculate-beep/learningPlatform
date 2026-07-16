@@ -4,9 +4,15 @@ from datetime import timedelta
 from django import forms
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.db import transaction
 from django.utils import timezone
 
 from apps.accounts.models import InviteCode, User
+from apps.profiles.forms import (
+    PROFILE_PIC_ACCEPT,
+    PROFILE_PIC_HELP_TEXT,
+    validate_profile_pic,
+)
 from apps.updates.models import Update
 from config.form_widgets import MARKDOWN_TEXTAREA_ATTRS
 
@@ -52,6 +58,67 @@ class CreateAdminForm(forms.Form):
         if cleaned.get('password'):
             validate_password(cleaned['password'])
         return cleaned
+
+
+class StudentProfileEditForm(forms.Form):
+    first_name = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(attrs={
+            'class': 'w-full border border-outline-variant rounded-lg px-3 py-2',
+        }),
+    )
+    last_name = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(attrs={
+            'class': 'w-full border border-outline-variant rounded-lg px-3 py-2',
+        }),
+    )
+    profile_pic = forms.ImageField(
+        required=False,
+        help_text=PROFILE_PIC_HELP_TEXT,
+        widget=forms.FileInput(attrs={
+            'accept': PROFILE_PIC_ACCEPT,
+            'class': 'text-body-sm',
+        }),
+    )
+
+    def __init__(self, *args, user=None, profile=None, **kwargs):
+        self.user = user
+        self.profile = profile
+        super().__init__(*args, **kwargs)
+        if user is not None and not self.is_bound:
+            self.fields['first_name'].initial = user.first_name
+            self.fields['last_name'].initial = user.last_name
+
+    def clean_first_name(self):
+        value = (self.cleaned_data.get('first_name') or '').strip()
+        if not value:
+            raise ValidationError('First name is required.')
+        return value
+
+    def clean_last_name(self):
+        value = (self.cleaned_data.get('last_name') or '').strip()
+        if not value:
+            raise ValidationError('Last name is required.')
+        return value
+
+    def clean_profile_pic(self):
+        return validate_profile_pic(self.cleaned_data.get('profile_pic'))
+
+    def save(self):
+        if self.user is None or self.profile is None:
+            raise ValueError('StudentProfileEditForm requires user and profile instances.')
+        with transaction.atomic():
+            self.user.first_name = self.cleaned_data['first_name']
+            self.user.last_name = self.cleaned_data['last_name']
+            self.user.save(update_fields=['first_name', 'last_name'])
+            uploaded = self.cleaned_data.get('profile_pic')
+            if uploaded:
+                if self.profile.profile_pic:
+                    self.profile.profile_pic.delete(save=False)
+                self.profile.profile_pic = uploaded
+                self.profile.save()
+        return self.user
 
 
 class UpdateForm(forms.ModelForm):

@@ -16,6 +16,7 @@ admin_panel_patterns = ([
     path('users/', admin_portal_views.users_list, name='users'),
     path('users/create-admin/', admin_portal_views.create_admin, name='create_admin'),
     path('users/<uuid:user_id>/', admin_portal_views.user_detail, name='user_detail'),
+    path('users/<uuid:user_id>/edit/', admin_portal_views.student_profile_edit, name='student_profile_edit'),
     path('users/<uuid:user_id>/suspend/', admin_portal_views.user_suspend, name='user_suspend'),
     path('users/<uuid:user_id>/activate/', admin_portal_views.user_activate, name='user_activate'),
     path('users/<uuid:user_id>/delete/', admin_portal_views.user_delete, name='user_delete'),

@@ -35,7 +35,10 @@ class CourseMaterialForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        self.course = kwargs.pop('course', None)
         super().__init__(*args, **kwargs)
+        if self.course is None and self.instance and self.instance.pk:
+            self.course = self.instance.course
         if self.instance and self.instance.pk:
             self.fields['objectives_text'].initial = '\n'.join(self.instance.objectives_json or [])
             resources = self.instance.other_resources_json or []
@@ -43,6 +46,16 @@ class CourseMaterialForm(forms.ModelForm):
                 f'{r.get("label", "")}|{r.get("url", "")}' for r in resources
             )
             self.fields['publish'].initial = self.instance.published
+
+    def clean_week(self):
+        week = self.cleaned_data.get('week')
+        if week is not None and self.course is not None:
+            qs = CourseMaterial.objects.filter(course=self.course, week=week)
+            if self.instance and self.instance.pk:
+                qs = qs.exclude(pk=self.instance.pk)
+            if qs.exists():
+                raise ValidationError(f'Week {week} already has materials for this course.')
+        return week
 
     def clean_slides(self):
         return self._validate_pdf(self.cleaned_data.get('slides'))

@@ -42,7 +42,7 @@ def material_create(request):
         messages.error(request, 'No active course found. Contact an administrator.')
         return redirect('teacher:materials')
 
-    form = CourseMaterialForm(request.POST or None, request.FILES or None)
+    form = CourseMaterialForm(request.POST or None, request.FILES or None, course=course)
     if request.method == 'POST' and form.is_valid():
         material = form.save(commit=False)
         material.course = course

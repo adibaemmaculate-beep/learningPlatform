@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const img = document.createElement('img');
         img.src = student.profile_pic_url || placeholderUrl;
         img.alt = student.name;
-        img.className = 'w-full h-full object-cover';
+        img.className = 'w-full h-full object-contain';
         avatarEl.appendChild(img);
     }
 

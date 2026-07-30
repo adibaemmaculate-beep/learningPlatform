@@ -18,7 +18,7 @@
         <h2 class="font-headline-sm text-headline-sm mb-md">Your Submission</h2>
         <p class="font-body-md"><strong>{{ submission.file_name }}</strong></p>
         <p class="font-body-sm text-on-surface-variant">Submitted {{ submission.submitted_at|date:"M d, Y H:i" }}{% if submission.is_late %} • <span class="text-error">Late</span>{% endif %}</p>
-        <a href="{{ submission.file.url }}" class="text-primary font-label-md hover:underline mt-2 inline-block" target="_blank">Download submitted file</a>
+        <a href="{% url 'student:submission_file' submission.id %}?download=1" class="text-primary font-label-md hover:underline mt-2 inline-block">Download submitted file</a>
         {% if assignment.grades_released and submission.score_obtained is not None %}
         <div class="mt-lg pt-lg border-t border-outline-variant">
             <p class="font-headline-md text-primary font-bold">{{ submission.score_obtained }} / {{ assignment.total_score }}</p>
@@ -29,6 +29,21 @@
         </div>
         {% elif submission.status == 'graded' %}
         <p class="font-body-sm text-on-surface-variant mt-md">Graded — waiting for teacher to release grades.</p>
+        {% endif %}
+        {% if submission.status == 'submitted' %}
+        <div class="mt-lg pt-lg border-t border-outline-variant">
+            <h3 class="font-headline-sm mb-sm">Replace submission</h3>
+            <p class="font-body-sm text-on-surface-variant mb-md">Choose a new file to replace your current submission. You can do this until it is graded.</p>
+            <form method="post" enctype="multipart/form-data" data-file-upload-form onsubmit="return confirm('Replace your current submission with this file?')">
+                {% csrf_token %}
+                <p class="text-error text-body-sm hidden mb-2" data-file-upload-error></p>
+                {{ form.file }}
+                {% if form.file.errors %}<p class="text-error text-body-sm mt-2">{{ form.file.errors.0 }}</p>{% endif %}
+                <button type="submit" class="mt-4 bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Replace submission</button>
+            </form>
+        </div>
+        {% else %}
+        <p class="font-body-sm text-on-surface-variant mt-md">This submission can no longer be replaced because it has been graded.</p>
         {% endif %}
     </div>
     {% else %}

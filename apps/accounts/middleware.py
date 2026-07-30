@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.http import HttpResponseNotFound
 from django.shortcuts import redirect
 from django.urls import resolve
 
@@ -20,6 +21,10 @@ class RoleRedirectMiddleware:
 
     def __call__(self, request):
         path = request.path
+
+        submission_media_prefix = f'{settings.MEDIA_URL.rstrip("/")}/submissions/'
+        if path.startswith(submission_media_prefix):
+            return HttpResponseNotFound()
 
         if any(path.startswith(p) for p in self.PUBLIC_PREFIXES):
             return self.get_response(request)

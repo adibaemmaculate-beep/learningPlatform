@@ -7,10 +7,26 @@
     <form method="post" class="space-y-4">
         {% csrf_token %}
         {% if form.non_field_errors %}<div class="text-error text-body-sm">{{ form.non_field_errors.0 }}</div>{% endif %}
-        <div><label class="block font-label-md mb-1">Title</label>{{ form.title }}</div>
-        <div><label class="block font-label-md mb-1">Message</label>{{ form.body }}</div>
-        <div><label class="block font-label-md mb-1">Visibility</label>{{ form.visibility }}</div>
-        <div id="target-student-field"><label class="block font-label-md mb-1">Target Student</label>{{ form.target_student }}</div>
+        <div>
+            <label class="block font-label-md mb-1" for="{{ form.title.id_for_label }}">Title</label>
+            {{ form.title }}
+            {% for error in form.title.errors %}<p class="text-error text-body-sm mt-1">{{ error }}</p>{% endfor %}
+        </div>
+        <div>
+            <label class="block font-label-md mb-1" for="{{ form.body.id_for_label }}">Message</label>
+            {{ form.body }}
+            {% for error in form.body.errors %}<p class="text-error text-body-sm mt-1">{{ error }}</p>{% endfor %}
+        </div>
+        <div>
+            <label class="block font-label-md mb-1" for="{{ form.visibility.id_for_label }}">Visibility</label>
+            {{ form.visibility }}
+            {% for error in form.visibility.errors %}<p class="text-error text-body-sm mt-1">{{ error }}</p>{% endfor %}
+        </div>
+        <div id="target-student-field">
+            <label class="block font-label-md mb-1" for="{{ form.target_student.id_for_label }}">Target Student</label>
+            {{ form.target_student }}
+            {% for error in form.target_student.errors %}<p class="text-error text-body-sm mt-1">{{ error }}</p>{% endfor %}
+        </div>
         <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Post</button>
     </form>
 </div>

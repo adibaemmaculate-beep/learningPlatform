@@ -1,3 +1,4 @@
+import logging
 from functools import wraps
 
 from django.contrib import messages
@@ -12,6 +13,8 @@ from apps.notifications.services import EmailNotificationService
 from .forms import AnnouncementForm
 from .models import Announcement
 from .services import announcements_for_user, mark_announcement_read, unread_announcements
+
+logger = logging.getLogger(__name__)
 
 
 def teacher_or_admin_required(view_func):
@@ -43,7 +46,10 @@ def announcement_create(request):
         announcement.created_by = request.user
         announcement.save()
         log_action(request.user, 'announcement_created', 'announcement', announcement.id, {'title': announcement.title})
-        EmailNotificationService.notify_announcement(announcement)
+        try:
+            EmailNotificationService.notify_announcement(announcement)
+        except Exception:
+            logger.exception('Failed to send notifications for announcement %s', announcement.id)
         messages.success(request, 'Announcement posted.')
         return redirect('teacher:announcements')
     return render(request, 'teacher/announcement_form.html', {

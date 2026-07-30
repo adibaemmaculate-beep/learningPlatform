@@ -1,4 +1,8 @@
+import mimetypes
+import os
+
 from django.contrib import messages
+from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_POST
@@ -28,6 +32,36 @@ from .services import (
 
 # --- Student views ---
 
+
+def _submission_file_response(submission, as_attachment=False):
+    if not submission.file:
+        raise Http404('Submission file not found.')
+    try:
+        file_handle = submission.file.open('rb')
+    except (FileNotFoundError, OSError):
+        raise Http404('Submission file not found.')
+    content_type = mimetypes.guess_type(submission.file_name)[0] or 'application/octet-stream'
+    response = FileResponse(
+        file_handle,
+        as_attachment=as_attachment,
+        filename=submission.file_name,
+        content_type=content_type,
+    )
+    response['X-Frame-Options'] = 'SAMEORIGIN'
+    return response
+
+
+def _submission_preview_kind(submission):
+    extension = os.path.splitext(submission.file_name)[1].lower()
+    if extension == '.pdf':
+        return 'pdf'
+    if extension == '.mp4':
+        return 'video'
+    if extension in ('.py', '.ipynb'):
+        return 'text'
+    return 'download'
+
+
 @student_required
 def student_assignments(request):
     course = get_active_course()
@@ -51,16 +85,35 @@ def student_assignment_detail(request, assignment_id):
     )
     submission = get_student_submission(assignment, request.user)
     form = SubmissionForm(request.POST or None, request.FILES or None, assignment=assignment)
-    if request.method == 'POST' and not submission and form.is_valid():
+    if (
+        request.method == 'POST'
+        and submission
+        and submission.status == AssignmentSubmission.Status.GRADED
+    ):
+        messages.error(request, 'A graded submission can no longer be replaced.')
+        return redirect('student:assignment_detail', assignment_id=assignment.id)
+    if request.method == 'POST' and form.is_valid():
+        now = timezone.now()
+        old_file_name = submission.file.name if submission and submission.file else None
+        is_replacement = submission is not None
         sub = form.save(commit=False)
-        sub.assignment = assignment
-        sub.student = request.user
+        if is_replacement:
+            submission.file = sub.file
+            sub = submission
+        else:
+            sub.assignment = assignment
+            sub.student = request.user
         sub.file_name = sub.file.name.split('/')[-1]
-        sub.is_late = timezone.now() > assignment.due_date
+        sub.submitted_at = now
+        sub.is_late = now > assignment.due_date
         sub.save()
-        log_action(request.user, 'assignment_submitted', 'submission', sub.id, {'assignment': assignment.title})
+        if old_file_name and old_file_name != sub.file.name:
+            sub.file.storage.delete(old_file_name)
+        action = 'assignment_resubmitted' if is_replacement else 'assignment_submitted'
+        log_action(request.user, action, 'submission', sub.id, {'assignment': assignment.title})
         EmailNotificationService.notify_submission_received(sub)
-        messages.success(request, 'Assignment submitted successfully.')
+        success_message = 'Submission replaced successfully.' if is_replacement else 'Assignment submitted successfully.'
+        messages.success(request, success_message)
         return redirect('student:assignment_detail', assignment_id=assignment.id)
     return render(request, 'student/assignment_detail.html', {
         'assignment': assignment,
@@ -68,6 +121,19 @@ def student_assignment_detail(request, assignment_id):
         'form': form,
         'active_nav': 'assignments',
     })
+
+
+@student_required
+def student_submission_file(request, submission_id):
+    submission = get_object_or_404(
+        AssignmentSubmission,
+        id=submission_id,
+        student=request.user,
+    )
+    return _submission_file_response(
+        submission,
+        as_attachment=request.GET.get('download') == '1',
+    )
 
 
 @student_required
@@ -182,8 +248,21 @@ def teacher_grade_submission(request, assignment_id, submission_id):
         'assignment': assignment,
         'submission': submission,
         'form': form,
+        'preview_kind': _submission_preview_kind(submission),
         'active_nav': 'assignments',
     })
+
+
+@teacher_required
+def teacher_submission_file(request, submission_id):
+    submission = get_object_or_404(
+        AssignmentSubmission.objects.select_related('assignment'),
+        id=submission_id,
+    )
+    return _submission_file_response(
+        submission,
+        as_attachment=request.GET.get('download') == '1',
+    )
 
 
 @teacher_required

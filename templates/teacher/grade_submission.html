@@ -2,24 +2,57 @@
 {% block title %}Grade Submission{% endblock %}
 {% block portal_content %}
 <div class="mb-4"><a href="{% url 'teacher:assignment_detail' assignment.id %}" class="text-primary font-label-md hover:underline">← Back to Tracker</a></div>
-<div class="max-w-2xl">
-    <h1 class="font-headline-md text-headline-md mb-2">Grade: {{ submission.student.get_full_name }}</h1>
-    <p class="font-body-md text-on-surface-variant mb-6">{{ assignment.title }} • Submitted {{ submission.submitted_at|date:"M d, Y H:i" }}{% if submission.is_late %} (Late){% endif %}</p>
-    <p class="mb-4"><a href="{{ submission.file.url }}" class="text-primary font-label-md hover:underline" target="_blank">Download submission: {{ submission.file_name }}</a></p>
-    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6">
+<div>
+    <div class="mb-lg">
+        <h1 class="font-headline-md text-headline-md mb-2">Grade: {{ submission.student.get_full_name }}</h1>
+        <p class="font-body-md text-on-surface-variant">{{ assignment.title }} • Submitted {{ submission.submitted_at|date:"M d, Y H:i" }}{% if submission.is_late %} • <span class="text-error">Late</span>{% endif %}</p>
+    </div>
+    <div class="grid grid-cols-1 xl:grid-cols-5 gap-lg items-start">
+        <section class="xl:col-span-3 bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-4 border-b border-outline-variant">
+                <div>
+                    <h2 class="font-headline-sm">Submitted file</h2>
+                    <p class="font-body-sm text-on-surface-variant break-all">{{ submission.file_name }}</p>
+                </div>
+                <a href="{% url 'teacher:submission_file' submission.id %}?download=1" class="border border-outline-variant px-4 py-2 rounded-lg font-label-md hover:bg-surface-container-low">Download</a>
+            </div>
+            <div class="bg-surface-container-low min-h-[32rem] flex items-center justify-center">
+                {% if preview_kind == 'pdf' %}
+                <iframe src="{% url 'teacher:submission_file' submission.id %}" title="PDF submission preview" class="w-full h-[70vh] min-h-[32rem] border-0"></iframe>
+                {% elif preview_kind == 'video' %}
+                <video controls preload="metadata" class="w-full max-h-[70vh] bg-black">
+                    <source src="{% url 'teacher:submission_file' submission.id %}" type="video/mp4">
+                    Your browser cannot preview this video.
+                </video>
+                {% elif preview_kind == 'text' %}
+                <iframe src="{% url 'teacher:submission_file' submission.id %}" title="Text submission preview" sandbox class="w-full h-[70vh] min-h-[32rem] border-0 bg-white"></iframe>
+                {% else %}
+                <div class="text-center p-8">
+                    <span class="material-symbols-outlined text-5xl text-on-surface-variant">draft</span>
+                    <p class="font-headline-sm mt-3">Preview unavailable</p>
+                    <p class="font-body-sm text-on-surface-variant mt-1 mb-4">This file type must be opened in a compatible application.</p>
+                    <a href="{% url 'teacher:submission_file' submission.id %}?download=1" class="bg-secondary-container text-primary px-5 py-2 rounded-lg font-label-md">Download {{ submission.file_name }}</a>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+        <section class="xl:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 xl:sticky xl:top-24">
+            <h2 class="font-headline-sm mb-5">Grade and feedback</h2>
         <form method="post" class="space-y-4">
             {% csrf_token %}
             <div>
-                <label class="block font-label-md mb-1">Score (out of {{ assignment.total_score }})</label>
-                <input type="number" name="score_obtained" min="0" max="{{ assignment.total_score }}" value="{{ form.score_obtained.value|default:0 }}" class="w-full border border-outline-variant rounded-lg px-3 py-2" required>
+                <label class="block font-label-md mb-1" for="id_score_obtained">Score (out of {{ assignment.total_score }})</label>
+                <input id="id_score_obtained" type="number" name="score_obtained" min="0" max="{{ assignment.total_score }}" value="{{ form.score_obtained.value|default:0 }}" class="w-full border border-outline-variant rounded-lg px-3 py-2" required>
                 {% if form.score_obtained.errors %}<p class="text-error text-sm">{{ form.score_obtained.errors.0 }}</p>{% endif %}
             </div>
             <div>
-                <label class="block font-label-md mb-1">Feedback</label>
+                <label class="block font-label-md mb-1" for="{{ form.comments.id_for_label }}">Feedback</label>
                 {{ form.comments }}
+                {% if form.comments.errors %}<p class="text-error text-sm">{{ form.comments.errors.0 }}</p>{% endif %}
             </div>
-            <button type="submit" class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md">Save Grade</button>
+            <button type="submit" class="w-full bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md">Save Grade</button>
         </form>
+        </section>
     </div>
 </div>
 {% endblock %}
